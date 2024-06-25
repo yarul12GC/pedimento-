@@ -1,0 +1,53 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pie-pagina {
+    width: 100%;
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 48%, rgb(0, 0, 0) 100%);
+    font-family: Verdana;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: right;
+    justify-content: left;
+    margin-top: auto; /* Alinea al final de la página */
+    color: #ffffff;
+}
+
+.pie-pagina .grupo-1 {
+    width: auto;
+    max-width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 100px;
+}
+
+.pie-pagina .grupo-1 .box figure {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+}
+
+.tex2 {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    text-align: right;
+}
+
+.pie-pagina .grupo-1 .box figure img {
+    width: 90px;
+}

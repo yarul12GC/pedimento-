@@ -1,0 +1,102 @@
+.zona1 {
+    font-family: Verdana;
+    width: 98%;
+    height: auto;
+    background: rgb(255, 255, 255);
+    margin: auto;
+    padding: 20px;
+    margin-top: 8ch;
+    font-family: Verdana;
+    color: #000000;
+    justify-content: center;
+    border-radius: 5px;
+    box-shadow: 7px 13px 37px #000000;
+}
+
+/* Consulta de medios para pantallas más pequeñas, como las de los celulares */
+@media screen and (max-width: 768px) {
+    .zona1 {
+        width: auto;
+        margin-top: 2ch; /* Ajusta el margen superior según tus preferencias */
+        padding: 10px; /* Ajusta el espaciado interno según tus preferencias */
+    }
+}
+
+.tabla1{
+    width: 100%;
+}
+.encabezadot{
+    text-align: center;
+    background-color: #ef1010;
+    color: white;
+    height: 30px;
+}
+tr{
+    height: 35px;
+}
+.info{
+    text-align: center;
+}
+.info1{
+    text-align: left;
+}
+.usu{
+    text-align: center;
+    list-style:none;
+}
+.boton1{
+    display: flex;
+}
+.cent{
+    text-align: center;
+}
+.buscar{
+    width: 40%;
+    border-radius: 5px;
+    height: 33px;
+    margin-bottom: 30px;
+}
+.logoini{
+    width: 10%;
+    text-align: center;
+    justify-content: center;
+}
+.fiel{
+    border: 5px;
+}
+
+.ayuda{
+    text-align: center;
+    margin-top: 40px;
+
+}
+.iconwats{
+    width: 50px;
+
+}
+.icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-container .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #11b35a;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 100%; /* Posición en la parte inferior del contenedor padre */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar el tooltip horizontalmente */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
