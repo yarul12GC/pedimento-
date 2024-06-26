@@ -23,7 +23,6 @@ try {
     $_SESSION['user_id'] = $userData['id'];
     $_SESSION['email'] = $userData['email'];
     $_SESSION['tipoUsuarioID'] = $userData['tipoUsuarioID'];
-    // Redirigir a la página principal del sistema secundario
     header("Location: home.php");
 
     exit();

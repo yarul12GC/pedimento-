@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(['success' => false, 'message' => 'El usuario ya existe. Inténtalo con otro correo.']);
             } else {
                 $hashedPassword = hash('sha512', $password);
-                $fechaRegistro = date('Y-m-d H:i:s'); // Obtenemos la fecha y hora actual
+                $fechaRegistro = date('Y-m-d H:i:s'); 
 
                 $consultaInsertar = $conexion->prepare("INSERT INTO usuarios (email, contrasena) VALUES (:email, :contrasena)");
                 $consultaInsertar->bindParam(':email', $email);
