@@ -15,43 +15,9 @@ if ($conexion->connect_error) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captura de Pedimento</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../estilos/pedimento.css">
     <title>Pedimento de Importación</title>
-    <style>
-        body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        h2 {
-            color: #ff0000;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .tex {
-            color: #FF0000;
-            font-size: bolder;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -94,17 +60,17 @@ if ($conexion->connect_error) {
                             <td></td>
                         </tr>
                     </table>
-                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
                                 d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
                             <path
                                 d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
                         </svg>
-                    </button>
-                    <br>
+                     </button>
+                    
+                <br>
                 </div>
 
                 <div class="form-section">
@@ -134,8 +100,8 @@ if ($conexion->connect_error) {
                     <br>
                 </div>
 
-                <div class="">
-                    <div class="row">
+                
+                <div class="row">
                         <div class="col-md-6">
                             <div class="form-section">
                                 <h5 class="tex">Bloque 3</h5>
@@ -207,7 +173,7 @@ if ($conexion->connect_error) {
                             </div>
                         </div>
                     </div>
-                </div>
+            
 
                 <div class="form-section">
                     <h5 class="tex">Bloque 5</h5>
@@ -254,7 +220,7 @@ if ($conexion->connect_error) {
                     </table>
 
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#bloque3">
+                        data-bs-target="#bloque5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
@@ -293,7 +259,7 @@ if ($conexion->connect_error) {
                     </table>
 
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#bloque3">
+                        data-bs-target="#bloque6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
@@ -331,7 +297,7 @@ if ($conexion->connect_error) {
                     </table>
 
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#bloque3">
+                        data-bs-target="#bloque7">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
@@ -362,7 +328,7 @@ if ($conexion->connect_error) {
                     </table>
 
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#bloque3">
+                        data-bs-target="#bloque8">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
@@ -374,7 +340,7 @@ if ($conexion->connect_error) {
                 </div>
 
 
-                <div class="">
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-section">
@@ -448,10 +414,10 @@ if ($conexion->connect_error) {
                             </div>
                         </div>
                     </div>
-                </div>
+            
 
 
-                <div class="">
+            
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-section">
@@ -532,7 +498,7 @@ if ($conexion->connect_error) {
                             </div>
                         </div>
                     </div>
-                </div>
+                
 
 
 
@@ -808,34 +774,10 @@ if ($conexion->connect_error) {
                 <div class="form-section">
                     <div class="row">
                         <!-- Primera Columna -->
-                        <div class="col-md-4">
-                            <table class="table table-bordered table-hover table-small">
-                                <thead>
-                                    <tr>
-                                        <th>SECCION</th>
-                                        <td><button type="button" class="btn btn-success float-end"
-                                                data-bs-toggle="modal" data-bs-target="#bloque2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
-                                                    <path
-                                                        d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
-                                                </svg>
-                                            </button></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">1</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
+                        
 
                         <!-- Segunda Columna -->
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -998,7 +940,7 @@ if ($conexion->connect_error) {
                         </div>
 
                         <!-- Tercera Columna -->
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -1025,7 +967,7 @@ if ($conexion->connect_error) {
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td colspan="11"></td>
 
                                     </tr>
                                 </tbody>
@@ -1035,11 +977,139 @@ if ($conexion->connect_error) {
                     </div>
                 </div>
 
+                <div class="form-section">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table  class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="11" class="text-center">AGENTE ADUANAL, APODERADO ADUANAL O EL ALMACEN</th>
+                                    </tr>
+                                </thead>
 
+                                <tbody>
+                                    <tr>
+                                        <th colspan="5">NOMBRE O RAZ. SOC.</th>
+                                        <td  colspan="6"></td>
 
+                                    </tr>
+                                    <tr>
+                                    <th>RFC</th>
+                                    <td></td>  
+                                    <th>P. Moral</th>
+                                    <td></td>
+                                    <th>RFC</th>
+                                    <td></td>
+                                    <th>P. Fisica</th>
+                                    <td></td>  
+                                    <th>CURP</th>
+                                    <td></td> 
+                                    <td>
 
+                                    <button type="button" class="btn btn-success float-end"
+                                                data-bs-toggle="modal" data-bs-target="#bloque2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
+                                                    <path
+                                                        d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
+                                                </svg>
+                                            </button>
 
+                                    </td>                                       
+                                    </tr>
 
+                                    <tr>
+                                        <th colspan="10" class="text-center table-dark">MANDATARIO / PERSONA AUTORIZADA
+                                        </th>
+                                        <td> <button type="button" class="btn btn-success float-end"
+                                                data-bs-toggle="modal" data-bs-target="#bloque2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
+                                                    <path
+                                                        d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="6">NOMBRE</th>
+                                        <td colspan="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3">RFC</th>
+                                        <td colspan="3"></td>
+                                        <th colspan="3">CURP</th>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>        
+
+                        </div>
+                        <div class="col-md-6">
+                            <table  class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">DECLARO BAJO PROTESTA DE DECIR VERDAD, EN LOS TERMINOS DE LO DISPUESTO POR EL ARTICULO 81 DE LA LEY ADUANERA</th>
+                                        <td>
+                                        <button type="button" class="btn btn-success float-end"
+                                                data-bs-toggle="modal" data-bs-target="#bloque2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
+                                                    <path
+                                                        d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <th  colspan="3" class="text-center">PATENTE O AUTORIZACION:</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td>
+
+                                <p>El pago de las contribuciones puede realizarse mediante el servicio de “Pago Electrónico Centralizado Aduanero” (PECA), conforme a lo establecido en la Regla 1.6.2. de las Reglas Generales de Comercio Exterior
+                            , con la posibilidad de que la cuenta bancaria del Importador-Exportador sea afectada directamente por el Banco. El agente o apoderado aduanal que utilice el servicio de PECA, deberá imprimir la 
+                            certificación bancaria en el campo correspondiente del pedimento o en el documento oficial, conforme al Apéndice 20 “Certificación de Pago Electrónico Centralizado” del Anexo 22 de las RCGMCE.
+                            </p>
+                            <p>
+                            El Importador-Exportador podrá solicitar la certificación de la información contenida en este pedimento en: Administración General de Aduanas, Administración de Operación Aduanera “7”, Av. Hidalgo Núm. 77,
+                            Módulo IV, P.B., Col. Guerrero, C.P. 06300., México, D.F.
+                            </p>
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
 
 
                 <button id="guardar-pedimento-completo" class="btn btn-primary">
@@ -1057,125 +1127,23 @@ if ($conexion->connect_error) {
     <footer>
         <?php include '../public/footer.php'; ?>
     </footer>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"> <img src="../media/locenca.png" width="40px">
-                        CAPTURA DEL BLOQUE 1 </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="bloque-a-form">
-                        <div class="form-group">
-                            <label for="bloque-a-campo1">NUM. PEDIMENTO</label>
-                            <input type="text" class="form-control" id="bloque-a-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-a-campo2">T.OPER</label>
-                            <input type="text" class="form-control" id="bloque-a-campo2" name="campo2" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-a-campo1">CVE PEDIMENTO</label>
-                            <input type="text" class="form-control" id="bloque-a-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-a-campo2">REGIMEN</label>
-                            <input type="text" class="form-control" id="bloque-a-campo2" name="campo2" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Guardar Bloque 1</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php 
+    include'bloque1/modalb1.php';
+    include'bloque2/modalb2.php';
+    include'bloque3/modalb3.php';
+    include'bloque4/modalb4.php';
+    include'bloque5/modalb5.php';
+    include'bloque6/modalb6.php';
+    include'bloque7/modalb7.php';
+    include'bloque8/modalb8.php';
+    include'bloque9/modalb9.php';
+    include'bloque10/modalb10.php';
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="bloque2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"> <img src="../media/locenca.png" width="40px">
-                        CAPTURA DEL BLOQUE 2 </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <form id="bloque-b-form">
-                        <div class="form-group">
-                            <label for="bloque-b-campo1">DESTINO O ORIGEN</label>
-                            <input type="text" class="form-control" id="bloque-b-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo2">TIPO DE CAMBIO</label>
-                            <input type="text" class="form-control" id="bloque-b-campo2" name="campo2" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo3">PESO BRUTO</label>
-                            <input type="text" class="form-control" id="bloque-b-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo4">ADUNA</label>
-                            <input type="text" class="form-control" id="bloque-b-campo2" name="campo2" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Guardar Bloque 2</button>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
 
-    <div class="modal fade" id="bloque3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"> <img src="../media/locenca.png" width="40px">
-                        CAPTURA DEL BLOQUE 3 </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
 
-                    <form id="bloque-b-form">
-                        <div class="form-group">
-                            <label for="bloque-b-campo1">DESTINO O ORIGEN</label>
-                            <input type="text" class="form-control" id="bloque-b-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo2">TIPO DE CAMBIO</label>
-                            <input type="text" class="form-control" id="bloque-b-campo2" name="campo2" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo3">PESO BRUTO</label>
-                            <input type="text" class="form-control" id="bloque-b-campo1" name="campo1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bloque-b-campo4">ADUNA</label>
-                            <input type="text" class="form-control" id="bloque-b-campo2" name="campo2" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Guardar Bloque 2</button>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
