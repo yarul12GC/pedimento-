@@ -1,0 +1,21 @@
+#loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255); /* Color de fondo semi-transparente */
+    z-index: 1050; /* Asegúrate de que este valor sea mayor que el del navbar */
+}
+
+#loading-gif {
+    width: 300px;
+}
+
+#loading-message {
+    margin-top: 10px;
+}

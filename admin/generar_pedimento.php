@@ -25,10 +25,31 @@ if ($conexion->connect_error) {
 // Obtener el ID del agente aduanal seleccionado
 $idAgente = isset($_POST['agente_id']) ? $_POST['agente_id'] : null;
 
+// Verificar que el ID del agente aduanal fue recibido correctamente
 if ($idAgente === null) {
-    echo json_encode(['status' => 'error', 'message' => 'Agente aduanal no seleccionado.']);
+    echo '<script> 
+            alert("Agente aduanal no seleccionado.");
+            window.history.back();
+          </script>';
     exit();
 }
+
+// Verificar si el agente aduanal existe en la base de datos
+$queryAgente = "SELECT * FROM agenteaduanal WHERE idagente = ?";
+$stmtAgente = $conexion->prepare($queryAgente);
+$stmtAgente->bind_param("i", $idAgente);
+$stmtAgente->execute();
+$resultAgente = $stmtAgente->get_result();
+
+if ($resultAgente->num_rows === 0) {
+    echo '<script> 
+            alert("El agente aduanal seleccionado no existe.");
+            window.history.back();
+          </script>';
+    exit();
+}
+
+$stmtAgente->close();
 
 $sql = "INSERT INTO pedimentocompleto (idagente, idusuario) VALUES (?, ?)";
 $stmt = $conexion->prepare($sql);
@@ -37,9 +58,13 @@ $stmt->bind_param("ii", $idAgente, $idUsuario);
 // Ejecutar la consulta preparada
 if ($stmt->execute()) {
     $last_id = $conexion->insert_id;
-    echo json_encode(['status' => 'success', 'pedimento_id' => $last_id]);
+    header("Location: capturapediemnto.php?id=$last_id");
+    exit();
 } else {
-    echo json_encode(['status' => 'error', 'message' => $conexion->error]);
+    echo '<script> 
+            alert("Error al generar el pedimento: ' . $conexion->error . '");
+            window.history.back();
+          </script>';
 }
 
 // Cerrar la conexión y liberar recursos
