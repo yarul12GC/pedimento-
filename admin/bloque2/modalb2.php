@@ -86,11 +86,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="bloque-b-campo5">ID PEDIMENTO</label>
-                                <input type="int" class="form-control" id="bloque-b-campo5" name="idpedimentoc"
-                                    required>
-                            </div>
+                            <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+
                         </div>
 
 

@@ -1,7 +1,7 @@
 <?php
 // insertar_datos.php
-include '../../conexion.php'; 
-include '../sesion.php';
+include_once '../../conexion.php'; 
+include_once '../sesion.php';
 
 $Nopedimento = $_POST['Nopedimento'];
 $Toper = $_POST['Toper'];

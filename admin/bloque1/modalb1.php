@@ -95,10 +95,8 @@
                                         <?php endwhile; ?>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="bloque-a-campo5">ID PEDIMENTO C</label>
-                                    <input type="number" class="form-control" id="bloque-a-campo5" name="idpedimentoc">
-                                </div>
+                                <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+
                             </div>
                         </div>
                         <div class="modal-footer">

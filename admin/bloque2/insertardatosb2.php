@@ -1,6 +1,6 @@
 <?php
-include '../../conexion.php';
-include '../sesion.php';
+include_once '../../conexion.php';
+include_once '../sesion.php';
 
 $idapendice15 = $_POST['idapendice15'];
 $tipocambio = $_POST['tipoCambio'];

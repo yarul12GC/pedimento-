@@ -93,10 +93,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="bloque-b-campo4">REFERENCIA DEL PEDIMENTO COMPLETO</label>
-                            <input type="text" class="form-control" id="bloque-b-campo2" name="idpedimentoc" required>
-                        </div>
+                        <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-success">Guardar Bloque 2</button>

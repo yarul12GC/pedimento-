@@ -84,11 +84,8 @@
                                     <input type="number" class="form-control" id="precio-pagado-mxn" name="precioPagado"
                                         required readonly>
                                 </div>
-                                <div class="form-group">
-                                    <label for="referencia-pedimento">REFERENCIA DEL PEDIMENTO COMPLETO</label>
-                                    <input type="text" class="form-control" id="referencia-pedimento"
-                                        name="idpedimentoc" required>
-                                </div>
+                                <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+
                             </div>
                         </div>
 

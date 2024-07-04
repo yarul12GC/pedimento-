@@ -1,6 +1,8 @@
 <?php
 include_once '../public/mensaje.php';
 include_once '../sesion.php';
+$pedimento_id = $_SESSION['pedimento_id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

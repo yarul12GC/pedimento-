@@ -22,11 +22,10 @@ if ($response === false) {
     if (isset($data['bmx']['series'][0]['datos'][0]['dato'])) {
         $tipoCambioMXN = $data['bmx']['series'][0]['datos'][0]['dato'];
 
-        file_put_contents('tipo_cambio.txt', $tipoCambioMXN);
+        file_put_contents('../admin/cambiotipo_cambio.txt', $tipoCambioMXN);
 
         $tipoCambioMXN;
     } else {
         echo 'Error al obtener el tipo de cambio';
     }
 }
-?>

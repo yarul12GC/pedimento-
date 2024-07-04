@@ -1,6 +1,6 @@
 <?php
-include '../conexion.php';
-include '../sesion.php';
+include_once '../conexion.php';
+include_once '../sesion.php';
 
 $last_id = isset($_SESSION['bloques']['bloque1']) ? $_SESSION['bloques']['bloque1'] : null;
 
