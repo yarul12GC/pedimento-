@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="bloque-b-campo4">REFERENCIA DEL PEDIEMNTO COMPLETO</label>
+                            <label for="bloque-b-campo4">REFERENCIA DEL PEDIMENTO COMPLETO</label>
                             <input type="text" class="form-control" id="bloque-b-campo2" name="idpedimentoc" required>
                         </div>
                         <div class="modal-footer">

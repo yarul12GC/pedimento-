@@ -1,31 +1,16 @@
 <?php
-// Iniciar sesión
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Verificar si el usuario está autenticado
-if (!isset($_SESSION['user_id'])) {
-    echo '<script> 
-            alert("Acceso denegado, no autenticado.");
-            window.location = "../index.php";
-          </script>';
-    exit();
-}
-
-// Obtener el ID del usuario autenticado
-$idUsuario = $_SESSION['user_id'];
-
 include '../conexion.php';
+include '../sesion.php';
+
+
+$idUsuario = $_SESSION['usuarioID'];
 
 if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
+    die("Conexi車n fallida: " . $conexion->connect_error);
 }
 
-// Obtener el ID del agente aduanal seleccionado
 $idAgente = isset($_POST['agente_id']) ? $_POST['agente_id'] : null;
 
-// Verificar que el ID del agente aduanal fue recibido correctamente
 if ($idAgente === null) {
     echo '<script> 
             alert("Agente aduanal no seleccionado.");
@@ -34,7 +19,6 @@ if ($idAgente === null) {
     exit();
 }
 
-// Verificar si el agente aduanal existe en la base de datos
 $queryAgente = "SELECT * FROM agenteaduanal WHERE idagente = ?";
 $stmtAgente = $conexion->prepare($queryAgente);
 $stmtAgente->bind_param("i", $idAgente);
@@ -67,7 +51,7 @@ if ($stmt->execute()) {
           </script>';
 }
 
-// Cerrar la conexión y liberar recursos
+// Cerrar la conexi車n y liberar recursos
 $stmt->close();
 $conexion->close();
 ?>

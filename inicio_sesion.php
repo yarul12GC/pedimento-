@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php'; 
+include 'conexion.php';
 
 if ($conexion->connect_error) {
     die("Conexion fallida: " . $conexion->connect_error);
@@ -19,10 +19,13 @@ function iniciarSesion($email, $contrasena) {
     
     $user = $result->fetch_assoc();
     
+    // Hashear la contraseña ingresada para comparar
     $hashedPassword = hash('sha512', $contrasena);
     
+    // Verificar si la contraseña hasheada coincide
     if ($hashedPassword == $user['contrasena']) {
         session_start();
+        // Almacenar los datos del usuario en la sesión
         $_SESSION['usuarioID'] = $user['usuarioID'];
         $_SESSION['email'] = $email;
         $_SESSION['tipoUsuarioID'] = $user['tipoUsuarioID'];
@@ -33,7 +36,6 @@ function iniciarSesion($email, $contrasena) {
     }
 }
 
-// Ejemplo de uso
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $contrasena = $_POST['contrasena'];

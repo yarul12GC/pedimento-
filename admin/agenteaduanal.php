@@ -134,7 +134,7 @@ include ('../sesion.php');
                                 </div>
                                 <div class="mb-3">
                                     <label class="control-label mb-3" for="usuarioID">USUARIO RELACIONADO: </label>
-                                    <select required="required" name="usuarioID" class="form-control">
+                                    <select required="required" name="idusuario" class="form-control">
                                         <option value="">-- Tipo de Usuario --</option>
                                         <?php
                                         $Usuarios = mysqli_query($conexion, "SELECT usuarioID, email FROM usuarios");

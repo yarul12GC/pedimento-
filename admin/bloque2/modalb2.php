@@ -75,7 +75,7 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
-                                    <label for="agenteSelect">ADUNA (APENDICE1)
+                                    <label for="agenteSelect">ADUANA (APENDICE1)
                                     </label><br>
                                     <select class="form-control" name="idapendice1">
                                         <?php while ($apendice1 = $apendice1Result->fetch_assoc()): ?>
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="bloque-b-campo5">ID PEDIEMNTO</label>
+                                <label for="bloque-b-campo5">ID PEDIMENTO</label>
                                 <input type="int" class="form-control" id="bloque-b-campo5" name="idpedimentoc"
                                     required>
                             </div>

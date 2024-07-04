@@ -17,7 +17,7 @@ if ($conexion->query($sql) === TRUE) {
     $_SESSION['bloques']['bloque1'] = $last_id;
 
 
-    header("Location: ../capturapediemnto.php");
+    header("Location: ../capturapediemnto.php?id=$last_id");
     exit();
 } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;
