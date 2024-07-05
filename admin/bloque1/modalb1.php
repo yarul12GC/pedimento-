@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-
-    <title>MODAL B1</title>
-</head>
 
 <body>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -28,27 +14,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="bloque-a-campo1">2 DÍGITOS: AÑO DE VALIDACIÓN</label>
+                                    <label for="bloque-a-campo1">AÑO DE VALIDACIÓN (2 DÍGITOS ) </label>
                                     <input type="text" class="form-control" id="num-pedimento-1" maxlength="2"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
-                                    <label for="bloque-a-campo2">2 DÍGITOS: CLAVE DE LA ADUANA DE DESPACHO (APENDICE 1)</label>
+                                    <label for="bloque-a-campo2">(2 DÍGITOS) CLAVE DE LA ADUANA DE DESPACHO (APENDICE 1)</label>
                                     <input type="text" class="form-control" id="num-pedimento-2" maxlength="2"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
-                                    <label for="bloque-a-campo3">4 DÍGITOS: CLAVE DE LA PATENTE DEL AGENTE ADUANAL</label>
+                                    <label for="bloque-a-campo3">CLAVE DE LA PATENTE DEL AGENTE ADUANAL (4 DÍGITOS ) </label>
                                     <input type="text" class="form-control" id="num-pedimento-3" maxlength="4"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
-                                    <label for="bloque-a-campo4">1 DÍGITO: EL ULTIMO DIGITO DEL AÑO EN CURSO</label>
+                                    <label for="bloque-a-campo4">EL ULTIMO DIGITO DEL AÑO EN CURSO (1 DÍGITO ) </label>
                                     <input type="text" class="form-control" id="num-pedimento-4" maxlength="1"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
-                                    <label for="bloque-a-campo5">6 DÍGITOS: NUMERACIÓN PROGRESIVA</label>
+                                    <label for="bloque-a-campo5">NUMERACIÓN PROGRESIVA (6 DÍGITOS) </label>
                                     <input type="text" class="form-control" id="num-pedimento-5" maxlength="6"
                                         oninput="concatenarPedimento()">
                                 </div>
@@ -99,6 +85,7 @@
 
                             </div>
                         </div>
+                        <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-success">Guardar Bloque 1</button>
@@ -109,8 +96,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+ 
 
     <script>
         function concatenarPedimento() {
@@ -131,4 +117,3 @@
     </script>
 </body>
 
-</html>

@@ -1,3 +1,4 @@
+<body>
 <?php
 include_once '../conexion.php';
 include_once '../sesion.php';
@@ -120,3 +121,4 @@ if ($last_idb3 !== null) {
 <?php
 }
 ?>
+</body>

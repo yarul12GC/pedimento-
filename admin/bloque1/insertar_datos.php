@@ -1,5 +1,4 @@
 <?php
-// insertar_datos.php
 include_once '../../conexion.php'; 
 include_once '../sesion.php';
 
@@ -12,12 +11,12 @@ $idpedimentoc = $_POST['idpedimentoc'];
 $sql = "INSERT INTO dpedimento (Nopedimento, Toper, idapendice2, idapendice16, idpedimentoc) VALUES ('$Nopedimento', '$Toper', '$idapendice2', '$idapendice16', '$idpedimentoc')";
 
 if ($conexion->query($sql) === TRUE) {
-    $last_id = $conexion->insert_id;
+    $last_idb1 = $conexion->insert_id;
 
-    $_SESSION['bloques']['bloque1'] = $last_id;
+    $_SESSION['bloques']['bloque1'] = $last_idb1;
 
 
-    header("Location: ../capturapediemnto.php?id=$last_id");
+    header("Location: ../capturapediemnto.php?id=$last_idb1");
     exit();
 } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;

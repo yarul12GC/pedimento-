@@ -1,6 +1,6 @@
 <?php
-include_once '../public/mensaje.php';
 include_once '../sesion.php';
+include_once '../public/mensaje.php';
 $pedimento_id = $_SESSION['pedimento_id'];
 
 ?>
@@ -10,12 +10,10 @@ $pedimento_id = $_SESSION['pedimento_id'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../estilos/pedimento.css">
-
-
     <title>captura de pedimento</title>
 </head>
+
 
 <body>
     <header>
@@ -23,7 +21,7 @@ $pedimento_id = $_SESSION['pedimento_id'];
     </header>
     <section class="zona1">
         <fieldset>
-            <legend><strong>CAPTURA DE PEDIEMNTO</strong></legend>
+            <legend><strong>CAPTURA DE PEDIMENTO</strong></legend>
 
             <div id="bloques-container">
                 <div class="form-section">
@@ -1038,13 +1036,16 @@ $pedimento_id = $_SESSION['pedimento_id'];
     include 'bloque6/modalb6.php';
     include 'bloque7/modalb7.php';
     include 'bloque8/modalb8.php';
-    //include'bloque9/modalb9.php';
-    //include'bloque10/modalb10.php';
     ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

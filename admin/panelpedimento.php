@@ -1,4 +1,5 @@
 <?php
+include_once '../sesion.php';
 include '../conexion.php';
 
 if ($conexion->connect_error) {

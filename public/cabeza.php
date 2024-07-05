@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,7 +81,7 @@
                             PEDIMENTOS
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink5">
-                            <li><a class="dropdown-item" href="moduloEntradas.php">mis pedimentos</a></li>
+                            <li><a class="dropdown-item" href="cap.php">mis pedimentos</a></li>
                         </ul>
                     </li>
                 </ul>
