@@ -1,4 +1,3 @@
-
 <body>
     <div class="modal fade" id="bloque4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw;">
@@ -8,31 +7,53 @@
                         <img src="../media/locenca.png" width="40px">
                         CAPTURA DEL BLOQUE 4
                     </h1>
-
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-
                     <form id="bloque-b-form" action="../admin/bloque4/insertardatosb4.php" method="post">
                         <div class=" justify-content-center align-items-center flex-column">
                             <?php include '../admin/cambio/tipocambio.php'; ?>
                             <div class="alert alert-light text-center" style="color: green; font-weight: bold;">
-                                1$ USD = $<span id="tipo-cambio"><?php echo $tipoCambioMXN; ?></span> MXN
+                                HOY 1$ USD = $<span id="tipo-cambio"><?php echo $tipoCambioMXN; ?></span> MXN
                             </div>
                         </div>
 
 
+
                         <div class="row">
-                            <div class="form-group">
-                                <label for="precio-pagado"><strong>PRECIO PAGADO (USD)</strong></label>
-                                <input type="number" class="form-control" id="precio-pagado" name="precioPagado"
-                                    required oninput="calcularValores()">
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="precio-pagado"><strong>PRECIO PAGADO $(USD)</strong></label>
+                                        <input type="number" class="form-control" id="precio-pagado" name="precioPagado"
+                                            required oninput="calcularValores()">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="tipo-cambio-input"><strong>CAMBIO $(MXN)</strong></label>
+                                        <input type="decimal" class="form-control" id="tipo-cambio-input" name=""
+                                            required oninput="calcularValores()">
+                                        <button type="button" class="btn btn-link"
+                                            onclick="window.open('https://www.dof.gob.mx/indicadores.php#gsc.tab=0')">Consultar
+                                            Cambio en el Diario
+                                            Oficial de la
+                                            Federación</button>
+                                    </div>
+                                </div>
+
+
                             </div>
+
+
+
                             <br>
-                            
+
                             <div class="col-md-6">
-                            <br>
+                                <br>
                                 <h5>INCREMENTABLES</h5>
                                 <div class="form-group">
                                     <label for="incrementables-flete">FLETES</label>
@@ -57,7 +78,7 @@
                             </div>
 
                             <div class="col-md-6">
-                            <br>
+                                <br>
                                 <h5>TOTALES</h5>
                                 <div class="form-group">
                                     <label for="valor-dolares">VALOR EN DOLARES</label>
@@ -85,17 +106,14 @@
                             <button type="submit" class="btn btn-success">Guardar Bloque 4</button>
                         </div>
                     </form>
-
                 </div>
-
             </div>
         </div>
     </div>
 
-
     <script>
         function calcularValores() {
-            var tipoCambioMXN = parseFloat(document.getElementById('tipo-cambio').innerText);
+            var tipoCambioMXN = parseFloat(document.getElementById('tipo-cambio-input').value) || 0;
             var precioPagado = parseFloat(document.getElementById('precio-pagado').value) || 0;
             var flete = parseFloat(document.getElementById('incrementables-flete').value) || 0;
             var seguro = parseFloat(document.getElementById('incrementables-seguro').value) || 0;
@@ -112,4 +130,3 @@
         }
     </script>
 </body>
-

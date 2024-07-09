@@ -33,7 +33,7 @@ if ($last_idb3 !== null) {
         $datosb3 = $resultbloque3->fetch_assoc();
         ?>
         <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
+            <thead class="text-center table-dark">
                 <tr>
                     <th colspan="8" class="text-center">MEDIOS DE TRANSPORTE</th>
                 </tr>
@@ -56,7 +56,7 @@ if ($last_idb3 !== null) {
     } else {
         ?>
         <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
+            <thead class="text-center table-dark">
                 <tr>
                     <th colspan="8" class="text-center">MEDIOS DE TRANSPORTE</th>
                 </tr>
@@ -90,7 +90,7 @@ if ($last_idb3 !== null) {
 } else {
     ?>
     <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
+        <thead class="text-center table-dark">
             <tr>
                 <th colspan="8" class="text-center">MEDIOS DE TRANSPORTE</th>
             </tr>

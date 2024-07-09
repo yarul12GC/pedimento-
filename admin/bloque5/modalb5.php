@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form id="bloque-b-form">
+                    <form id="bloque-b-form" action="../admin/bloque5/insertardatosb5.php" method="post">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -72,11 +72,8 @@
                                     <label for="pais">País</label>
                                     <input type="text" class="form-control" id="pais" name="pais" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="idpedimentoc">ID Pedimento</label>
-                                    <input type="number" class="form-control" id="idpedimentoc" name="idpedimentoc"
-                                        required>
-                                </div>
+                                <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+
                             </div>
                         </div>
 
