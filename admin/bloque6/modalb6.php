@@ -25,7 +25,6 @@
 
                             </div>
 
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="bloque-b-campo1">FLETES</label>
