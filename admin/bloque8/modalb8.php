@@ -18,9 +18,20 @@
                                         name="aviso_electronico" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bloque-b-campo2">CLAVE DE LA SECCION ADUANERA DE DESPACHO</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo2" name="idapendice1"
-                                        required>
+                                    <?php
+                                    include ('../conexion.php');
+                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave FROM apendice1");
+                                    if ($conexion->connect_error) {
+                                        die("Conexión fallida: " . $conexion->connect_error);
+                                    }
+                                    ?>
+                                    <label for="agenteSelect">CLAVE DE LA SECCION ADUANERA DE DESPACHO</label><br>
+                                    <select class="form-control" name="idapendice1">
+                                        <?php while ($apendice1 = $apendice1Result->fetch_assoc()): ?>
+                                            <option value="<?= $apendice1['idapendice1'] ?>"><?= $apendice1['clave'] ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
                                 </div>
 
                             </div>

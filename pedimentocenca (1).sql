@@ -1486,6 +1486,9 @@ ALTER TABLE `contribuciones`
 --
 ALTER TABLE `cuadrodeliquidacion`
   ADD CONSTRAINT `cuadrodeliquidacion_ibfk_1` FOREIGN KEY (`idpedimentoc`) REFERENCES `pedimentocompleto` (`idpedimentoc`);
+    ADD CONSTRAINT `cuadrodeliquidacion_ibfk_2` FOREIGN KEY (`idpedimentoc`) REFERENCES `pedimentocompleto` (`idpedimentoc`);
+  ADD CONSTRAINT `cuadrodeliquidacion_ibfk_3` FOREIGN KEY (`idpedimentoc`) REFERENCES `pedimentocompleto` (`idpedimentoc`);
+
 
 --
 -- Filtros para la tabla `dembarque`

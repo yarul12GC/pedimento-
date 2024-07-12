@@ -40,7 +40,6 @@ $stmt->bind_param("ii", $idAgente, $idUsuario);
 
 if ($stmt->execute()) {
     $last_id = $conexion->insert_id;
-    // Guardar el last_id en una variable de sesión
     $_SESSION['pedimento_id'] = $last_id;
     header("Location: capturapediemnto.php?id=$last_id");
     exit();
