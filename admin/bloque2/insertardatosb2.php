@@ -15,6 +15,8 @@ if ($conexion->query($sql) === TRUE) {
     $last_idb2 = $conexion->insert_id;
 
     // Guardar el último ID en la sesión para este bloque específico
+    $_SESSION['bloques']['idapendice1'] = $idapendice1;
+
     $_SESSION['bloques']['bloque2'] = $last_idb2;
 
     header("location: ../capturapediemnto.php");

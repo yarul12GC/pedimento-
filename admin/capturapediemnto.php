@@ -221,7 +221,7 @@ $pedimento_id = $_SESSION['pedimento_id'];
                     </table>
 
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                        data-bs-target="#bloque3">
+                        data-bs-target="#bloque13">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-database-add" viewBox="0 0 16 16">
                             <path
@@ -807,6 +807,8 @@ $pedimento_id = $_SESSION['pedimento_id'];
     include 'bloque10/modalb10.php';
     include 'bloque11/modalb11.php';
     include 'bloque12/modalb12.php';
+    include 'bloque13/modalb13.php';
+
 
 
 

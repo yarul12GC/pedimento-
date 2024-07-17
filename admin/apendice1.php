@@ -62,7 +62,8 @@ include '../sesion.php';
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>CLAVE</th>
+                        <th>ADUANA</th>
+                        <th>SECCION</th>
                         <th>COMPLEMENTO</th>
                         <th class="cent">ACCIONES</th>
                     </tr>
@@ -71,6 +72,8 @@ include '../sesion.php';
                     <?php while ($row = mysqli_fetch_array($queryapendice1)) { ?>
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
+                            <td> <?php echo $row['seccion']; ?> </td>
+
                             <td> <?php echo $row['descripcion']; ?></td>
                             <td class="cent">
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
@@ -109,15 +112,23 @@ include '../sesion.php';
                 <div class="modal-body">
                     <form action="../admin/apendice1/registarApendice1.php" method="post">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
 
                                 <div class="mb-3">
-                                    <label class="control-label mb-3" for="clave">CLAVE </label>
+                                    <label class="control-label mb-3" for="clave">ADUANA </label>
                                     <input class="form-control" type="text" name="clave" required>
                                 </div>
 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="clave">SECCION </label>
+                                    <input class="form-control" type="text" name="seccion" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
 
                                 <div class="mb-3">
                                     <label class="control-label mb-3" for="descripcion">CONTENIDO </label>
@@ -155,7 +166,7 @@ include '../sesion.php';
                     <div class="modal-body">
                         <form action="../admin/apendice1/actualizarapendice1.php" method="post">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     <div class="mb-3">
                                         <label class="control-label mb-3" for="clave">CLAVE </label>
@@ -164,7 +175,16 @@ include '../sesion.php';
                                     </div>
 
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="clave">SECCION </label>
+                                        <input class="form-control" type="text" name="seccion"
+                                            value="<?php echo $row['seccion']; ?>">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
 
                                     <div class="mb-3">
                                         <label class="control-label mb-3" for="contenido">CONTENIDO </label>

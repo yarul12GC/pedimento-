@@ -6,11 +6,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $clave = mysqli_real_escape_string($conexion, $_POST['clave']);
     $contenido = mysqli_real_escape_string($conexion, $_POST['descripcion']);
-    
-    // Validar que los campos no estén vacíos
-    if (!empty($clave) && !empty($contenido)) {
+    $seccion = mysqli_real_escape_string($conexion, $_POST['seccion']);
+
+    // Validar que los campos no estén vacíos (permitiendo ceros)
+    if (isset($clave) && isset($contenido) && isset($seccion) && $clave !== '' && $contenido !== '' && $seccion !== '') {
         // Insertar en la base de datos
-        $query = "INSERT INTO apendice1 (clave, descripcion) VALUES ('$clave', '$contenido')";
+        $query = "INSERT INTO apendice1 (clave, descripcion, seccion) VALUES ('$clave', '$contenido', '$seccion')";
 
         if (mysqli_query($conexion, $query)) {
             // Redirigir a una página de éxito o mostrar un mensaje de éxito

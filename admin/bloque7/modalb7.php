@@ -14,12 +14,12 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="bloque-b-campo1">TRANSPORTE DECREMENTABLE</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo1" name="VsegurosD"
+                                    <input type="number" class="form-control" id="bloque-b-campo1" name="VsegurosD"
                                         required>
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-b-campo2">SEGURO DECREMENTABLE</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo2" name="segurosD"
+                                    <input type="number" class="form-control" id="bloque-b-campo2" name="segurosD"
                                         required>
                                 </div>
 
@@ -29,8 +29,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="bloque-b-campo1">CARGA</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo3" name="fletesD"
+                                    <input type="number" class="form-control" id="bloque-b-campo3" name="fletesD"
                                         required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bloque-b-campo1">CAMBIO(MXN)</label>
+                                    <input type="number" id="hidden-tipo-cambio" name="tipoCambioMXN" value="">
+                                    required>
                                 </div>
 
                             </div>
@@ -38,12 +43,12 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="bloque-b-campo1">DESCARGA</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo4" name="embalajesD"
+                                    <input type="number" class="form-control" id="bloque-b-campo4" name="embalajesD"
                                         required>
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-b-campo2">OTROS DECREMENTABLES</label>
-                                    <input type="text" class="form-control" id="bloque-b-campo5" name="otrosDecrement"
+                                    <input type="number" class="form-control" id="bloque-b-campo5" name="otrosDecrement"
                                         required>
                                 </div>
                                 <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">

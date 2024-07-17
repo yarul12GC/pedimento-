@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tipo-cambio-input"><strong>CAMBIO $(MXN)</strong></label>
-                                <input type="decimal" class="form-control" id="tipo-cambio-input" name="" required oninput="calcularValores()">
+                                <input type="decimal" class="form-control" id="tipo-cambio-input" name="tipoCambioMXN" required oninput="calcularValores()">
                                 <button type="button" class="btn btn-link" onclick="window.open('https://www.dof.gob.mx/indicadores.php#gsc.tab=0')">Consultar
                                     Cambio en el Diario
                                     Oficial de la
@@ -42,6 +42,7 @@
                         <div class="col-md-4">
                             <h5>INCREMENTABLES</h5>
                             <form id="form1" action="../admin/bloque6/insetardatosb6.php" method="post">
+                                <input type="hidden" id="hidden-tipo-cambio-form1" name="tipoCambioMXN" value="">
                                 <div class="form-group">
                                     <label for="incrementables-flete">FLETES</label>
                                     <input type="number" class="form-control" id="incrementables-flete" name="fletes" required oninput="calcularValores()">
@@ -69,6 +70,7 @@
                         <div class="col-md-4">
                             <h5>DECREMENTABLES</h5>
                             <form id="form2" action="../admin/bloque7/insertardatosb7.php" method="post">
+                                <input type="hidden" id="hidden-tipo-cambio-form2" name="tipoCambioMXN" value="">
                                 <div class="form-group">
                                     <label for="bloque-b-campo1">TRANSPORTE DECREMENTABLE</label>
                                     <input type="number" class="form-control" id="decrementable-VsegurosD" name="VsegurosD" required oninput="calcularValores()">
@@ -124,6 +126,9 @@
     <script>
         function calcularValores() {
             var tipoCambioMXN = parseFloat(document.getElementById('tipo-cambio-input').value) || 0;
+            document.getElementById('hidden-tipo-cambio-form1').value = tipoCambioMXN.toFixed(2);
+            document.getElementById('hidden-tipo-cambio-form2').value = tipoCambioMXN.toFixed(2);
+            
             var precioPagado = parseFloat(document.getElementById('precio-pagado').value) || 0;
             var Vseguros = parseFloat(document.getElementById('incrementables-Vseguros').value) || 0;
             var flete = parseFloat(document.getElementById('incrementables-flete').value) || 0;
@@ -145,7 +150,6 @@
             document.getElementById('valor-aduana').value = valorAduana.toFixed(2);
             document.getElementById('precio-pagado-mxn').value = precioPagadoMXN.toFixed(2);
         }
-
 
         async function submitForm(formId) {
             const form = document.getElementById(formId);
@@ -185,13 +189,6 @@
             if (allFormsSubmitted) {
                 window.location.href = 'capturapediemnto.php';
             }
-        });
-
-
-        document.getElementById('submitAllForms').addEventListener('click', function() {
-            submitForm('form1');
-            submitForm('form2');
-            submitForm('form3');
         });
     </script>
 </body>

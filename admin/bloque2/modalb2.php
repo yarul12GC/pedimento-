@@ -55,7 +55,7 @@
                                     <?php
                                     include ('../conexion.php');
 
-                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave as clave1 FROM apendice1");
+                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave as clave1, seccion, descripcion FROM apendice1");
 
                                     if ($conexion->connect_error) {
                                         die("Conexión fallida: " . $conexion->connect_error);
@@ -65,7 +65,7 @@
                                     </label><br>
                                     <select class="form-control" name="idapendice1">
                                         <?php while ($apendice1 = $apendice1Result->fetch_assoc()): ?>
-                                            <option value="<?= $apendice1['idapendice1'] ?>"><?= $apendice1['clave1'] ?>
+                                            <option value="<?= $apendice1['idapendice1'] ?>"><?= $apendice1['clave1'] . ' ' . $apendice1['seccion'] . ' ' .$apendice1['descripcion'] ?>
                                             </option>
                                         <?php endwhile; ?>
                                     </select>

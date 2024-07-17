@@ -15,6 +15,8 @@ if ($conexion->query($sql) === TRUE) {
     if (!isset($_SESSION['bloques']['bloque12'])) {
         $_SESSION['bloques']['bloque12'] = [];
     }
+    $_SESSION['bloques']['total'] = $total;
+
     $_SESSION['bloques']['bloque12'][] = $last_idb12;
 
     header("location: ../capturapediemnto.php");

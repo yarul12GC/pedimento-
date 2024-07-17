@@ -15,6 +15,9 @@ $sql = "INSERT INTO fechas (entrada,
 
   if($conexion->query($sql) === TRUE){
     $last_idb9 = $conexion->insert_id;
+
+    $_SESSION['bloques']['pago'] = $pago;
+
     $_SESSION['bloques']['bloque9']= $last_idb9;
 
     header("location: ../capturapediemnto.php");

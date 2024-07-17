@@ -2,12 +2,14 @@
 include('../../conexion.php');
 include('../../sesion.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {    $idapendice1 = mysqli_real_escape_string($conexion, $_POST['idapendice1']);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {    
+    $idapendice1 = mysqli_real_escape_string($conexion, $_POST['idapendice1']);
     $clave = mysqli_real_escape_string($conexion, $_POST['clave']);
     $contenido = mysqli_real_escape_string($conexion, $_POST['descripcion']);
+    $seccion = mysqli_real_escape_string($conexion, $_POST['seccion']);
 
-    if (!empty($idapendice1) && !empty($clave) && !empty($contenido)) {
-        $query = "UPDATE apendice1 SET clave='$clave', descripcion='$contenido' WHERE idapendice1='$idapendice1'";
+    if (isset($idapendice1) && $idapendice1 !== '' && isset($clave) && $clave !== '' && isset($contenido) && $contenido !== '' && isset($seccion) && $seccion !== '') {
+        $query = "UPDATE apendice1 SET clave='$clave', descripcion='$contenido', seccion='$seccion' WHERE idapendice1='$idapendice1'";
 
         if (mysqli_query($conexion, $query)) {
             header("Location: ../apendice1.php?mensaje=exito");

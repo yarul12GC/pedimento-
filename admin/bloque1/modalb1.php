@@ -15,27 +15,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="bloque-a-campo1">AÑO DE VALIDACIÓN (2 DÍGITOS ) </label>
-                                    <input type="text" class="form-control" id="num-pedimento-1" maxlength="2"
+                                    <input type="text" class="form-control" id="num-pedimento-1" name="anio_validacion" maxlength="2"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-a-campo2">(2 DÍGITOS) CLAVE DE LA ADUANA DE DESPACHO (APENDICE 1)</label>
-                                    <input type="text" class="form-control" id="num-pedimento-2" maxlength="2"
+                                    <input type="text" class="form-control" id="num-pedimento-2" name="clave_aduana" maxlength="2"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-a-campo3">CLAVE DE LA PATENTE DEL AGENTE ADUANAL (4 DÍGITOS ) </label>
-                                    <input type="text" class="form-control" id="num-pedimento-3" maxlength="4"
+                                    <input type="text" class="form-control" id="num-pedimento-3" name="PATENTE" maxlength="4"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-a-campo4">EL ULTIMO DIGITO DEL AÑO EN CURSO (1 DÍGITO ) </label>
-                                    <input type="text" class="form-control" id="num-pedimento-4" maxlength="1"
+                                    <input type="text" class="form-control" id="num-pedimento-4" name="ultimo_digito_anio" maxlength="1"
                                         oninput="concatenarPedimento()">
                                 </div>
                                 <div class="form-group">
                                     <label for="bloque-a-campo5">NUMERACIÓN PROGRESIVA (6 DÍGITOS) </label>
-                                    <input type="text" class="form-control" id="num-pedimento-5" maxlength="6"
+                                    <input type="text" class="form-control" id="num-pedimento-5" name="numeracion_progresiva" maxlength="6"
                                         oninput="concatenarPedimento()">
                                 </div>
                             </div>
