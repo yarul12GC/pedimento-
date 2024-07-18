@@ -38,7 +38,6 @@
                                         <option value="Banco Azteca">Banco Azteca</option>
                                         <option value="BanCoppel">BanCoppel</option>
                                         <option value="BanBajío">BanBajío</option>
-                                        <!-- Agrega más opciones según sea necesario -->
                                     </select>
                                 </div>
                             </div>
@@ -70,11 +69,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mPresentacion">Medio de Presentación:</label>
-                                    <input type="text" class="form-control" name="mPresentacion" id="mPresentacion" required>
+                                    <input type="text" class="form-control" name="mPresentacion" id="mPresentacion" value="Pago Electrónico" required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="MedioRecepcion">Medio de Recepción:</label>
-                                    <input type="text" class="form-control" name="MedioRecepcion" id="MedioRecepcion" required>
+                                    <input type="text" class="form-control" name="MedioRecepcion" id="MedioRecepcion" value="Efectivo - Cargo a Cuenta" required readonly>
                                 </div>
                             </div>
                         </div>
