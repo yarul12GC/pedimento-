@@ -1,6 +1,6 @@
 <body>
     <?php
-    include_once '../sesion.php'; 
+    include_once '../sesion.php';
     include_once '../conexion.php';
 
     $last_idb13 = isset($_SESSION['bloques']['bloque13']) ? $_SESSION['bloques']['bloque13'] : null;
@@ -24,9 +24,7 @@
                 <tbody>
                     <tr>
                         <th colspan="6" class="text-center">***DEPOSITO ELECTRONICO***</th>
-
                     </tr>
-
                     <tr>
                         <th>PATENTE</th>
                         <td><?php echo htmlspecialchars($datosb13['patente']); ?></td>
@@ -36,7 +34,7 @@
                         <td><?php echo htmlspecialchars($datosb13['aduana']); ?></td>
                     </tr>
                     <tr>
-                        <th scope="row" colspan="2"class="text-center">BANCO</th>
+                        <th scope="row" colspan="2" class="text-center">BANCO</th>
                         <td colspan="4" class="text-center"><?php echo htmlspecialchars($datosb13['banco']); ?></td>
                     </tr>
                     <tr>
@@ -65,15 +63,25 @@
                         <th class="text-center" colspan="2" scope="row">MEDIO DE PRESENTACION</th>
                         <td class="text-center" colspan="4"><?php echo htmlspecialchars($datosb13['MedioRecepcion']); ?></td>
                     </tr>
-
                     <tr>
-                        <th colspan="6" class="text-center"> </th>
+                        <th colspan="6" class="text-center">
+                            <?php
+                            if (isset($_GET['barcode'])) {
+                                // Tamaño recomendado para una buena escaneabilidad en dispositivos móviles
+                                $width = 400; // Ancho en píxeles
+                                $height = 80;  // Alto en píxeles (ajustable según el diseño del código)
+
+                                echo '<img src="../barcodes/' . htmlspecialchars($_GET['barcode']) . '" alt="Código de Barras" width="' . $width . '" height="' . $height . '">';
+                            } else {
+                                echo 'Aquí va la barra de código de barras';
+                            }
+                            ?>
+                        </th>
 
                     </tr>
-
-
                 </tbody>
             </table>
+
         <?php
         } else {
         ?>

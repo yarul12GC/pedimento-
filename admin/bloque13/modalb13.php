@@ -11,7 +11,8 @@
 
                     <form action="../admin/bloque13/insertardatosb13.php" method="POST">
                         <div class="row">
-                            <div class="col-md-4">
+                            
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="patente">Patente:</label>
                                     <input type="text" class="form-control" name="patente" id="patente" value="<?php echo isset($_SESSION['bloques']['PATENTE']) ? $_SESSION['bloques']['PATENTE'] : ''; ?>" readonly maxlength="4">
@@ -24,10 +25,15 @@
                                     <label for="aduana">Aduana:</label>
                                     <input type="text" class="form-control" name="aduana" id="aduana" value="<?php echo isset($_SESSION['bloques']['idapendice1']) ? $_SESSION['bloques']['idapendice1'] : ''; ?>" readonly>
                                 </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="banco">Banco:</label>
                                     <select class="form-control" name="banco" id="banco" required>
-                                        <option value="" selected disabled>Selecciona un banco</option>
+                                        <option value="" selected disabled>--SELECCIONA UN BANCO--</option>
                                         <option value="BBVA">BBVA</option>
                                         <option value="Santander">Santander</option>
                                         <option value="Banorte">Banorte</option>
@@ -40,14 +46,7 @@
                                         <option value="BanBajío">BanBajío</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
 
-
-                                <div class="form-group">
-                                    <label for="lineaC">Línea de Captura:</label>
-                                    <input type="text" class="form-control" name="lineaC" id="lineaC" required>
-                                </div>
                                 <div class="form-group">
                                     <label for="importePago">Importe Pago:</label>
                                     <input type="text" class="form-control" name="importePago" id="importePago" value="<?php echo isset($_SESSION['bloques']['total']) ? $_SESSION['bloques']['total'] : ''; ?>" readonly>
@@ -56,29 +55,17 @@
                                     <label for="fechapago">Fecha Pago:</label>
                                     <input type="date" class="form-control" name="fechapago" id="fechapago" value="<?php echo isset($_SESSION['bloques']['pago']) ? $_SESSION['bloques']['pago'] : ''; ?>" readonly>
                                 </div>
-                                <div class="form-group">
-                                    <label for="noperacionbancar">No. Operación Bancaria:</label>
-                                    <input type="text" class="form-control" name="noperacionbancar" id="noperacionbancar" required>
-                                </div>
                             </div>
-                            <div class="col-md-4">
 
-                                <div class="form-group">
-                                    <label for="ntransaccionS">No. Transacción S:</label>
-                                    <input type="text" class="form-control" name="ntransaccionS" id="ntransaccionS" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="mPresentacion">Medio de Presentación:</label>
-                                    <input type="text" class="form-control" name="mPresentacion" id="mPresentacion" value="Pago Electrónico" required readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="MedioRecepcion">Medio de Recepción:</label>
-                                    <input type="text" class="form-control" name="MedioRecepcion" id="MedioRecepcion" value="Efectivo - Cargo a Cuenta" required readonly>
-                                </div>
-                            </div>
+                            <input type="hidden" class="form-control" name="lineaC" id="lineaC" required>
+                            <input type="hidden" class="form-control" name="noperacionbancar" id="noperacionbancar" required>
+                            <input type="hidden" class="form-control" name="ntransaccionS" id="ntransaccionS" required>
+                            <input type="hidden" class="form-control" name="mPresentacion" id="mPresentacion" value="Pago Electrónico" required readonly>
+                            <input type="hidden" class="form-control" name="MedioRecepcion" id="MedioRecepcion" value="Efectivo - Cargo a Cuenta" required readonly>
+                            <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+                            
                         </div>
                         <br>
-                        <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-success">Guardar Bloque 13</button>

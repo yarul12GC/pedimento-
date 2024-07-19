@@ -18,7 +18,7 @@
             setTimeout(() => {
                 document.getElementById("loading-container").style.display = "none";
                 document.getElementById("content").style.display = "block";
-            }, 3000);
+            }, 1000);
         });
     </script>
 </body>
