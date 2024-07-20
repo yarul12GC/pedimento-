@@ -86,15 +86,17 @@ if ($conexion->query($sql) === TRUE) {
     
     $generator = new BarcodeGeneratorPNG();
     $barcode = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
+    
+    // Guardar la imagen del código de barras en la base de datos
+    $barcodeEscaped = $conexion->real_escape_string($barcode);
+    $updateSql = "UPDATE pagoelectronico SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
 
-    $barcodeFile = 'codigo_de_barras_' . $last_idb13 . '.png';
-    $barcodeDir = realpath(__DIR__ . '/../../barcodes/');
-    $barcodePath = $barcodeDir . DIRECTORY_SEPARATOR . $barcodeFile;
-
-    file_put_contents($barcodePath, $barcode);
-
-    header("location: ../capturapediemnto.php?barcode=" . urlencode($barcodeFile));
-    exit();
+    if ($conexion->query($updateSql) === TRUE) {
+        header("location: ../capturapediemnto.php?barcode=" . urlencode($barcodeFile));
+        exit();
+    } else {
+        echo "Error actualizando la imagen del código de barras: " . $conexion->error;
+    }
 } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;
 }

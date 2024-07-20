@@ -65,20 +65,15 @@
                     </tr>
                     <tr>
                         <th colspan="6" class="text-center">
-                            <?php
-                            if (isset($_GET['barcode'])) {
-                                // Tamaño recomendado para una buena escaneabilidad en dispositivos móviles
-                                $width = 400; // Ancho en píxeles
-                                $height = 80;  // Alto en píxeles (ajustable según el diseño del código)
-
-                                echo '<img src="../barcodes/' . htmlspecialchars($_GET['barcode']) . '" alt="Código de Barras" width="' . $width . '" height="' . $height . '">';
-                            } else {
-                                echo 'Aquí va la barra de código de barras';
-                            }
-                            ?>
+                            <?php if (!empty($datosb13['barcode_image'])) : ?>
+                                <img src="data:image/png;base64,<?php echo base64_encode($datosb13['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
+                            <?php else : ?>
+                                No se encontró el código de barras.
+                            <?php endif; ?>
                         </th>
-
                     </tr>
+
+
                 </tbody>
             </table>
 
