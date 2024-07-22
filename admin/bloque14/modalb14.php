@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     <label for="tipopoc">PROVEEDOR O COMPRADOR</label>
                                     <select class="form-control" id="tipopoc" name="tipopoc">
-                                        <option value="">---Seleccione una opción---</option>
+                                        <option>---SELECCIONE UNA OPCION---</option>
                                         <option value="PROVEEDOR">PROVEEDOR</option>
                                         <option value="COMPRADOR">COMPRADOR</option>
                                     </select>
@@ -29,7 +29,7 @@
                                     <input type="text" class="form-control" id="nombreDORS" name="nombreDORS">
                                 </div>
                                 <div class="form-group">
-                                    <label for="calle">Calle</label>
+                                    <label for="calle">CALLE</label>
                                     <input type="text" class="form-control" id="calle" name="calle">
                                 </div>
                             </div>
@@ -37,19 +37,19 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="noexterior">Número Exterior</label>
+                                    <label for="noexterior">NUMERO EXTERIOR</label>
                                     <input type="text" class="form-control" id="noexterior" name="noexterior">
                                 </div>
                                 <div class="form-group">
-                                    <label for="nointerior">Número Interior</label>
+                                    <label for="nointerior">MUMERO INTERIOR</label>
                                     <input type="text" class="form-control" id="nointerior" name="nointerior">
                                 </div>
                                 <div class="form-group">
-                                    <label for="codigo_postal">Código Postal</label>
+                                    <label for="codigo_postal">CODIGO POSTAL</label>
                                     <input type="text" class="form-control" id="codigo_postal" name="codigo_postal">
                                 </div>
                                 <div class="form-group">
-                                    <label for="localidad">Ciudad</label>
+                                    <label for="localidad">CIUDAD</label>
                                     <input type="text" class="form-control" id="localidad" name="localidad">
                                 </div>
 
@@ -59,11 +59,11 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="entidadF">Entidad Federativa</label>
+                                    <label for="entidadF">ENTIDAD FEDERATIVA</label>
                                     <input type="text" class="form-control" id="entidadF" name="entidadF">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pais">País</label>
+                                    <label for="pais">PAIS</label>
                                     <input type="text" class="form-control" id="pais" name="pais">
                                 </div>
 

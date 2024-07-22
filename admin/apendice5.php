@@ -10,8 +10,7 @@ include '../sesion.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../estilos/zona.css">
     <link rel="stylesheet" href="../../estilos/pie.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="../media/locenca.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>APENDICE 5</title>
@@ -55,13 +54,13 @@ include '../sesion.php';
 
             <legend>Apendice 5</legend>
             <input type="text" name="buscar" placeholder="Buscar" class="form-control buscar" oninput="filtrarTabla()">
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                data-bs-target="#agregarapendice">Nuevo Complemento</button><br><br>
+            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#agregarapendice">Nuevo Complemento</button><br><br>
 
 
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
+                        <th>PAIS</th>
                         <th>CLAVE</th>
                         <th>COMPLEMENTO</th>
                         <th class="cent">ACCIONES</th>
@@ -70,13 +69,12 @@ include '../sesion.php';
                 <tbody class="table-group-divider">
                     <?php while ($row = mysqli_fetch_array($queryapendice5)) { ?>
                         <tr>
+                            <td> <?php echo $row['pais']; ?> </td>
                             <td> <?php echo $row['clave']; ?> </td>
                             <td> <?php echo $row['descripcion']; ?></td>
                             <td class="cent">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editar_<?php echo $row['idapendice5']; ?>">Editar</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="confirmarEliminar(<?php echo $row['idapendice5']; ?>)">Eliminar</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_<?php echo $row['idapendice5']; ?>">Editar</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmarEliminar(<?php echo $row['idapendice5']; ?>)">Eliminar</button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -141,10 +139,9 @@ include '../sesion.php';
     <?php
     $queryapendice5 = mysqli_query($conexion, $consultar);
     while ($row = mysqli_fetch_array($queryapendice5)) {
-        ?>
+    ?>
 
-        <div class="modal fade" id="editar_<?php echo $row['idapendice5']; ?>" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editar_<?php echo $row['idapendice5']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw;">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -158,9 +155,16 @@ include '../sesion.php';
                                 <div class="col-md-6">
 
                                     <div class="mb-3">
+                                        <label class="control-label mb-3" for="pais">PAIS </label>
+                                        <input class="form-control" type="text" name="pais" value="<?php echo $row['pais']; ?>">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="mb-3">
                                         <label class="control-label mb-3" for="clave">CLAVE </label>
-                                        <input class="form-control" type="text" name="clave"
-                                            value="<?php echo $row['clave']; ?>">
+                                        <input class="form-control" type="text" name="clave" value="<?php echo $row['clave']; ?>">
                                     </div>
 
                                 </div>
@@ -168,8 +172,7 @@ include '../sesion.php';
 
                                     <div class="mb-3">
                                         <label class="control-label mb-3" for="contenido">CONTENIDO </label>
-                                        <input class="form-control" type="text" name="descripcion" required
-                                            value="<?php echo $row['descripcion']; ?>">
+                                        <input class="form-control" type="text" name="descripcion" required value="<?php echo $row['descripcion']; ?>">
                                     </div>
 
                                 </div>
@@ -185,7 +188,7 @@ include '../sesion.php';
                 </div>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 

@@ -4,19 +4,19 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
+class ComposerStaticInit906787304fff11015cfe879175918ee2
 {
     public static $prefixLengthsPsr4 = array (
-        'F' => 
+        'P' => 
         array (
-            'Firebase\\JWT\\' => 13,
+            'Picqer\\Barcode\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Firebase\\JWT\\' => 
+        'Picqer\\Barcode\\' => 
         array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+            0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
         ),
     );
 
@@ -27,9 +27,9 @@ class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit20fad51902f91e7fd3039e016a6556b5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit20fad51902f91e7fd3039e016a6556b5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit20fad51902f91e7fd3039e016a6556b5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit906787304fff11015cfe879175918ee2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit906787304fff11015cfe879175918ee2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit906787304fff11015cfe879175918ee2::$classMap;
 
         }, null, ClassLoader::class);
     }

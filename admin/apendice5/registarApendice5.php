@@ -5,12 +5,13 @@ include('../../sesion.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $clave = mysqli_real_escape_string($conexion, $_POST['clave']);
+    $pais = mysqli_real_escape_string($conexion, $_POST['pais']);
     $contenido = mysqli_real_escape_string($conexion, $_POST['descripcion']);
     
     // Validar que los campos no estén vacíos
     if (!empty($clave) && !empty($contenido)) {
         // Insertar en la base de datos
-        $query = "INSERT INTO apendice5 (clave, descripcion) VALUES ('$clave', '$contenido')";
+        $query = "INSERT INTO apendice5 (clave, descripcion, pais) VALUES ('$clave', '$contenido', '$pais')";
 
         if (mysqli_query($conexion, $query)) {
             // Redirigir a una página de éxito o mostrar un mensaje de éxito

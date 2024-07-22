@@ -60,7 +60,7 @@
                         <td class="text-center" colspan="4"><?php echo htmlspecialchars($datosb13['mPresentacion']); ?></td>
                     </tr>
                     <tr>
-                        <th class="text-center" colspan="2" scope="row">MEDIO DE PRESENTACION</th>
+                        <th class="text-center" colspan="2" scope="row">MEDIO DE RECEPCION/COBRO</th>
                         <td class="text-center" colspan="4"><?php echo htmlspecialchars($datosb13['MedioRecepcion']); ?></td>
                     </tr>
                     <tr>
@@ -127,7 +127,7 @@
                         <td colspan="13"></td>
                     </tr>
                     <tr>
-                        <th scope="row">MEDIO DE PRESENTACION</th>
+                        <th scope="row">MEDIO DE RECEPCION/COBRO</th>
                         <td colspan="13"></td>
                     </tr>
 
@@ -197,7 +197,7 @@
                     <td colspan="13"></td>
                 </tr>
                 <tr>
-                    <th scope="row">MEDIO DE PRESENTACION</th>
+                    <th scope="row">MEDIO DE RECEPCION/COBRO</th>
                     <td colspan="13"></td>
                 </tr>
 

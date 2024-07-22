@@ -51,7 +51,7 @@
                                     ?>
                                     <label for="agenteSelect">ADUANA (APENDICE1)</label><br>
                                     <select class="form-control" name="idapendice1" id="idapendice1">
-                                        <option value="">---SELECCIONE ADUANA---</option>
+                                        <option>---SELECCIONE ADUANA---</option>
                                         <?php while ($apendice1 = $apendice1Result->fetch_assoc()) : ?>
                                             <option value="<?= $apendice1['idapendice1'] ?>" data-clave="<?= $apendice1['clave1'] ?>" data-seccion="<?= $apendice1['seccion'] ?>">
                                                 <?= $apendice1['clave1'] . ' ' . $apendice1['descripcion'] ?>
