@@ -87,7 +87,6 @@ if ($conexion->query($sql) === TRUE) {
     $generator = new BarcodeGeneratorPNG();
     $barcode = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
     
-    // Guardar la imagen del código de barras en la base de datos
     $barcodeEscaped = $conexion->real_escape_string($barcode);
     $updateSql = "UPDATE pagoelectronico SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
 

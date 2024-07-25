@@ -10,8 +10,7 @@ include '../sesion.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../estilos/zona.css">
     <link rel="stylesheet" href="../../estilos/pie.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="../media/locenca.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>APENDICE 8</title>
@@ -55,15 +54,19 @@ include '../sesion.php';
 
             <legend>Apendice 8</legend>
             <input type="text" name="buscar" placeholder="Buscar" class="form-control buscar" oninput="filtrarTabla()">
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                data-bs-target="#agregarapendice">Nuevo Complemento</button><br><br>
+            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#agregarapendice">Nuevo Complemento</button><br><br>
 
 
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
                         <th>CLAVE</th>
-                        <th>COMPLEMENTO</th>
+                        <th>DESCRIPCION</th>
+                        <th>NIVEL</th>
+                        <th>APLICASION</th>
+                        <th>COMPLEMENTO 1</th>
+                        <th>COMPLEMENTO 2</th>
+                        <th>COMPLEMENTO 3</th>
                         <th class="cent">ACCIONES</th>
                     </tr>
                 </thead>
@@ -72,11 +75,15 @@ include '../sesion.php';
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
                             <td> <?php echo $row['descripcion']; ?></td>
+                            <td> <?php echo $row['nivel']; ?></td>
+                            <td> <?php echo $row['supuestosdeaplicacion']; ?></td>
+                            <td> <?php echo $row['Complemento1']; ?></td>
+                            <td> <?php echo $row['Complemento2']; ?></td>
+                            <td> <?php echo $row['Complemento3']; ?></td>
+
                             <td class="cent">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editar_<?php echo $row['idapendice8']; ?>">Editar</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="confirmarEliminar(<?php echo $row['idapendice8']; ?>)">Eliminar</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_<?php echo $row['idapendice8']; ?>">Editar</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmarEliminar(<?php echo $row['idapendice8']; ?>)">Eliminar</button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -110,82 +117,129 @@ include '../sesion.php';
                     <form action="../admin/apendice8/registarApendice8.php" method="post">
                         <div class="row">
                             <div class="col-md-6">
-
                                 <div class="mb-3">
-                                    <label class="control-label mb-3" for="clave">CLAVE </label>
+                                    <label class="control-label mb-3" for="clave">CLAVE</label>
                                     <input class="form-control" type="text" name="clave" required>
                                 </div>
-
                             </div>
                             <div class="col-md-6">
-
                                 <div class="mb-3">
-                                    <label class="control-label mb-3" for="descripcion">CONTENIDO </label>
+                                    <label class="control-label mb-3" for="descripcion">DESCRIPCIÓN</label>
                                     <input class="form-control" type="text" name="descripcion" required>
                                 </div>
-
                             </div>
-                            <input type="hidden" name="idapendice8">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="nivel">NIVEL</label>
+                                    <input class="form-control" type="text" name="nivel" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="supuestosdeaplicacion">SUPUESTOS DE APLICACIÓN</label>
+                                    <input class="form-control" type="text" name="supuestosdeaplicacion">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="complemento1">COMPLEMENTO 1</label>
+                                    <input class="form-control" type="text" name="complemento1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="complemento2">COMPLEMENTO 2</label>
+                                    <input class="form-control" type="text" name="complemento2">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="complemento3">COMPLEMENTO 3</label>
+                                    <input class="form-control" type="text" name="complemento3">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                             <button type="submit" class="btn btn-primary">Registrar</button>
                         </div>
                     </form>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
 
     <?php
+    // Re-queremos la consulta para los modales de edición
     $queryapendice8 = mysqli_query($conexion, $consultar);
     while ($row = mysqli_fetch_array($queryapendice8)) {
-        ?>
-
-        <div class="modal fade" id="editar_<?php echo $row['idapendice8']; ?>" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+    ?>
+        <div class="modal fade" id="editar_<?php echo $row['idapendice8']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"> <img src="../media/locenca.png" width="40px">
-                            REGISTRAR COMPLEMENTO</h1>
+                            EDITAR COMPLEMENTO</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="../admin/apendice8/actualizarapendice8.php" method="post">
                             <div class="row">
                                 <div class="col-md-6">
-
                                     <div class="mb-3">
                                         <label class="control-label mb-3" for="clave">CLAVE </label>
-                                        <input class="form-control" type="text" name="clave"
-                                            value="<?php echo $row['clave']; ?>">
+                                        <input class="form-control" type="text" name="clave" value="<?php echo htmlspecialchars($row['clave']); ?>" required>
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
-
                                     <div class="mb-3">
-                                        <label class="control-label mb-3" for="contenido">CONTENIDO </label>
-                                        <input class="form-control" type="text" name="descripcion" required
-                                            value="<?php echo $row['descripcion']; ?>">
+                                        <label class="control-label mb-3" for="descripcion">DESCRIPCIÓN </label>
+                                        <input class="form-control" type="text" name="descripcion" required value="<?php echo htmlspecialchars($row['descripcion']); ?>">
                                     </div>
-
                                 </div>
-                                <input type="hidden" name="idapendice8" value="<?php echo $row['idapendice8']; ?>">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="nivel">NIVEL </label>
+                                        <input class="form-control" type="text" name="nivel" required value="<?php echo htmlspecialchars($row['nivel']); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="supuestosdeaplicasion">SUPUESTOS DE APLICACION</label>
+                                        <input class="form-control" type="text" name="supuestosdeaplicacion" value="<?php echo htmlspecialchars($row['supuestosdeaplicacion']); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="complemento1">COMPLEMENTO 1 </label>
+                                        <input class="form-control" type="text" name="complemento1" value="<?php echo htmlspecialchars($row['Complemento1']); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="complemento2">COMPLEMENTO 2 </label>
+                                        <input class="form-control" type="text" name="complemento2" value="<?php echo htmlspecialchars($row['Complemento2']); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="complemento3">COMPLEMENTO 3 </label>
+                                        <input class="form-control" type="text" name="complemento3" value="<?php echo htmlspecialchars($row['Complemento3']); ?>">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="idapendice8" value="<?php echo htmlspecialchars($row['idapendice8']); ?>">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 
