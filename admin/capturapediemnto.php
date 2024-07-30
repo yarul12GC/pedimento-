@@ -220,82 +220,48 @@ $pedimento_id = $_SESSION['pedimento_id'];
                 </div>
 
 
-
-
-                <div class="duplicate-container" id="table-container">
+                <div class="duplicate-container" id="table-container-template" style="display: none;">
                     <div class="row row-cols-auto">
                         <div class="col-md-1">
-                            <?php include_once 'bloque19/tablasb19.php';
-                            ?>
+                            <?php include_once 'bloque19/tablasb19.php'; ?>
                         </div>
                         <div class="col-sm-8">
                             <table class="table table-bordered table-hover">
                                 <thead>
-
-                                    <?php include_once 'bloque20/tablasb20.php';
-                                    ?>
-
-
+                                    <?php include_once 'bloque20/tablasb20.php'; ?>
                                     <tr>
-                                        <?php include_once 'bloque21/tablasb21.php';
-                                        ?>
+                                        <?php include_once 'bloque21/tablasb21.php'; ?>
                                     </tr>
-
                                     <tr>
-                                        <?php include_once 'bloque22/tablasb22.php';
-                                        ?>
+                                        <?php include_once 'bloque22/tablasb22.php'; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
+                                        <?php include_once 'bloque20/tabla20.php'; ?>
                                     </tr>
                                     <tr>
                                         <td colspan="11"></td>
                                     </tr>
-
                                     <tr>
                                         <td colspan="3"></td>
                                         <td colspan="2"></td>
                                         <td colspan="2"></td>
                                         <td colspan="4"></td>
                                     </tr>
-
-
-                                    <?php include_once 'bloque23/tablasb23.php';
-                                    ?>
-
-
-                                    <?php include_once 'bloque24/tablasb24.php';
-                                    ?>
-
-                                    <?php include_once 'bloque25/tablasb25.php';
-                                    ?>
-
-
-
-
-
+                                    <?php include_once 'bloque23/tablasb23.php'; ?>
+                                    <?php include_once 'bloque24/tablasb24.php'; ?>
+                                    <?php include_once 'bloque25/tablasb25.php'; ?>
                                 </tbody>
                             </table>
                         </div>
                         <div class="col-md-1">
-                            <?php include_once 'bloque27/tablasb27.php';
-                            ?>
+                            <?php include_once 'bloque27/tablasb27.php'; ?>
                         </div>
                     </div>
                 </div>
+                <div id="sectionsContainer"></div>
                 <button type="button" class="btn btn-primary" id="duplicate-table-btn">Duplicar Tabla</button>
-
 
 
                 <div class="form-section">
@@ -463,17 +429,79 @@ $pedimento_id = $_SESSION['pedimento_id'];
     include 'bloque16/modalb16.php';
     include 'bloque17/modalb17.php';
     include 'bloque18/modalb18.php';
+    include 'bloque20/modalb20.php';
+
     ?>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById('duplicate-table-btn').addEventListener('click', function() {
-            const container = document.getElementById('table-container');
-            const newTable = container.children[0].cloneNode(true); // Clonar la primera tabla
-            container.appendChild(newTable); // Agregar la nueva tabla al contenedor
+        let sectionCounter = 0;
+
+        // Función para cargar secciones desde localStorage
+        function loadSections() {
+            const savedSections = JSON.parse(localStorage.getItem('sections')) || [];
+            savedSections.forEach((sectionData, index) => {
+                duplicateSection(sectionData);
+                sectionCounter = index + 1;
+            });
+        }
+
+        // Función para guardar secciones en localStorage
+        function saveSections() {
+            const sections = [];
+            $('#sectionsContainer .duplicate-container').each(function() {
+                const sectionHTML = $(this).prop('outerHTML');
+                sections.push(sectionHTML);
+            });
+            localStorage.setItem('sections', JSON.stringify(sections));
+        }
+
+        // Función para duplicar una sección
+        function duplicateSection(sectionHTML = null) {
+            const template = $(sectionHTML || $('#table-container-template').clone().removeAttr('id').show().prop('outerHTML'));
+            const newSectionId = 'section' + sectionCounter;
+            sectionCounter++;
+
+            template.attr('id', newSectionId);
+            template.find('button').each(function(index, button) {
+                $(button).attr('data-section-id', newSectionId);
+            });
+
+            $('#sectionsContainer').append(template);
+
+            if (!sectionHTML) {
+                template.find('input, select, textarea').val('');
+            }
+
+            saveSections();
+        }
+
+        $(document).ready(function() {
+            // Cargar secciones al cargar la página
+            loadSections();
+
+            $('#duplicate-table-btn').click(function() {
+                duplicateSection();
+            });
+
+            $(document).on('click', '.openModalBtn', function() {
+                const sectionId = $(this).data('section-id');
+                const modal = $('#' + sectionId).find('.modal');
+                modal.modal('show');
+            });
+
+            $(document).on('click', '.saveDataBtn', function() {
+                const sectionId = $(this).data('section-id');
+                const modal = $('#' + sectionId).find('.modal');
+                const input = modal.find('.modalInput');
+                const dataContainer = $('#' + sectionId).find('.dataContainer');
+                dataContainer.html(input.val());
+                modal.modal('hide');
+                saveSections();
+            });
         });
     </script>
 </body>
