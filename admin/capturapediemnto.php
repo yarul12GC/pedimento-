@@ -1,5 +1,6 @@
 <?php
 include_once '../sesion.php';
+include_once '../conexion.php';
 include_once '../public/mensaje.php';
 $pedimento_id = $_SESSION['pedimento_id'];
 
@@ -23,7 +24,7 @@ $pedimento_id = $_SESSION['pedimento_id'];
         <fieldset>
             <legend><strong>CAPTURA DE PEDIMENTO</strong></legend>
 
-            < id="bloques-container">
+            <div id="bloques-container">
                 <div class="form-section">
                     <h5 class="tex">Bloque 1</h5>
                     <?php
@@ -219,60 +220,155 @@ $pedimento_id = $_SESSION['pedimento_id'];
                     </table>
                 </div>
 
+                <?php
+                // Inicializar la sesión si no existe
+                if (!isset($_SESSION['sections'])) {
+                    $_SESSION['sections'] = [];
+                }
 
+                // Agregar una nueva sección
+                if (isset($_POST['add_section'])) {
+                    $_SESSION['sections'][] = [
+                        'fraccionA' => '',
+                        'nico' => '',
+                        'vinc' => '',
+                        'metval' => '',
+                        'umc' => '',
+                        'cantumc' => '',
+                        'umt' => '',
+                        'cant' => '',
+                        'idapendice4' => '',
+                        'pod' => '',
+                        'idpedimentoc' => '' // Agregado aquí
+                    ];
+                }
 
+                // Guardar datos de una sección y enviarlos a la base de datos
+                if (isset($_POST['save_section'])) {
+                    $index = $_POST['index'];
+                    $pedimento_id = $_POST['idpedimentoc'][$index] ?? ''; // Corregido aquí
+                    $_SESSION['sections'][$index] = [
+                        'fraccionA' => $_POST['fraccionA'][$index] ?? '',
+                        'nico' => $_POST['nico'][$index] ?? '',
+                        'vinc' => $_POST['vinc'][$index] ?? '',
+                        'metval' => $_POST['metval'][$index] ?? '',
+                        'umc' => $_POST['umc'][$index] ?? '',
+                        'cantumc' => $_POST['cantumc'][$index] ?? '',
+                        'umt' => $_POST['umt'][$index] ?? '',
+                        'cant' => $_POST['cant'][$index] ?? '',
+                        'idapendice4' => $_POST['idapendice4'][$index] ?? '',
+                        'pod' => $_POST['pod'][$index] ?? '',
+                        'idpedimentoc' => $pedimento_id // Corregido aquí
+                    ];
 
-                <div class="duplicate-container" id="table-container">
-                    <div class="row row-cols-auto">
-                        <div class="col-md-1">
-                            <?php include_once 'bloque19/tablasb19.php'; ?>
+                    // Insertar en la base de datos
+                    $section = $_SESSION['sections'][$index];
+                    $sql = "INSERT INTO partida1 (
+        fraccionA,
+        nico,
+        vinc,
+        metval,
+        umc,
+        cantumc,
+        umt,
+        cant,
+        idapendice4,
+        pod,
+        idpedimentoc
+    ) VALUES (
+        '{$section['fraccionA']}',
+        '{$section['nico']}',
+        '{$section['vinc']}',
+        '{$section['metval']}',
+        '{$section['umc']}',
+        '{$section['cantumc']}',
+        '{$section['umt']}',
+        '{$section['cant']}',
+        '{$section['idapendice4']}',
+        '{$section['pod']}',
+        '{$section['idpedimentoc']}'
+    )";
 
+                    if ($conexion->query($sql) === TRUE) {
+                        echo "Datos guardados correctamente.";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conexion->error;
+                    }
+                }
+
+                // Obtener las secciones de la sesión
+                $sections = $_SESSION['sections'];
+                ?>
+
+                <button id="add-section" class="btn btn-primary mb-3">Agregar Sección</button>
+                <form action="" method="POST" id="sections-form">
+                    <input type="hidden" name="add_section" value="1">
+                    <?php foreach ($sections as $index => $section) : ?>
+                        <div class="duplicate-container" id="section-<?php echo $index; ?>">
+                            <div class="row row-cols-auto">
+                                <div class="col-md-1">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>SECCION.</th>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo $index + 1; ?></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="col-sm-8">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>FRACCION</th>
+                                                <th>SUBD./NICO</th>
+                                                <th>VINC</th>
+                                                <th>MET VAL</th>
+                                                <th>UMC</th>
+                                                <th>CANT UMC</th>
+                                                <th>UMT</th>
+                                                <th>CANT UMT</th>
+                                                <th>P.V/C</th>
+                                                <th>P.O/D</th>
+                                                <th colspan="2">Acciones</th>
+                                            </tr>
+                                            <tr>
+                                                <?php include_once 'bloque21/tablasb21.php'; ?>
+                                            </tr>
+                                            <tr>
+                                                <?php include_once 'bloque22/tablasb22.php'; ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" name="fraccionA[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['fraccionA']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="nico[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['nico']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="vinc[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['vinc']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="metval[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['metval']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="umc[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['umc']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="cantumc[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['cantumc']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="umt[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['umt']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="cant[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['cant']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="idapendice4[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['idapendice4']); ?>" class="form-control"></td>
+                                                <td><input type="text" name="pod[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($section['pod']); ?>" class="form-control"></td>
+                                                <input type="hidden" name="idpedimentoc[<?php echo $index; ?>]" value="<?php echo htmlspecialchars($pedimento_id); ?>"><!-- Campo oculto añadido aquí -->
+                                                <td colspan="2">
+                                                    <button type="button" class="btn btn-success save-section" data-index="<?php echo $index; ?>">Guardar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php include_once 'bloque27/tablasb27.php'; ?>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <?php include_once 'bloque20/tablasb20.php'; ?>
-                                    <tr>
-                                        <?php include_once 'bloque21/tablasb21.php'; ?>
-                                    </tr>
-                                    <tr>
-                                        <?php include_once 'bloque22/tablasb22.php'; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <?php include_once 'bloque20/tabla20.php'; ?>
-
-                                    </tr>
-                                    <tr>
-                                        <td colspan="11"></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="4"></td>
-                                    </tr>
-
-
-                                    <?php include_once 'bloque23/tablasb23.php'; ?>
-                                    <?php include_once 'bloque24/tablasb24.php'; ?>
-                                    <?php include_once 'bloque25/tablasb25.php'; ?>
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-1">
-                            <?php include_once 'bloque27/tablasb27.php'; ?>
-
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary" id="duplicate-table-btn">Duplicar Tabla</button>
-
+                    <?php endforeach; ?>
+                </form>
 
 
                 <div class="form-section">
@@ -415,7 +511,7 @@ $pedimento_id = $_SESSION['pedimento_id'];
                     </svg>
                 </button>
 
-                </div>
+            </div>
 
     </section>
     <footer>
@@ -443,17 +539,57 @@ $pedimento_id = $_SESSION['pedimento_id'];
     include 'bloque20/modalb20.php';
     ?>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        document.getElementById('duplicate-table-btn').addEventListener('click', function() {
-            const container = document.getElementById('table-container');
-            const newTable = container.children[0].cloneNode(true); // Clonar la primera tabla
-            container.appendChild(newTable); // Agregar la nueva tabla al contenedor
+        document.getElementById('add-section').addEventListener('click', function() {
+            document.getElementById('sections-form').submit();
+        });
+
+        document.querySelectorAll('.save-section').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const form = document.createElement('form');
+                form.method = 'POST';
+
+                // Lista de campos que quieres enviar como datos ocultos
+                const fields = [
+                    'fraccionA', 'nico', 'vinc', 'metval',
+                    'umc', 'cantumc', 'umt', 'cant',
+                    'idapendice4', 'pod', 'idpedimentoc' // Añadido 'idpedimentoc' aquí
+                ];
+
+                // Agregar los campos al formulario
+                fields.forEach(field => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = `${field}[${index}]`; // Corregido para enviar el índice
+                    input.value = document.querySelector(`[name="${field}[${index}]"]`).value;
+                    form.appendChild(input);
+                });
+
+                // Agregar el índice de la sección
+                const indexInput = document.createElement('input');
+                indexInput.type = 'hidden';
+                indexInput.name = 'index';
+                indexInput.value = index;
+                form.appendChild(indexInput);
+
+                // Agregar el campo para guardar la sección
+                const saveInput = document.createElement('input');
+                saveInput.type = 'hidden';
+                saveInput.name = 'save_section';
+                saveInput.value = '1';
+                form.appendChild(saveInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            });
         });
     </script>
+
 </body>
 
 </html>
