@@ -50,9 +50,22 @@
                             </div>
 
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="idapendice4">ID Apendice 4</label>
-                                    <input type="text" class="form-control" id="idapendice4" name="idapendice4" required>
+                            <div class="form-group">
+                                    <?php
+                                    include('../conexion.php');
+
+                                    $apendice4Result = $conexion->query("SELECT idapendice4, clave as clave4 FROM apendice4");
+
+                                    if ($conexion->connect_error) {
+                                        die("Conexión fallida: " . $conexion->connect_error);
+                                    }
+                                    ?>
+                                    <label for="agenteSelect">DESTINO O ORIGEN (APENDICE4)</label><br>
+                                    <select class="form-control" name="idapendice4">
+                                        <?php while ($apendice4 = $apendice4Result->fetch_assoc()) : ?>
+                                            <option value="<?= $apendice4['idapendice4'] ?>"><?= $apendice4['clave4'] ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="pod">POD</label>
