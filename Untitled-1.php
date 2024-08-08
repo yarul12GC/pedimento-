@@ -34,12 +34,7 @@ if (isset($_POST['save_section'])) {
             'firmapermiso' => $_POST['firmapermiso'] ?? '',
             'valcomdls' => $_POST['valcomdls'] ?? '',
             'cantidadumt' => $_POST['cantidadumt'] ?? '',
-            'observacionesnp' => $_POST['observacionesnp'] ?? '',
-            'idapendice12' => $_POST['idapendice12'] ?? '',
-            'tasa' => $_POST['tasa'] ?? '',
-            'idapendice18' => $_POST['idapendice18'] ?? '',
-            'idapendice13' => $_POST['idapendice13'] ?? '',
-            'importe' => $_POST['importe'] ?? ''
+            'observacionesnp' => $_POST['observacionesnp'] ?? ''
 
         ];
 
@@ -215,36 +210,6 @@ if (isset($_POST['observaciones-nivel-p'])) {
         echo "Error: Índice de sección no válido.";
     }
 }
-if (isset($_POST['contribuciones-form'])) {
-    $index = $_POST['index'] ?? null;
-    if ($index !== null && isset($_SESSION['sections'][$index])) {
-        $_SESSION['sections'][$index]['idapendice12'] = $_POST['idapendice12'] ?? null;
-        $_SESSION['sections'][$index]['tasa'] = $_POST['tasa'] ?? '';
-        $_SESSION['sections'][$index]['idapendice18'] = $_POST['idapendice18'] ?? null;
-        $_SESSION['sections'][$index]['idapendice13'] = $_POST['idapendice13'] ?? null;
-        $_SESSION['sections'][$index]['importe'] = $_POST['importe'] ?? '';
-        $_SESSION['sections'][$index]['idpedimentoc'] = $_POST['idpedimentoc'] ?? null;
-
-        // Sanitizar y validar datos
-        $idapendice12 = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idapendice12']));
-        $tasa = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['tasa']));
-        $idapendice18 = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idapendice18']));
-        $idapendice13 = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idapendice13']));
-        $importe = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['importe']));
-        $idpedimentoc = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idpedimentoc']));
-
-        $sql = "INSERT INTO contribuciones (idapendice12, tasa, idapendice18, idapendice13, importe, idpedimentoc) 
-                VALUES ('$idapendice12', '$tasa', '$idapendice18', '$idapendice13', '$importe', '$idpedimentoc')";
-
-        if ($conexion->query($sql) === TRUE) {
-            // Los datos se han guardado correctamente
-        } else {
-            echo "Error: " . $sql . "<br>" . $conexion->error;
-        }
-    } else {
-        echo "Error: Índice de sección no válido.";
-    }
-}
 
 // Manejar la solicitud para agregar una nueva sección
 if (isset($_POST['add_section'])) {
@@ -275,13 +240,7 @@ if (isset($_POST['add_section'])) {
         'complemento1' => '',
         'complemento2' => '',
         'complemento3' => '',
-        'observacionesnp' => '',
-        'idapendice12' => '',
-        'tasa' => '',
-        'idapendice18' => '',
-        'idapendice13' => '',
-        'importe' => ''
-
+        'observacionesnp' => ''
 
     ];
 }
@@ -410,7 +369,7 @@ if (isset($_POST['add_section'])) {
                                     <input type="hidden" name="save_section_partida3" value="1">
                                     <input type="hidden" name="index" value="<?php echo $index; ?>">
                                     <td colspan="2">
-                                        <input type="text" id="valaduusd" name="valaduusd" value="<?php echo htmlspecialchars($section['valaduusd']); ?>" class="form-control" oninput="calculateImporte()">
+                                        <input type="text" name="valaduusd" value="<?php echo htmlspecialchars($section['valaduusd']); ?>" class="form-control">
                                     </td>
                                     <td colspan="3">
                                         <input type="text" name="imppreciopag" value="<?php echo htmlspecialchars($section['imppreciopag']); ?>" class="form-control">
@@ -557,95 +516,24 @@ if (isset($_POST['add_section'])) {
                                 <th>TASA</th>
                                 <th>T.T.</th>
                                 <th>F.P.</th>
-                                <th>IMPORTE</th>
-
+                                <th>IMP.</th>
+                                <td><button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-add" viewBox="0 0 16 16">
+                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
+                                            <path d="M12.096 6.223A5 5 0 0 0 13 5.698V7c0 .289-.213.654-.753 1.007a4.5 4.5 0 0 1 1.753.25V4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-.813-.927Q8.378 15 8 15c-1.464 0-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13h.027a4.6 4.6 0 0 1 0-1H8c-1.464 0-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10q.393 0 .774-.024a4.5 4.5 0 0 1 1.102-1.132C9.298 8.944 8.666 9 8 9c-1.464 0-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777M3 4c0-.374.356-.875 1.318-1.313C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4" />
+                                        </svg>
+                                    </button></td>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td colspan="11"></td>
 
-                            <form action="" method="POST" id="contribuciones-form-<?php echo $index; ?>">
-                                <tr> <input type="hidden" name="contribuciones-form" value="1">
-                                    <input type="hidden" name="index" value="<?php echo $index; ?>">
-
-                                    <td>
-                                        <div class="form-group">
-                                            <?php
-                                            // Consulta para obtener los valores del select para idapendice12
-                                            $apendice12Result = $conexion->query("SELECT idapendice12, clave AS descripcion12 FROM apendice12");
-
-                                            if ($conexion->connect_error) {
-                                                die("Conexión fallida: " . $conexion->connect_error);
-                                            }
-                                            ?>
-                                            <select class="form-control" name="idapendice12">
-                                                <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
-                                                    <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>" <?= ($section['idapendice12'] == $apendice12['idapendice12']) ? 'selected' : '' ?>>
-                                                        <?= htmlspecialchars($apendice12['descripcion12']) ?>
-                                                    </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <input type="text" id="tasa" name="tasa" value="<?php echo htmlspecialchars($section['tasa']); ?>" class="form-control" oninput="calculateImporte()">
-                                    </td>
-
-                                    <td>
-                                        <div class="form-group">
-                                            <?php
-                                            // Consulta para obtener los valores del select para idapendice18
-                                            $apendice18Result = $conexion->query("SELECT idapendice18, clave AS descripcion18 FROM apendice18");
-
-                                            if ($conexion->connect_error) {
-                                                die("Conexión fallida: " . $conexion->connect_error);
-                                            }
-                                            ?>
-                                            <select class="form-control" name="idapendice18">
-                                                <?php while ($apendice18 = $apendice18Result->fetch_assoc()) : ?>
-                                                    <option value="<?= htmlspecialchars($apendice18['idapendice18']) ?>" <?= ($section['idapendice18'] == $apendice18['idapendice18']) ? 'selected' : '' ?>>
-                                                        <?= htmlspecialchars($apendice18['descripcion18']) ?>
-                                                    </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <div class="form-group">
-                                            <?php
-                                            // Consulta para obtener los valores del select para idapendice13
-                                            $apendice13Result = $conexion->query("SELECT idapendice13, clave AS descripcion13 FROM apendice13");
-
-                                            if ($conexion->connect_error) {
-                                                die("Conexión fallida: " . $conexion->connect_error);
-                                            }
-                                            ?>
-                                            <select class="form-control" name="idapendice13">
-                                                <?php while ($apendice13 = $apendice13Result->fetch_assoc()) : ?>
-                                                    <option value="<?= htmlspecialchars($apendice13['idapendice13']) ?>" <?= ($section['idapendice13'] == $apendice13['idapendice13']) ? 'selected' : '' ?>>
-                                                        <?= htmlspecialchars($apendice13['descripcion13']) ?>
-                                                    </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <input type="text" id="importe" name="importe" value="<?php echo htmlspecialchars($section['importe']); ?>" class="form-control" readonly>
-                                    </td>
-                                    <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
-
-
-                                </tr>
-                                <tr>
-                                    <td class="text-center" colspan="5">
-                                        <button type="submit" class="btn btn-success">Guardar</button>
-                                    </td>
-                                </tr>
-                            </form>
-
-
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -666,18 +554,6 @@ if (isset($_POST['add_section'])) {
             document.body.appendChild(form);
             form.submit();
         });
-
-        function calculateImporte() {
-            // Obtener los valores de los inputs
-            const valaduusd = parseFloat(document.getElementById('valaduusd').value) || 0;
-            const tasa = parseFloat(document.getElementById('tasa').value) || 0;
-
-            // Realizar la multiplicación
-            const importe = valaduusd * tasa;
-
-            // Insertar el resultado en el input de importe
-            document.getElementById('importe').value = importe.toFixed(2);
-        }
     </script>
 </body>
 
