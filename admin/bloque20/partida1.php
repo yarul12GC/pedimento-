@@ -410,7 +410,7 @@ if (isset($_POST['add_section'])) {
                                     <input type="hidden" name="save_section_partida3" value="1">
                                     <input type="hidden" name="index" value="<?php echo $index; ?>">
                                     <td colspan="2">
-                                        <input type="text" id="valaduusd" name="valaduusd" value="<?php echo htmlspecialchars($section['valaduusd']); ?>" class="form-control" oninput="calculateImporte()">
+                                        <input type="text" id="valaduusd-<?php echo $index; ?>" name="valaduusd" value="<?php echo htmlspecialchars($section['valaduusd']); ?>" class="form-control valaduusd" oninput="calculateImporte(<?php echo $index; ?>)">
                                     </td>
                                     <td colspan="3">
                                         <input type="text" name="imppreciopag" value="<?php echo htmlspecialchars($section['imppreciopag']); ?>" class="form-control">
@@ -588,7 +588,7 @@ if (isset($_POST['add_section'])) {
                                     </td>
 
                                     <td>
-                                        <input type="text" id="tasa" name="tasa" value="<?php echo htmlspecialchars($section['tasa']); ?>" class="form-control" oninput="calculateImporte()">
+                                        <input type="text" id="tasa-<?php echo $index; ?>" name="tasa" value="<?php echo htmlspecialchars($section['tasa']); ?>" class="form-control tasa" oninput="calculateImporte(<?php echo $index; ?>)">
                                     </td>
 
                                     <td>
@@ -632,7 +632,7 @@ if (isset($_POST['add_section'])) {
                                     </td>
 
                                     <td>
-                                        <input type="text" id="importe" name="importe" value="<?php echo htmlspecialchars($section['importe']); ?>" class="form-control" readonly>
+                                        <input type="text" id="importe-<?php echo $index; ?>" name="importe" value="<?php echo htmlspecialchars($section['importe']); ?>" class="form-control importe">
                                     </td>
                                     <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
 
@@ -667,16 +667,17 @@ if (isset($_POST['add_section'])) {
             form.submit();
         });
 
-        function calculateImporte() {
-            // Obtener los valores de los inputs
-            const valaduusd = parseFloat(document.getElementById('valaduusd').value) || 0;
-            const tasa = parseFloat(document.getElementById('tasa').value) || 0;
+        function calculateImporte(index) {
+            const valaduusdInput = document.querySelector(`#valaduusd-${index}`);
+            const tasaInput = document.querySelector(`#tasa-${index}`);
+            const importeInput = document.querySelector(`#importe-${index}`);
 
-            // Realizar la multiplicación
+            const valaduusd = parseFloat(valaduusdInput.value) || 0;
+            const tasa = parseFloat(tasaInput.value) || 0;
+
             const importe = valaduusd * tasa;
 
-            // Insertar el resultado en el input de importe
-            document.getElementById('importe').value = importe.toFixed(2);
+            importeInput.value = importe.toFixed(2);
         }
     </script>
 </body>
