@@ -12,7 +12,6 @@ function sanitize($conexion, $value)
     return $conexion->real_escape_string(trim($value));
 }
 
-// Función para insertar datos en la base de datos
 function insertData($conexion, $table, $columns, $values)
 {
     $sql = "INSERT INTO $table ($columns) VALUES ($values)";
@@ -23,7 +22,6 @@ function insertData($conexion, $table, $columns, $values)
     }
 }
 
-// Manejar la solicitud para agregar una nueva sección
 if (isset($_POST['add_section'])) {
     $newIndex = count($_SESSION['sections']);
     $_SESSION['sections'][$newIndex] = [
@@ -62,7 +60,6 @@ if (isset($_POST['add_section'])) {
     ];
 }
 
-// Manejar la solicitud para guardar una sección en partida1
 if (isset($_POST['save_section'])) {
     $index = $_POST['index'] ?? null;
     if ($index !== null && isset($_SESSION['sections'][$index])) {
@@ -113,7 +110,6 @@ if (isset($_POST['save_section'])) {
         )";
 
         if ($conexion->query($sql) === TRUE) {
-            // Los datos se han guardado correctamente
         } else {
             echo "Error: " . $sql . "<br>" . $conexion->error;
         }
@@ -176,25 +172,20 @@ if (isset($_POST['permisos-nivel-partida'])) {
 }
 
 // Manejar la solicitud para complementos
-// Manejar la solicitud para complementos
 if (isset($_POST['complementosp-nivel-partida'])) {
     $index = $_POST['index'] ?? null;
     if ($index !== null && isset($_SESSION['sections'][$index])) {
-        // Obtener los valores de section_id y idpedimentoc
         $section_id = $_SESSION['sections'][$index]['section_id'] ?? '';
         $idpedimentoc = $_SESSION['sections'][$index]['idpedimentoc'] ?? '';
 
-        // Sanear y almacenar los datos en la sesión
         foreach (['idapendice8', 'complemento1', 'complemento2', 'complemento3'] as $field) {
             $_SESSION['sections'][$index][$field] = sanitize($conexion, $_POST[$field] ?? '');
         }
 
-        // Preparar los datos para la inserción
         $section = $_SESSION['sections'][$index];
         $columns = "idapendice8, complemento1, complemento2, complemento3, idpedimentoc, section_id";
         $values = "'{$section['idapendice8']}', '{$section['complemento1']}', '{$section['complemento2']}', '{$section['complemento3']}', '$idpedimentoc', '$section_id'";
 
-        // Insertar datos en la tabla 'complementosp'
         insertData($conexion, 'complementosp', $columns, $values);
     } else {
         echo "Error: Índice de sección no válido.";
@@ -208,14 +199,11 @@ if (isset($_POST['observaciones-nivel-p'])) {
         $section_id = $_SESSION['sections'][$index]['section_id'] ?? '';
         $idpedimentoc = $_SESSION['sections'][$index]['idpedimentoc'] ?? '';
 
-        // Sanear y almacenar datos en la sesión
         $_SESSION['sections'][$index]['descripcionnp'] = sanitize($conexion, $_POST['descripcionnp'] ?? '');
 
-        // Construir columnas y valores para la inserción
         $columns = "descripcionnp, idpedimentoc, section_id";
         $values = "'{$_SESSION['sections'][$index]['descripcionnp']}', '$idpedimentoc', '$section_id'";
 
-        // Insertar datos en la tabla 'observacionesnp'
         insertData($conexion, 'observacionesnp', $columns, $values);
     } else {
         echo "Error: Índice de sección no válido.";
@@ -232,6 +220,7 @@ if (isset($_POST['contribuciones-form'])) {
         $_SESSION['sections'][$index]['idapendice13'] = $_POST['idapendice13'] ?? null;
         $_SESSION['sections'][$index]['importe'] = $_POST['importe'] ?? '';
         $_SESSION['sections'][$index]['idpedimentoc'] = $_POST['idpedimentoc'] ?? null;
+        $_SESSION['sections'][$index]['section_id'] = $_POST['section_id'] ?? '';
 
         // Sanitizar y validar datos
         $idapendice12 = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idapendice12']));
@@ -240,12 +229,13 @@ if (isset($_POST['contribuciones-form'])) {
         $idapendice13 = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idapendice13']));
         $importe = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['importe']));
         $idpedimentoc = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['idpedimentoc']));
+        $section_id = $conexion->real_escape_string(trim($_SESSION['sections'][$index]['section_id']));
 
-        $sql = "INSERT INTO contribuciones (idapendice12, tasa, idapendice18, idapendice13, importe, idpedimentoc) 
-                VALUES ('$idapendice12', '$tasa', '$idapendice18', '$idapendice13', '$importe', '$idpedimentoc')";
+        $sql = "INSERT INTO contribuciones (idapendice12, tasa, idapendice18, idapendice13, importe, idpedimentoc, section_id) 
+                VALUES ('$idapendice12', '$tasa', '$idapendice18', '$idapendice13', '$importe', '$idpedimentoc', '$section_id')";
 
         if ($conexion->query($sql) === TRUE) {
-            // Los datos se han guardado correctamente
+            echo "Datos guardados correctamente.";
         } else {
             echo "Error: " . $sql . "<br>" . $conexion->error;
         }
@@ -254,7 +244,6 @@ if (isset($_POST['contribuciones-form'])) {
     }
 }
 
-// Mostrar las secciones almacenadas en la sesión
 if (isset($_POST['show_sections'])) {
     echo '<pre>';
     print_r($_SESSION['sections']);
@@ -552,16 +541,17 @@ if (isset($_POST['show_sections'])) {
                         </thead>
                         <tbody>
 
-                            <form action="" method="POST" id="contribuciones-form-<?php echo $index; ?>">
-                                <tr> <input type="hidden" name="contribuciones-form" value="1">
-                                    <input type="hidden" name="index" value="<?php echo $index; ?>">
+                            <form action="" method="POST" id="contribuciones-form-<?php echo htmlspecialchars($index); ?>">
+                                <input type="hidden" name="contribuciones-form" value="1">
+                                <input type="hidden" name="index" value="<?php echo htmlspecialchars($index); ?>">
+                                <input type="hidden" name="section_id" value="<?php echo htmlspecialchars($_SESSION['sections'][$index]['section_id']); ?>">
 
+                                <tr>
                                     <td>
                                         <div class="form-group">
                                             <?php
                                             // Consulta para obtener los valores del select para idapendice12
                                             $apendice12Result = $conexion->query("SELECT idapendice12, clave AS descripcion12 FROM apendice12");
-
                                             if ($conexion->connect_error) {
                                                 die("Conexión fallida: " . $conexion->connect_error);
                                             }
@@ -577,7 +567,7 @@ if (isset($_POST['show_sections'])) {
                                     </td>
 
                                     <td>
-                                        <input type="text" id="tasa-<?php echo $index; ?>" name="tasa" value="<?php echo htmlspecialchars($section['tasa']); ?>" class="form-control tasa" oninput="calculateImporte(<?php echo $index; ?>)">
+                                        <input type="text" id="tasa-<?php echo htmlspecialchars($index); ?>" name="tasa" value="<?php echo htmlspecialchars($section['tasa'] ?? ''); ?>" class="form-control tasa" oninput="calculateImporte(<?php echo htmlspecialchars($index); ?>)">
                                     </td>
 
                                     <td>
@@ -585,7 +575,6 @@ if (isset($_POST['show_sections'])) {
                                             <?php
                                             // Consulta para obtener los valores del select para idapendice18
                                             $apendice18Result = $conexion->query("SELECT idapendice18, clave AS descripcion18 FROM apendice18");
-
                                             if ($conexion->connect_error) {
                                                 die("Conexión fallida: " . $conexion->connect_error);
                                             }
@@ -605,7 +594,6 @@ if (isset($_POST['show_sections'])) {
                                             <?php
                                             // Consulta para obtener los valores del select para idapendice13
                                             $apendice13Result = $conexion->query("SELECT idapendice13, clave AS descripcion13 FROM apendice13");
-
                                             if ($conexion->connect_error) {
                                                 die("Conexión fallida: " . $conexion->connect_error);
                                             }
@@ -621,11 +609,9 @@ if (isset($_POST['show_sections'])) {
                                     </td>
 
                                     <td>
-                                        <input type="text" id="importe-<?php echo $index; ?>" name="importe" value="<?php echo htmlspecialchars($section['importe']); ?>" class="form-control importe">
+                                        <input type="text" id="importe-<?php echo htmlspecialchars($index); ?>" name="importe" value="<?php echo htmlspecialchars($section['importe'] ?? ''); ?>" class="form-control importe">
                                     </td>
                                     <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
-
-
                                 </tr>
                                 <tr>
                                     <td class="text-center" colspan="5">
@@ -633,6 +619,7 @@ if (isset($_POST['show_sections'])) {
                                     </td>
                                 </tr>
                             </form>
+
 
 
 
