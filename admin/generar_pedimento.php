@@ -18,8 +18,7 @@ if ($idAgente === null) {
     exit();
 }
 
-// Consulta para obtener los datos del agente aduanal seleccionado
-$queryAgente = "SELECT nombreagente, apellidoP, apellidoM, curp, rfc, nacionalidad, tipo_domicilio, estado, localidad, codigo_postal FROM agenteaduanal WHERE idagente = ?";
+$queryAgente = "SELECT nombreagente, apellidoP, apellidoM, curp, rfc, nacionalidad, tipo_domicilio, estado, localidad, patente, codigo_postal FROM agenteaduanal WHERE idagente = ?";
 $stmtAgente = $conexion->prepare($queryAgente);
 $stmtAgente->bind_param("i", $idAgente);
 $stmtAgente->execute();
@@ -44,9 +43,10 @@ $_SESSION['agente_nacionalidad'] = $agenteData['nacionalidad'];
 $_SESSION['agente_tipo_domicilio'] = $agenteData['tipo_domicilio'];
 $_SESSION['agente_estado'] = $agenteData['estado'];
 $_SESSION['agente_localidad'] = $agenteData['localidad'];
+$_SESSION['agente_patente'] = $agenteData['patente'];
 $_SESSION['agente_codigo_postal'] = $agenteData['codigo_postal'];
 
-$stmtAgente->close();
+$stmtAgente->close(); 
 
 // Inserción del pedimento en la base de datos
 $sql = "INSERT INTO pedimentocompleto (idagente, idusuario) VALUES (?, ?)";

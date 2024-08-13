@@ -1,6 +1,6 @@
 <?php
-include ('../conexion.php');
-include ('../sesion.php');
+include('../conexion.php');
+include('../sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@ include ('../sesion.php');
     <header>
         <?php
         include '../public/cabeza.php'
-            ?>
+        ?>
     </header>
 
     <section class="zona1">
@@ -60,8 +60,7 @@ include ('../sesion.php');
 
                         </tr>
 
-                    <?php }
-                    ; ?>
+                    <?php }; ?>
                 </tbody>
             </table>
         </fieldset>
@@ -70,7 +69,7 @@ include ('../sesion.php');
     <footer>
         <?php
         include '../public/footer.php'
-            ?>
+        ?>
     </footer>
 
     <!-- Modal para registrar un nuevo agente-->
@@ -133,6 +132,11 @@ include ('../sesion.php');
                                         required>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="control-label mb-3" for="patente">PATENTE </label>
+                                    <input class="form-control" type="text" name="patente" placeholder=""
+                                        required>
+                                </div>
+                                <div class="mb-3">
                                     <label class="control-label mb-3" for="usuarioID">USUARIO RELACIONADO: </label>
                                     <select required="required" name="idusuario" class="form-control">
                                         <option value="">-- Tipo de Usuario --</option>
@@ -140,11 +144,11 @@ include ('../sesion.php');
                                         $Usuarios = mysqli_query($conexion, "SELECT usuarioID, email FROM usuarios");
 
                                         while ($datos = mysqli_fetch_array($Usuarios)) {
-                                            ?>
+                                        ?>
                                             <option value="<?php echo $datos['usuarioID']; ?>">
                                                 <?php echo $datos['email']; ?>
                                             </option>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                     </select>
@@ -171,7 +175,7 @@ include ('../sesion.php');
     <?php
     $queryagente = mysqli_query($conexion, $consultar);
     while ($row = mysqli_fetch_array($queryagente)) {
-        ?>
+    ?>
         <!-- Modal para editar agente-->
         <div class="modal fade" id="editar_<?php echo $row['idagente']; ?>" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -244,21 +248,26 @@ include ('../sesion.php');
                                             value="<?php echo $row['codigo_postal']; ?>">
                                     </div>
                                     <div class="mb-3">
-                                    <label for="TipoUsuarioID">USUARIO RELACIONADO:</label>
-                                    <select class="form-control" required name="idusuario">
-                                        <option value="">-- Usuario --</option>
-                                        <?php
-                                        $Usuarios = mysqli_query($conexion, "SELECT usuarioID, email FROM usuarios");
-                                        while ($datos = mysqli_fetch_array($Usuarios)) {
-                                            ?>
-                                            <option value="<?php echo $datos['usuarioID']; ?>" <?php echo ($datos['usuarioID'] == $row['idusuario']) ? 'selected' : ''; ?>>
-                                                <?php echo $datos['email']; ?>
-                                            </option>
+                                        <label class="control-label mb-3" for="patente">PATENTE </label>
+                                        <input class="form-control" type="text" name="patente" placeholder=""
+                                            value="<?php echo $row['patente']; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="TipoUsuarioID">USUARIO RELACIONADO:</label>
+                                        <select class="form-control" required name="idusuario">
+                                            <option value="">-- Usuario --</option>
                                             <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                                            $Usuarios = mysqli_query($conexion, "SELECT usuarioID, email FROM usuarios");
+                                            while ($datos = mysqli_fetch_array($Usuarios)) {
+                                            ?>
+                                                <option value="<?php echo $datos['usuarioID']; ?>" <?php echo ($datos['usuarioID'] == $row['idusuario']) ? 'selected' : ''; ?>>
+                                                    <?php echo $datos['email']; ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
 
                                     <input class="form-control" type="hidden" name="idagente" placeholder=""
                                         value="<?php echo $row['idagente']; ?>">
@@ -276,7 +285,7 @@ include ('../sesion.php');
                 </div>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 </body>

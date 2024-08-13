@@ -13,8 +13,8 @@ $agenteNacionalidad = isset($_SESSION['agente_nacionalidad']) ? $_SESSION['agent
 $agenteTipoDomicilio = isset($_SESSION['agente_tipo_domicilio']) ? $_SESSION['agente_tipo_domicilio'] : 'N/A';
 $agenteEstado = isset($_SESSION['agente_estado']) ? $_SESSION['agente_estado'] : 'N/A';
 $agenteLocalidad = isset($_SESSION['agente_localidad']) ? $_SESSION['agente_localidad'] : 'N/A';
+$agentePatente = isset($_SESSION['agente_patente']) ? $_SESSION['agente_patente'] : 'N/A';
 $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agente_codigo_postal'] : 'N/A';
-
 
 ?>
 <!DOCTYPE html>

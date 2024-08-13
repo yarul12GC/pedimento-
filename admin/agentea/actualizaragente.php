@@ -15,12 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = mysqli_real_escape_string($conexion, $_POST['estado']);
     $localidad = mysqli_real_escape_string($conexion, $_POST['localidad']);
     $codigo_postal = mysqli_real_escape_string($conexion, $_POST['codigo_postal']);
+    $patente = mysqli_real_escape_string($conexion, $_POST['patente']);
     $idusuario = mysqli_real_escape_string($conexion, $_POST['idusuario']);
 
     $sql = "UPDATE agenteaduanal 
             SET nombreagente = '$nombre', apellidoP = '$apellidoP', apellidoM = '$apellidoM', curp = '$curp', rfc = '$rfc', 
                 nacionalidad = '$nacionalidad', tipo_domicilio = '$tipo_domicilio', estado = '$estado', localidad = '$localidad', 
-                codigo_postal = '$codigo_postal', idusuario = '$idusuario' 
+                codigo_postal = '$codigo_postal', patente = '$patente', idusuario = '$idusuario' 
             WHERE idagente = '$idagente'";
 
     if (mysqli_query($conexion, $sql)) {
