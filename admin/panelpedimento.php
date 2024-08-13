@@ -9,51 +9,66 @@ if ($conexion->connect_error) {
 $agentesResult = $conexion->query("SELECT idagente, nombreagente FROM agenteaduanal");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captura de Pedimento</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../estilos/pedimento.css">
-    <title>Pedimento de Importación</title>
 </head>
 
-<body>
+<body class="bg-light">
     <header>
         <?php include '../public/cabeza.php'; ?>
     </header>
     <section class="zona1">
-        <fieldset>
-            <legend><strong>Genera archivo de Pedimento</strong></legend>
-
-            <div class="form-group">
-                <label for="agenteSelect" class="tex"><i class="fas fa-user"></i><strong> Seleccione el agente aduanal
-                        responsable de la generación del pedimento.</strong>
-                </label><br><br>
-                <select class="form-control" id="agenteSelect" name="agenteSelect">
-                    <?php while ($agente = $agentesResult->fetch_assoc()): ?>
-                        <option value="<?= htmlspecialchars($agente['idagente']) ?>"><?= htmlspecialchars($agente['nombreagente']) ?></option>
-                    <?php endwhile; ?>
-                </select><br>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="fas fa-file-alt"></i> Generar Archivo de Pedimento</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="generar-pedimento-form" method="POST" action="generar_pedimento.php">
+                                <div class="form-group">
+                                    <label for="agenteSelect"><i class="fas fa-user"></i> Seleccione el agente aduanal responsable:</label>
+                                    <select class="form-control" id="agenteSelect" name="agenteSelect">
+                                        <?php while ($agente = $agentesResult->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($agente['idagente']) ?>"><?= htmlspecialchars($agente['nombreagente']) ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="agente_id" name="agente_id">
+                                <button type="submit" id="generar-pedimento" class="btn btn-success btn-block">
+                                    <i class="fas fa-check"></i> Generar Pedimento
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <form id="generar-pedimento-form" method="POST" action="generar_pedimento.php">
-                <input type="hidden" id="agente_id" name="agente_id">
-                <button type="submit" id="generar-pedimento" class="btn btn-primary">Generar Pedimento</button>
-            </form>
-            <br><br>
-        </fieldset>
+        </div>
     </section>
-    <footer>
+
+
+    <footer class="footer mt-5">
         <?php include '../public/footer.php'; ?>
     </footer>
-   
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#generar-pedimento').click(function (event) {
+        $(document).ready(function() {
+            $('#generar-pedimento').click(function(event) {
                 event.preventDefault();
                 var agenteId = $('#agenteSelect').val();
                 $('#agente_id').val(agenteId);
@@ -61,9 +76,6 @@ $agentesResult = $conexion->query("SELECT idagente, nombreagente FROM agenteadua
             });
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
