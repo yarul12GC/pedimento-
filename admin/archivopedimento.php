@@ -4,7 +4,6 @@ include_once '../sesion.php';
 
 $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Consulta combinada para obtener datos de los bloques 1, 2, 3 ,4 ,5 
 $query = "
     SELECT dp.*, 
            a2.clave AS clave_apendice2,
@@ -39,8 +38,19 @@ $query = "
            vd.segurosD,
            vd.fletesD,
            vd.embalajesD,
-           vd.otrosDecrement
-
+           vd.otrosDecrement,
+           p.aviso_electronico,
+           p.marca,
+           p.modelo,
+           p.nBultos,
+           ap1.clave AS claveapn1,
+           f.entrada,
+           f.pago,
+           tp.*, 
+           a18.idapendice18, 
+           a18.clave AS clavea18,
+           a12.idapendice12, 
+           a12.clave AS clavea12
     FROM dpedimento dp
     INNER JOIN apendice2 a2 ON dp.idapendice2 = a2.idapendice2
     INNER JOIN apendice16 a16 ON dp.idapendice16 = a16.idapendice16
@@ -55,20 +65,30 @@ $query = "
     INNER JOIN importadorexportador i ON dp.idpedimento = i.idpedimentoc
     INNER JOIN valorincrementable vi ON dp.idpedimento = vi.idpedimentoc
     INNER JOIN valordecrementable vd ON dp.idpedimento = vd.idpedimentoc
-
+    INNER JOIN permisos p ON dp.idpedimento = p.idpedimentoc
+    INNER JOIN apendice1 ap1 ON p.idapendice1 = ap1.idapendice1
+    INNER JOIN fechas f ON dp.idpedimento = f.idpedimentoc
+    INNER JOIN tasapedimento tp ON dp.idpedimento = tp.idpedimentoc
+    INNER JOIN apendice18 a18 ON tp.idapendice18 = a18.idapendice18
+    INNER JOIN apendice12 a12 ON tp.idapendice12 = a12.idapendice12
     WHERE dp.idpedimento = ?
-
 ";
-
 $stmt = $conexion->prepare($query);
 $stmt->bind_param("i", $idPedimento);
 $stmt->execute();
 $result = $stmt->get_result();
 
+$tasas = []; 
+$datos = []; 
+
 if ($result->num_rows > 0) {
-    $datos = $result->fetch_assoc();
+    while ($row = $result->fetch_assoc()) {
+        $tasas[] = $row; // Almacena cada fila en el array $tasas
+    }
+    // Si necesitas almacenar una fila específica en $datos, puedes hacerlo aquí
+    $datos = $tasas[0]; // Almacena la primera fila en $datos
 } else {
-    echo '<p>No se encontraron datos para este pedimento.</p>';
+    echo '<p>No se encontraron datos para este pedimento o no has terminado de capturar tu pedimento.</p>';
     exit();
 }
 
@@ -253,16 +273,89 @@ $conexion->close();
             </tbody>
         </table>
 
+        <table class="table table-bordered table-hover">
+
+            <tbody>
+                <tr>
+                    <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
+                    <td><?php echo htmlspecialchars($datos['aviso_electronico']); ?></td>
+                    <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
+                    <td><?php echo htmlspecialchars($datos['claveapn1']); ?></td>
+                </tr>
+                <tr>
+                    <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
+                    <td colspan="3"><?php echo htmlspecialchars($datos['marca'] . ' ' . $datos['modelo'] . ' ' . $datos['nBultos']); ?></td>
+
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-section">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="text-center">
+                            <tr>
+                                <th colspan="8" class="text-center bg-secondary text-light">FECHAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <th>ENTRADAS</th>
+                                <td><?php echo htmlspecialchars($datos['entrada']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>PAGO</th>
+                                <td><?php echo htmlspecialchars($datos['pago']); ?></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-section">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="text-center">
+                            <tr>
+                                <th colspan="8" class="text-center bg-secondary text-light">TASA NIVEL PEDIMENTO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>CONTRIB</th>
+                                <th>CVE.T.TASA</th>
+                                <th>TASA</th>
+                            </tr>
+                            <?php
+                            if (!empty($tasas)) {
+                                foreach ($tasas as $row) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($row['clavea12']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['clavea18']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['tasa']) . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros.</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer class="mt-5">
         <?php include '../public/footer.php'; ?>
-    </footer>
-
-    <!-- Agrega Bootstrap JS y dependencias si es necesario -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </footer>  
 </body>
 
 </html>

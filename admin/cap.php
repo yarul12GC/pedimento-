@@ -1,8 +1,6 @@
 <?php
 include_once '../sesion.php';
 include_once '../public/mensaje.php';
-$pedimento_id = $_SESSION['pedimento_id'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +9,7 @@ $pedimento_id = $_SESSION['pedimento_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/pedimento.css">
-    <title>captura de pedimento</title>
+    <title>Pedimentos Generados</title>
     <style>
         body {
             background-color: #f8f9fa;
