@@ -29,7 +29,18 @@ $query = "
            i.codigoPostal,
            i.municipio,
            i.entidadfederativa,
-           i.pais
+           i.pais,
+           vi.Vseguros,
+           vi.seguros,
+           vi.fletes,
+           vi.embalajes,
+           vi.otrosincrement,
+           vd.VsegurosD,
+           vd.segurosD,
+           vd.fletesD,
+           vd.embalajesD,
+           vd.otrosDecrement
+
     FROM dpedimento dp
     INNER JOIN apendice2 a2 ON dp.idapendice2 = a2.idapendice2
     INNER JOIN apendice16 a16 ON dp.idapendice16 = a16.idapendice16
@@ -42,7 +53,11 @@ $query = "
     INNER JOIN apendice3 a3_sal ON t.idapendice3salida = a3_sal.idapendice3
     INNER JOIN valoresp v ON dp.idpedimento = v.idpedimentoc
     INNER JOIN importadorexportador i ON dp.idpedimento = i.idpedimentoc
+    INNER JOIN valorincrementable vi ON dp.idpedimento = vi.idpedimentoc
+    INNER JOIN valordecrementable vd ON dp.idpedimento = vd.idpedimentoc
+
     WHERE dp.idpedimento = ?
+
 ";
 
 $stmt = $conexion->prepare($query);
@@ -152,8 +167,8 @@ $conexion->close();
         </div>
         <table class="table table-bordered table-hover">
             <thead class="text-center ">
-                <tr >
-                    <th colspan="14" class=" bg-secondary text-light" >DATOS DEL IMPORTADOR/EXPORTADOR</th>
+                <tr>
+                    <th colspan="14" class=" bg-secondary text-light">DATOS DEL IMPORTADOR/EXPORTADOR</th>
                 </tr>
             </thead>
             <tbody>
@@ -190,6 +205,54 @@ $conexion->close();
                 </tr>
             </tbody>
         </table>
+        <table class="table table-bordered table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th colspan="14" class="text-center bg-secondary text-light">VALOR INCREMENTABLES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">VAL.SEGUROS</th>
+                    <th scope="row">SEGUROS</th>
+                    <th scope="row">FLETES</th>
+                    <th scope="row">EMBALAJES</th>
+                    <th scope="row">OTROS INCREMENTABLES</th>
+                </tr>
+                <tr>
+                    <td><?php echo htmlspecialchars($datos['Vseguros']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['seguros']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['fletes']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['embalajes']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['otrosincrement']); ?></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th colspan="14" class="text-center bg-secondary text-light">VALOR DECREMENTABLES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">TRANSPORTE DECREMENTABLE</th>
+                    <th scope="row">SEGURO DECREMENTABLE</th>
+                    <th scope="row">CARGA</th>
+                    <th scope="row">DESCARGA</th>
+                    <th scope="row">OTROS DECREMENTABLES</th>
+                </tr>
+                <tr>
+                    <td><?php echo htmlspecialchars($datos['VsegurosD']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['segurosD']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['fletesD']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['embalajesD']); ?></td>
+                    <td><?php echo htmlspecialchars($datos['otrosDecrement']); ?></td>
+                </tr>
+            </tbody>
+        </table>
+
     </section>
 
     <footer class="mt-5">
