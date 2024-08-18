@@ -1,5 +1,5 @@
 <body>
-<?php
+    <?php
     include_once '../conexion.php';
     include_once '../sesion.php';
 
@@ -8,7 +8,17 @@
 
     if ($last_idb15 !== null) {
         $querybloque15 = "
-    SELECT *FROM dmonetarios WHERE iddmonetarios = $last_idb15
+     SELECT dmonetarios.numfactura, 
+           dmonetarios.fecha, 
+           a14.clave AS claveapn14, 
+           a5.clave AS claveapn5, 
+           dmonetarios.valmonfact, 
+           dmonetarios.factormonfact, 
+           dmonetarios.valdolares
+    FROM dmonetarios 
+    INNER JOIN apendice14 a14 ON dmonetarios.idapendice14 = a14.idapendice14
+    INNER JOIN apendice5 a5 ON dmonetarios.idapendice5 = a5.idapendice5
+    WHERE dmonetarios.iddmonetarios = $last_idb15
     ";
 
         $resultbloque15 = $conexion->query($querybloque15);
@@ -31,8 +41,8 @@
                     <tr>
                         <td><?php echo htmlspecialchars($datosb15['numfactura']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['fecha']); ?></td>
-                        <td><?php echo htmlspecialchars($datosb15['idapendice14']); ?></td>
-                        <td><?php echo htmlspecialchars($datosb15['idapendice5']); ?></td>
+                        <td><?php echo htmlspecialchars($datosb15['claveapn14']); ?></td>
+                        <td><?php echo htmlspecialchars($datosb15['claveapn5']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['valmonfact']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['factormonfact']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['valdolares']); ?></td>
