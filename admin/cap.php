@@ -1,6 +1,5 @@
 <?php
 include_once '../sesion.php';
-include_once '../public/mensaje.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

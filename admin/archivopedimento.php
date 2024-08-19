@@ -1,99 +1,9 @@
 <?php
 include_once '../conexion.php';
 include_once '../sesion.php';
+include_once '../public/mensaje.php';
 
 $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-$query = "
-    SELECT dp.*, 
-           a2.clave AS clave_apendice2,
-           a16.clave AS clave_apendice16,
-           ts.tipoCambio,
-           ts.peso_bruto,
-           a15.clave AS clavea15,
-           a1_2.clave AS clavea1,
-           t.*,
-           a3_ent.clave AS clave_entrtadaSalida, 
-           a3_arr.clave AS clave_arribo, 
-           a3_sal.clave AS clave_salida,
-           v.valorDolares,
-           v.valorAduna,
-           v.precioPagado,
-           i.nombreE,
-           i.rfc,
-           i.curp,
-           i.Calle,
-           i.numeroInterior,
-           i.numeroExterior,
-           i.codigoPostal,
-           i.municipio,
-           i.entidadfederativa,
-           i.pais,
-           vi.Vseguros,
-           vi.seguros,
-           vi.fletes,
-           vi.embalajes,
-           vi.otrosincrement,
-           vd.VsegurosD,
-           vd.segurosD,
-           vd.fletesD,
-           vd.embalajesD,
-           vd.otrosDecrement,
-           p.aviso_electronico,
-           p.marca,
-           p.modelo,
-           p.nBultos,
-           ap1.clave AS claveapn1,
-           f.entrada,
-           f.pago,
-           tp.*, 
-           a18.idapendice18, 
-           a18.clave AS clavea18,
-           a12.idapendice12, 
-           a12.clave AS clavea12
-          
-    FROM dpedimento dp
-    INNER JOIN apendice2 a2 ON dp.idapendice2 = a2.idapendice2
-    INNER JOIN apendice16 a16 ON dp.idapendice16 = a16.idapendice16
-    INNER JOIN transacciones ts ON dp.idpedimento = ts.idpedimentoc
-    INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
-    INNER JOIN apendice1 a1_2 ON ts.idapendice1 = a1_2.idapendice1
-    INNER JOIN transporte t ON dp.idpedimento = t.idtransporte
-    INNER JOIN apendice3 a3_ent ON t.idapendice3entrtadaSalida = a3_ent.idapendice3
-    INNER JOIN apendice3 a3_arr ON t.idapendice3arribo = a3_arr.idapendice3
-    INNER JOIN apendice3 a3_sal ON t.idapendice3salida = a3_sal.idapendice3
-    INNER JOIN valoresp v ON dp.idpedimento = v.idpedimentoc
-    INNER JOIN importadorexportador i ON dp.idpedimento = i.idpedimentoc
-    INNER JOIN valorincrementable vi ON dp.idpedimento = vi.idpedimentoc
-    INNER JOIN valordecrementable vd ON dp.idpedimento = vd.idpedimentoc
-    INNER JOIN permisos p ON dp.idpedimento = p.idpedimentoc
-    INNER JOIN apendice1 ap1 ON p.idapendice1 = ap1.idapendice1
-    INNER JOIN fechas f ON dp.idpedimento = f.idpedimentoc
-    INNER JOIN tasapedimento tp ON dp.idpedimento = tp.idpedimentoc
-    INNER JOIN apendice18 a18 ON tp.idapendice18 = a18.idapendice18
-    INNER JOIN apendice12 a12 ON tp.idapendice12 = a12.idapendice12
-    WHERE dp.idpedimento = ?
-";
-$stmt = $conexion->prepare($query);
-$stmt->bind_param("i", $idPedimento);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$tasas = [];
-$datos = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        // Almacena los datos de cada fila en los arrays correspondientes
-        $tasas[] = $row;
-    }
-
-    // Almacena la primera fila en los arrays de datos si es necesario
-    $datos = $tasas[0];
-} else {
-    echo '<p>No se encontraron datos para este pedimento o no has terminado de capturar tu pedimento.</p>';
-    exit();
-}
 
 ?>
 
@@ -113,28 +23,72 @@ if ($result->num_rows > 0) {
 
     <section class="zona1">
         <table class="table table-bordered table-hover">
-            <tr>
-                <th>NUM.PEDIMENTO</th>
-                <td><?php echo htmlspecialchars($datos['Nopedimento']); ?></td>
-                <th>T.OPER</th>
-                <td><?php echo htmlspecialchars($datos['Toper']); ?></td>
-                <th>CVE PEDIMENTO</th>
-                <td><?php echo htmlspecialchars($datos['clave_apendice2']); ?></td>
-                <th>REGIMEN</th>
-                <td><?php echo htmlspecialchars($datos['clave_apendice16']); ?></td>
-            </tr>
+            <?php
+            $querydpm =  " SELECT dp.*, 
+        a2.clave AS clave_apendice2,
+        a16.clave AS clave_apendice16
+        FROM dpedimento dp
+        INNER JOIN apendice2 a2 ON dp.idapendice2 = a2.idapendice2
+        INNER JOIN apendice16 a16 ON dp.idapendice16 = a16.idapendice16
+        WHERE idpedimentoc = ?";
+            $stmtdpm = $conexion->prepare($querydpm);
+            $stmtdpm->bind_param("i", $idPedimento);
+            $stmtdpm->execute();
+            $resultdpm = $stmtdpm->get_result();
+
+            if ($resultdpm->num_rows > 0) {
+                $datodpm = $resultdpm->fetch_assoc();
+            ?>
+                <tr>
+                    <th>NUM.PEDIMENTO</th>
+                    <td><?php echo htmlspecialchars($datodpm['Nopedimento']); ?></td>
+                    <th>T.OPER</th>
+                    <td><?php echo htmlspecialchars($datodpm['Toper']); ?></td>
+                    <th>CVE PEDIMENTO</th>
+                    <td><?php echo htmlspecialchars($datodpm['clave_apendice2']); ?></td>
+                    <th>REGIMEN</th>
+                    <td><?php echo htmlspecialchars($datodpm['clave_apendice16']); ?></td>
+                </tr>
+            <?php
+            } else {
+                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de datosdel pedimento.</td></tr>";
+            }
+
+            ?>
         </table>
+
+
         <table class="table table-bordered table-hover">
-            <tr>
-                <th>DESTINO/ORIGEN</th>
-                <td><?php echo htmlspecialchars($datos['clavea15']); ?></td>
-                <th>TIPO DE CAMBIO</th>
-                <td><?php echo htmlspecialchars($datos['tipoCambio']); ?></td>
-                <th>PESO BRUTO</th>
-                <td><?php echo htmlspecialchars($datos['peso_bruto']); ?></td>
-                <th>ADUANA</th>
-                <td><?php echo htmlspecialchars($datos['clavea1']); ?></td>
-            </tr>
+            <?php
+            $querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1
+            FROM transacciones ts
+            INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
+            INNER JOIN apendice1 a1 ON ts.idapendice1 = a1.idapendice1
+            WHERE idpedimentoc = ?";
+            $stmttransac = $conexion->prepare($querytransac);
+            $stmttransac->bind_param("i", $idPedimento);
+            $stmttransac->execute();
+            $resulttransac = $stmttransac->get_result();
+
+            if ($resulttransac->num_rows > 0) {
+                $datotransac = $resulttransac->fetch_assoc();
+            ?>
+                <tr>
+                    <th>DESTINO/ORIGEN</th>
+                    <td><?php echo htmlspecialchars($datotransac['clavea15']); ?></td>
+                    <th>TIPO DE CAMBIO</th>
+                    <td><?php echo htmlspecialchars($datotransac['tipoCambio']); ?></td>
+                    <th>PESO BRUTO</th>
+                    <td><?php echo htmlspecialchars($datotransac['peso_bruto']); ?></td>
+                    <th>ADUANA</th>
+                    <td><?php echo htmlspecialchars($datotransac['clavea1']); ?></td>
+                </tr>
+            <?php
+            } else {
+                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de transacciones.</td></tr>";
+            }
+
+            ?>
         </table>
         <div class="row">
             <div class="col-md-6">
@@ -152,11 +106,41 @@ if ($result->num_rows > 0) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><?php echo htmlspecialchars($datos['clave_entrtadaSalida']); ?></td>
-                                <td><?php echo htmlspecialchars($datos['clave_arribo']); ?></td>
-                                <td><?php echo htmlspecialchars($datos['clave_salida']); ?></td>
-                            </tr>
+                            <?php
+                            $querytransp =  "SELECT 
+                                t.*,
+                                a1.clave AS clave_entrtadaSalida, 
+                                a2.clave AS clave_arribo, 
+                                a3.clave AS clave_salida
+                                FROM 
+                                transporte t
+                                INNER JOIN 
+                                apendice3 a1 ON t.idapendice3entrtadaSalida = a1.idapendice3
+                                INNER JOIN 
+                                apendice3 a2 ON t.idapendice3arribo = a2.idapendice3
+                                INNER JOIN 
+                                apendice3 a3 ON t.idapendice3salida = a3.idapendice3
+                                WHERE idpedimentoc = ?";
+
+                            $stmttransp = $conexion->prepare($querytransp);
+                            $stmttransp->bind_param("i", $idPedimento);
+                            $stmttransp->execute();
+                            $resulttransp = $stmttransp->get_result();
+
+                            if ($resulttransp->num_rows > 0) {
+                                $datostrnsp = $resulttransp->fetch_assoc();
+                            ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($datostrnsp['clave_entrtadaSalida']); ?></td>
+                                    <td><?php echo htmlspecialchars($datostrnsp['clave_arribo']); ?></td>
+                                    <td><?php echo htmlspecialchars($datostrnsp['clave_salida']); ?></td>
+                                </tr>
+                            <?php
+                            } else {
+                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de valores.</td></tr>";
+                            }
+
+                            ?>
                         </tbody>
                     </table>
 
@@ -166,63 +150,97 @@ if ($result->num_rows > 0) {
                 <div class="form-section">
                     <table class="table table-bordered table-hover">
                         <tbody>
-                            <tr>
-                                <th>VALOR EN DOLARES</th>
-                                <td>$<?php echo htmlspecialchars($datos['valorDolares']); ?></td>
-                            </tr>
-                            <tr>
-                                <th>VALOR ADUANA</th>
-                                <td>$<?php echo htmlspecialchars($datos['valorAduna']); ?></td>
-                            </tr>
-                            <tr>
-                                <th>PRECIO PAGADO/VALOR COMERCIAL</th>
-                                <td>$<?php echo htmlspecialchars($datos['precioPagado']); ?></td>
-                            </tr>
+                            <?php
+                            $queryvaloresp =  " SELECT * FROM valoresp WHERE idpedimentoc = ?";
+
+                            $stmtvaloresp = $conexion->prepare($queryvaloresp);
+                            $stmtvaloresp->bind_param("i", $idPedimento);
+                            $stmtvaloresp->execute();
+                            $resultvaloresp = $stmtvaloresp->get_result();
+
+                            if ($resultvaloresp->num_rows > 0) {
+                                $datosvp = $resultvaloresp->fetch_assoc();
+                            ?>
+                                <tr>
+                                    <th>VALOR EN DOLARES</th>
+                                    <td>$<?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>VALOR ADUANA</th>
+                                    <td>$<?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>PRECIO PAGADO/VALOR COMERCIAL</th>
+                                    <td>$<?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
+                                </tr>
                         </tbody>
+                    <?php
+                            } else {
+                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de valores.</td></tr>";
+                            }
+
+                    ?>
                     </table>
 
                 </div>
             </div>
         </div>
         <table class="table table-bordered table-hover">
-            <thead class="text-center ">
-                <tr>
-                    <th colspan="14" class=" bg-secondary text-light">DATOS DEL IMPORTADOR/EXPORTADOR</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th colspan="7" scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
-                    <td colspan="7"><?php echo htmlspecialchars($datos['nombreE']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">RFC</th>
-                    <td colspan="13"><?php echo htmlspecialchars($datos['rfc']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">CURP</th>
-                    <td colspan="13"><?php echo htmlspecialchars($datos['curp']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row" colspan="14" class="text-center bg-secondary text-light">DOMICILIO</th>
-                </tr>
-                <tr>
-                    <th scope="row">CALLE</th>
-                    <td><?php echo htmlspecialchars($datos['Calle']); ?></td>
-                    <th scope="row">NUMERO INTERIOR</th>
-                    <td><?php echo htmlspecialchars($datos['numeroInterior']); ?></td>
-                    <th scope="row">NUMERO EXTERIOR</th>
-                    <td><?php echo htmlspecialchars($datos['numeroExterior']); ?></td>
-                    <th scope="row">CODIGO POSTAL</th>
-                    <td><?php echo htmlspecialchars($datos['codigoPostal']); ?></td>
-                    <th scope="row">MUNICIPIO</th>
-                    <td><?php echo htmlspecialchars($datos['municipio']); ?></td>
-                    <th scope="row">ENTIDAD FEDERATIVA</th>
-                    <td><?php echo htmlspecialchars($datos['entidadfederativa']); ?></td>
-                    <th scope="row">PAIS</th>
-                    <td><?php echo htmlspecialchars($datos['pais']); ?></td>
-                </tr>
-            </tbody>
+            <?php
+            $queryimpoex =  " SELECT * FROM importadorexportador WHERE idpedimentoc = ?";
+
+            $stmtimpoex = $conexion->prepare($queryimpoex);
+            $stmtimpoex->bind_param("i", $idPedimento);
+            $stmtimpoex->execute();
+            $resultimpoex = $stmtimpoex->get_result();
+
+            if ($resultimpoex->num_rows > 0) {
+                $datosimport = $resultimpoex->fetch_assoc();
+            ?>
+                <thead class="text-center ">
+                    <tr>
+                        <th colspan="14" class=" bg-secondary text-light">DATOS DEL IMPORTADOR/EXPORTADOR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="7" scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
+                        <td colspan="7"><?php echo htmlspecialchars($datosimport['nombreE']); ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RFC</th>
+                        <td colspan="13"><?php echo htmlspecialchars($datosimport['rfc']); ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CURP</th>
+                        <td colspan="13"><?php echo htmlspecialchars($datosimport['curp']); ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="14" class="text-center bg-secondary text-light">DOMICILIO</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">CALLE</th>
+                        <td><?php echo htmlspecialchars($datosimport['Calle']); ?></td>
+                        <th scope="row">NUMERO INTERIOR</th>
+                        <td><?php echo htmlspecialchars($datosimport['numeroInterior']); ?></td>
+                        <th scope="row">NUMERO EXTERIOR</th>
+                        <td><?php echo htmlspecialchars($datosimport['numeroExterior']); ?></td>
+                        <th scope="row">CODIGO POSTAL</th>
+                        <td><?php echo htmlspecialchars($datosimport['codigoPostal']); ?></td>
+                        <th scope="row">MUNICIPIO</th>
+                        <td><?php echo htmlspecialchars($datosimport['municipio']); ?></td>
+                        <th scope="row">ENTIDAD FEDERATIVA</th>
+                        <td><?php echo htmlspecialchars($datosimport['entidadfederativa']); ?></td>
+                        <th scope="row">PAIS</th>
+                        <td><?php echo htmlspecialchars($datosimport['pais']); ?></td>
+                    </tr>
+                </tbody>
+            <?php
+            } else {
+                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de importador o exportador.</td></tr>";
+            }
+
+            ?>
         </table>
         <table class="table table-bordered table-hover">
             <thead class="text-center">
@@ -238,13 +256,30 @@ if ($result->num_rows > 0) {
                     <th scope="row">EMBALAJES</th>
                     <th scope="row">OTROS INCREMENTABLES</th>
                 </tr>
-                <tr>
-                    <td><?php echo htmlspecialchars($datos['Vseguros']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['seguros']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['fletes']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['embalajes']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['otrosincrement']); ?></td>
-                </tr>
+                <?php
+                $queryvaloresin =  " SELECT * FROM valorincrementable WHERE idpedimentoc = ?";
+
+                $stmtvaloresin = $conexion->prepare($queryvaloresin);
+                $stmtvaloresin->bind_param("i", $idPedimento);
+                $stmtvaloresin->execute();
+                $resultvaloresin = $stmtvaloresin->get_result();
+
+                if ($resultvaloresin->num_rows > 0) {
+                    $datosincr = $resultvaloresin->fetch_assoc();
+                ?>
+                    <tr>
+                        <td>$<?php echo htmlspecialchars($datosincr['Vseguros']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosincr['seguros']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosincr['fletes']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosincr['embalajes']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosincr['otrosincrement']); ?></td>
+                    </tr>
+                <?php
+                } else {
+                    echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de valores incrementable.</td></tr>";
+                }
+
+                ?>
             </tbody>
         </table>
 
@@ -263,29 +298,67 @@ if ($result->num_rows > 0) {
                     <th scope="row">OTROS DECREMENTABLES</th>
                 </tr>
                 <tr>
-                    <td><?php echo htmlspecialchars($datos['VsegurosD']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['segurosD']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['fletesD']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['embalajesD']); ?></td>
-                    <td><?php echo htmlspecialchars($datos['otrosDecrement']); ?></td>
+                    <?php
+                    $queryvaloresd =  " SELECT * FROM valordecrementable WHERE idpedimentoc = ?";
+
+                    $stmtvaloresd = $conexion->prepare($queryvaloresd);
+                    $stmtvaloresd->bind_param("i", $idPedimento);
+                    $stmtvaloresd->execute();
+                    $resultvaloresd = $stmtvaloresd->get_result();
+
+                    if ($resultvaloresd->num_rows > 0) {
+                        $datosdcre = $resultvaloresd->fetch_assoc();
+                    ?>
+                        <td>$<?php echo htmlspecialchars($datosdcre['VsegurosD']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosdcre['segurosD']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosdcre['fletesD']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosdcre['embalajesD']); ?></td>
+                        <td>$<?php echo htmlspecialchars($datosdcre['otrosDecrement']); ?></td>
                 </tr>
+            <?php
+                    } else {
+                        echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de valores decrementables.</td></tr>";
+                    }
+
+            ?>
             </tbody>
         </table>
 
         <table class="table table-bordered table-hover">
 
             <tbody>
-                <tr>
-                    <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
-                    <td><?php echo htmlspecialchars($datos['aviso_electronico']); ?></td>
-                    <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
-                    <td><?php echo htmlspecialchars($datos['claveapn1']); ?></td>
-                </tr>
-                <tr>
-                    <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
-                    <td colspan="3"><?php echo htmlspecialchars($datos['marca'] . ' ' . $datos['modelo'] . ' ' . $datos['nBultos']); ?></td>
+                <?php
+                $querypermisos =  "SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1
+                FROM permisos
+                INNER JOIN apendice1 ON permisos.idapendice1 = apendice1.idapendice1
+                WHERE idpedimentoc = ?";
 
-                </tr>
+                $stmtpermisos = $conexion->prepare($querypermisos);
+                $stmtpermisos->bind_param("i", $idPedimento);
+                $stmtpermisos->execute();
+                $resultpermisos = $stmtpermisos->get_result();
+
+                if ($resultpermisos->num_rows > 0) {
+                    $datosperm = $resultpermisos->fetch_assoc();
+                ?>
+
+                    <tr>
+                        <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
+                        <td><?php echo htmlspecialchars($datosperm['aviso_electronico']); ?></td>
+                        <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
+                        <td><?php echo htmlspecialchars($datosperm['claveapn1']); ?></td>
+                    </tr>
+                    <tr>
+                        <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
+                        <td colspan="3"><?php echo htmlspecialchars($datosperm['marca'] . ' ' . $datosperm['modelo'] . ' ' . $datosperm['nBultos']); ?></td>
+
+                    </tr>
+                <?php
+                } else {
+                    echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de permisos.</td></tr>";
+                }
+
+                ?>
             </tbody>
         </table>
 
@@ -300,16 +373,33 @@ if ($result->num_rows > 0) {
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $queryfechas = "SELECT * FROM fechas WHERE idpedimentoc = ?";
 
-                            <tr>
-                                <th>ENTRADAS</th>
-                                <td><?php echo htmlspecialchars($datos['entrada']); ?></td>
-                            </tr>
-                            <tr>
-                                <th>PAGO</th>
-                                <td><?php echo htmlspecialchars($datos['pago']); ?></td>
+                            $stmtfechas = $conexion->prepare($queryfechas);
+                            $stmtfechas->bind_param("i", $idPedimento);
+                            $stmtfechas->execute();
+                            $resultfechas = $stmtfechas->get_result();
 
-                            </tr>
+                            if ($resultfechas->num_rows > 0) {
+                                $rowfech = $resultfechas->fetch_assoc();
+                            ?>
+
+                                <tr>
+                                    <th>ENTRADAS</th>
+                                    <td><?php echo htmlspecialchars($rowfech['entrada']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>PAGO</th>
+                                    <td><?php echo htmlspecialchars($rowfech['pago']); ?></td>
+
+                                </tr>
+                            <?php
+                            } else {
+                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de fechas.</td></tr>";
+                            }
+
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -332,18 +422,51 @@ if ($result->num_rows > 0) {
                                 <th>TASA</th>
                             </tr>
                             <?php
-                            if (!empty($tasas)) {
-                                foreach ($tasas as $row) {
-                                    echo "<tr>";
-                                    echo "<td>" . htmlspecialchars($row['clavea12']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($row['clavea18']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($row['tasa']) . "</td>";
-                                    echo "</tr>";
+                            $querytasasp = "
+                                    SELECT 
+                                tasapedimento.*, 
+                                apendice18.idapendice18, 
+                                apendice18.clave AS clavea18,
+                                apendice12.idapendice12, 
+                                apendice12.clave AS clavea12
+                            FROM 
+                                tasapedimento
+                            INNER JOIN 
+                                apendice18 ON tasapedimento.idapendice18 = apendice18.idapendice18
+                            INNER JOIN 
+                                apendice12 ON tasapedimento.idapendice12 = apendice12.idapendice12
+                            WHERE tasapedimento.idpedimentoc = ?
+                                                                ";
+
+                            $stmttasasp = $conexion->prepare($querytasasp);
+                            $stmttasasp->bind_param("i", $idPedimento);
+                            $stmttasasp->execute();
+                            $resulttasasp = $stmttasasp->get_result();
+
+                            $cuadrotasasp = [];
+                            if ($resulttasasp->num_rows > 0) {
+                                while ($rowtsp = $resulttasasp->fetch_assoc()) {
+                                    $cuadrotasasp[] = $rowtsp;
                                 }
                             } else {
-                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros.</td></tr>";
+                                echo '<p>No se encontraron contribuciones.</p>';
+                            }
+
+                            if (!empty($cuadrotasasp)) {
+                                foreach ($cuadrotasasp as $rowtsp) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($rowtsp['clavea12']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowtsp['clavea18']); ?></td>
+                                        <td>$<?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de contribuciones.</td></tr>";
                             }
                             ?>
+
                         </tbody>
                     </table>
 
@@ -401,7 +524,7 @@ if ($result->num_rows > 0) {
                                     echo "<tr>";
                                     echo "<td>" . htmlspecialchars($row['clavetpa12_cl']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['clavetpa13_cl']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($row['importe']) . "</td>";
+                                    echo "<td>$" . htmlspecialchars($row['importe']) . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
@@ -437,15 +560,15 @@ if ($result->num_rows > 0) {
                             ?>
                                 <tr>
                                     <th>EFECTIVO</th>
-                                    <td><?php echo htmlspecialchars($rowt['efectivo']); ?></td>
+                                    <td>$<?php echo htmlspecialchars($rowt['efectivo']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>OTROS</th>
-                                    <td><?php echo htmlspecialchars($rowt['otros']); ?></td>
+                                    <td>$<?php echo htmlspecialchars($rowt['otros']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>TOTAL</th>
-                                    <td><?php echo htmlspecialchars($rowt['total']); ?></td>
+                                    <td>$<?php echo htmlspecialchars($rowt['total']); ?></td>
                                 </tr>
                             <?php
                             } else {
@@ -499,7 +622,7 @@ if ($result->num_rows > 0) {
                     </tr>
                     <tr>
                         <th>IMPORTE PAGADO</th>
-                        <td><?php echo htmlspecialchars($rowpe['importePago']); ?></td>
+                        <td>$<?php echo htmlspecialchars($rowpe['importePago']); ?></td>
                         <th>FECHA PAGADA</th>
                         <td colspan="3"><?php echo htmlspecialchars($rowpe['fechapago']); ?></td>
                     </tr>
@@ -761,117 +884,53 @@ if ($result->num_rows > 0) {
             </table>
         </div>
         <?php
+        function fetchData($conexion, $query, $idPedimento, $sectionKey, &$secciones)
+        {
+            $stmt = $conexion->prepare($query);
+            $stmt->bind_param("i", $idPedimento);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $secciones[$row['section_id']][$sectionKey][] = $row;
+                }
+            }
+        }
+
         $secciones = [];
 
-        $querypart1 = "SELECT p.*, 
-                a11.clave AS claveapp11, 
-                a4.clave AS claveapp4 
-             FROM partida1 p
-             INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
-             INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
-             WHERE p.idpedimentoc = ? ORDER BY section_id";
+        $queries = [
+            'partida1' => "SELECT p.*, 
+                              a11.clave AS claveapp11, 
+                              a4.clave AS claveapp4 
+                          FROM partida1 p
+                          INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
+                          INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
+                          WHERE p.idpedimentoc = ? ORDER BY section_id",
 
-        $stmtpart1 = $conexion->prepare($querypart1);
-        $stmtpart1->bind_param("i", $idPedimento);
-        $stmtpart1->execute();
-        $resultpart1 = $stmtpart1->get_result();
+            'partida2' => "SELECT descripcion, section_id FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id",
+            'partida3' => "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id",
+            'permisos' => "SELECT * FROM permisop WHERE idpedimentoc = ? ORDER BY section_id",
+            'complementos' => "SELECT * FROM complementosp WHERE idpedimentoc = ? ORDER BY section_id",
+            'observaciones' => "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id",
+            'contribuciones' => "SELECT * FROM contribuciones WHERE idpedimentoc = ? ORDER BY section_id"
+        ];
 
-        if ($resultpart1->num_rows > 0) {
-            while ($sectionData = $resultpart1->fetch_assoc()) {
-                $secciones[$sectionData['section_id']]['partida1'][] = $sectionData;
-            }
-        }
-
-        // Ejecuta la consulta para partida2
-        $querypart2 = "SELECT descripcion, section_id FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtpart2 = $conexion->prepare($querypart2);
-        $stmtpart2->bind_param("i", $idPedimento);
-        $stmtpart2->execute();
-        $resultpart2 = $stmtpart2->get_result();
-
-        if ($resultpart2->num_rows > 0) {
-            while ($rowPart2 = $resultpart2->fetch_assoc()) {
-                $secciones[$rowPart2['section_id']]['partida2'][] = $rowPart2;
-            }
-        }
-        // Ejecuta la consulta para partida3
-
-        $querypart3 = "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtpart3 = $conexion->prepare($querypart3);
-        $stmtpart3->bind_param("i", $idPedimento);
-        $stmtpart3->execute();
-        $resultpart3 = $stmtpart3->get_result();
-
-        if ($resultpart3->num_rows > 0) {
-            while ($rowPart3 = $resultpart3->fetch_assoc()) {
-                $secciones[$rowPart3['section_id']]['partida3'][] = $rowPart3;
-            }
-        }
-        // Ejecuta la consulta para permisos
-
-        $querypermip4 = "SELECT * FROM permisop WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtpermip4 = $conexion->prepare($querypermip4);
-        $stmtpermip4->bind_param("i", $idPedimento);
-        $stmtpermip4->execute();
-        $resultpermip4 = $stmtpermip4->get_result();
-
-        if ($resultpermip4->num_rows > 0) {
-            while ($rowpermip4 = $resultpermip4->fetch_assoc()) {
-                $secciones[$rowpermip4['section_id']]['permisos'][] = $rowpermip4;
-            }
-        }
-
-
-        $querycomplement = "SELECT * FROM complementosp WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtcomplement = $conexion->prepare($querycomplement);
-        $stmtcomplement->bind_param("i", $idPedimento);
-        $stmtcomplement->execute();
-        $resultcomplement = $stmtcomplement->get_result();
-
-        if ($resultcomplement->num_rows > 0) {
-            while ($rowcomplement = $resultcomplement->fetch_assoc()) {
-                $secciones[$rowcomplement['section_id']]['complementos'][] = $rowcomplement;
-            }
-        }
-
-        $queryobsernp = "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtobsernp = $conexion->prepare($queryobsernp);
-        $stmtobsernp->bind_param("i", $idPedimento);
-        $stmtobsernp->execute();
-        $resultobsernp = $stmtobsernp->get_result();
-
-        if ($resultobsernp->num_rows > 0) {
-            while ($rowobsernp = $resultobsernp->fetch_assoc()) {
-                $secciones[$rowobsernp['section_id']]['observaciones'][] = $rowobsernp;
-            }
-        }
-
-        $querycontribuciobes = "SELECT * FROM contribuciones WHERE idpedimentoc = ? ORDER BY section_id";
-        $stmtcontribuciobes = $conexion->prepare($querycontribuciobes);
-        $stmtcontribuciobes->bind_param("i", $idPedimento);
-        $stmtcontribuciobes->execute();
-        $resultcontribuciobes = $stmtcontribuciobes->get_result();
-
-        if ($resultcontribuciobes->num_rows > 0) {
-            while ($rowcontribuciobes = $resultcontribuciobes->fetch_assoc()) {
-                $secciones[$rowcontribuciobes['section_id']]['contribuciones'][] = $rowcontribuciobes;
-            }
+        // Ejecutar las consultas
+        foreach ($queries as $key => $query) {
+            fetchData($conexion, $query, $idPedimento, $key, $secciones);
         }
 
 
         foreach ($secciones as $idSeccion => $data) {
-            $cuadropart1 = isset($data['partida1']) ? $data['partida1'] : [];
-            $cuadropart2 = isset($data['partida2']) ? $data['partida2'] : [];
-            $cuadropart3 = isset($data['partida3']) ? $data['partida3'] : [];
-            $cuadropermisop4 = isset($data['permisos']) ? $data['permisos'] : [];
-            $cuadrocomplementos = isset($data['complementos']) ? $data['complementos'] : [];
-            $cuadroobservaciones = isset($data['observaciones']) ? $data['observaciones'] : [];
-            $cuadrocontribuciones = isset($data['contribuciones']) ? $data['contribuciones'] : [];
-
-
-
-
-
+            $cuadropart1 = $data['partida1'] ?? [];
+            $cuadropart2 = $data['partida2'] ?? [];
+            $cuadropart3 = $data['partida3'] ?? [];
+            $cuadropermisop4 = $data['permisos'] ?? [];
+            $cuadrocomplementos = $data['complementos'] ?? [];
+            $cuadroobservaciones = $data['observaciones'] ?? [];
+            $cuadrocontribuciones = $data['contribuciones'] ?? [];
         ?>
             <div class="duplicate-container">
                 <div class="row row-cols-auto table-section">
@@ -1083,7 +1142,7 @@ if ($result->num_rows > 0) {
                                             <td><?php echo htmlspecialchars($rowocontribuciones['tasa']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['idapendice18']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['idapendice13']); ?></td>
-                                            <td><?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
+                                            <td>$<?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
                                 </tr>
 
                             <?php
@@ -1104,7 +1163,141 @@ if ($result->num_rows > 0) {
         <?php
         }
         ?>
+        <div class="form-section">
+            <div class="row">
+                <?php
+                $queryagente = "SELECT 
+            p.*, 
+            a.nombreagente, 
+            a.apellidoP, 
+            a.apellidoM, 
+            a.curp, 
+            a.rfc, 
+            a.nacionalidad, 
+            a.tipo_domicilio, 
+            a.estado, 
+            a.localidad, 
+            a.codigo_postal, 
+            a.patente
+        FROM 
+            pedimentocompleto p
+        INNER JOIN 
+            agenteaduanal a 
+        ON 
+            p.idagente = a.idagente
+        WHERE 
+            p.idpedimentoc = ?;";
 
+                $stmtagente = $conexion->prepare($queryagente);
+                $stmtagente->bind_param("i", $idPedimento);
+                $stmtagente->execute();
+                $resultagente = $stmtagente->get_result();
+
+                if ($resultagente->num_rows > 0) {
+                    while ($rowagente = $resultagente->fetch_assoc()) {
+                ?>
+                        <div class="col-md-6">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th colspan="10" class="text-center bg-secondary text-light">
+                                            AGENTE ADUANAL, APODERADO ADUANAL O EL ALMACÉN
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="5">NOMBRE O RAZ. SOC.</th>
+                                        <td colspan="5"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>RFC</th>
+                                        <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                        <th>P. Moral</th>
+                                        <th>RFC</th>
+                                        <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                        <th>P. Física</th>
+                                        <th>CURP</th>
+                                        <td><?php echo htmlspecialchars($rowagente['curp']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="10" class="text-center bg-secondary text-light">
+                                            MANDATARIO / PERSONA AUTORIZADA
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">NOMBRE</th>
+                                        <td colspan="8"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>RFC</th>
+                                        <td colspan="4"><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                        <th>CURP</th>
+                                        <td colspan="4"><?php echo htmlspecialchars($rowagente['curp']); ?></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center bg-secondary text-light">
+                                            DECLARO BAJO PROTESTA DE DECIR VERDAD, EN LOS TÉRMINOS DE LO DISPUESTO POR EL ARTÍCULO 81 DE LA LEY ADUANERA
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="3" class="text-center">PATENTE O AUTORIZACIÓN:</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <?php echo htmlspecialchars($rowagente['patente']); ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo "<p class='text-center'>No se encontraron registros del agente aduanal.</p>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>
+
+                            <p>El pago de las contribuciones puede realizarse mediante el servicio de “Pago
+                                Electrónico Centralizado Aduanero” (PECA), conforme a lo establecido en la Regla
+                                1.6.2. de las Reglas Generales de Comercio Exterior
+                                , con la posibilidad de que la cuenta bancaria del Importador-Exportador sea
+                                afectada directamente por el Banco. El agente o apoderado aduanal que utilice el
+                                servicio de PECA, deberá imprimir la
+                                certificación bancaria en el campo correspondiente del pedimento o en el
+                                documento oficial, conforme al Apéndice 20 “Certificación de Pago Electrónico
+                                Centralizado” del Anexo 22 de las RCGMCE.
+                            </p>
+                            <p>
+                                El Importador-Exportador podrá solicitar la certificación de la información
+                                contenida en este pedimento en: Administración General de Aduanas,
+                                Administración de Operación Aduanera “7”, Av. Hidalgo Núm. 77,
+                                Módulo IV, P.B., Col. Guerrero, C.P. 06300., México, D.F.
+                            </p>
+
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
 
 
     </section>
