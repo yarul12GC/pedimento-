@@ -89,9 +89,10 @@ include_once '../sesion.php';
                                 <i class='fas fa-eye'></i> Ver Detalles
                               </a>";
 
-                                echo "<a href='exportar_pdf.php?id=" . $row['idpedimentoc'] . "' class='btn btn-danger btn-sm'>";
-                                echo "<i class='fas fa-file-pdf'></i> Exportar PDF</a> ";
-                                echo "<a href='exportar_xml.php?id=" . $row['idpedimentoc'] . "' class='btn btn-warning btn-sm'>";
+                              echo "<a href='exportarpdf/pedimentopdf.php?id=" . $row['idpedimentoc'] . "' class='btn btn-danger btn-sm'>";
+                              echo "<i class='fas fa-file-pdf'></i> Exportar PDF</a>";
+                              
+                                echo "<a href='exportarpdf/barra.php?id=" . $row['idpedimentoc'] . "' class='btn btn-warning btn-sm'>";
                                 echo "<i class='fas fa-file-code'></i> Exportar XML</a> ";
                                 echo "<a href='eliminar_pedimento.php?id=" . $row['idpedimentoc'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"¿Estás seguro de que deseas eliminar este pedimento?\");'>";
                                 echo "<i class='fas fa-trash'></i> Eliminar</a>";
