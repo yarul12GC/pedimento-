@@ -66,7 +66,7 @@
                     <tr>
                         <th colspan="6" class="text-center">
                             <?php if (!empty($datosb13['barcode_image'])) : ?>
-                                <img src="data:image/png;base64,<?php echo base64_encode($datosb13['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
+                                <img src="../admin/bloque13/barcodes/<?php echo htmlspecialchars($datosb13['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
                             <?php else : ?>
                                 No se encontró el código de barras.
                             <?php endif; ?>

@@ -3,8 +3,8 @@ include_once '../../conexion.php';
 include_once '../../sesion.php';
 require 'vendor/autoload.php'; 
 
-// Importar la clase de la librería
-use Picqer\Barcode\BarcodeGeneratorPNG;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 function generarCadenaAlfanumerica($longitud) {
     $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -23,7 +23,6 @@ function generarNumeroAleatorio($longitud) {
     return $numero;
 }
 
-// Generar valores únicos
 do {
     $lineaC = generarCadenaAlfanumerica(20);
     $consulta = "SELECT * FROM pagoelectronico WHERE lineaC = '$lineaC'";
@@ -52,7 +51,6 @@ $mPresentacion = $_POST['mPresentacion'];
 $MedioRecepcion = $_POST['MedioRecepcion'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
-// Insertar los datos en la base de datos
 $sql = "INSERT INTO pagoelectronico (
     patente,
     pedimento, 
@@ -85,31 +83,26 @@ if ($conexion->query($sql) === TRUE) {
     $last_idb13 = $conexion->insert_id;
     $_SESSION['bloques']['bloque13'] = $last_idb13;
     
-    // Generar código de barras
     $barcodeData = $lineaC . "|" . $importePago . "|" . $banco . "|" . $fechapago . "|" . $noperacionbancar . "|" . $ntransaccionS;
-    
-    // Crear el generador de código de barras
-    $generator = new BarcodeGeneratorPNG();
-    $barcode = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
 
-    // Definir la ruta donde se guardará la imagen
-    $barcodeFolder = 'barcodes/';
-    if (!is_dir($barcodeFolder)) {
-        mkdir($barcodeFolder, 0777, true); // Crear la carpeta si no existe
-    }
-    $barcodeFileName = 'barcode_' . $last_idb13 . '.png';
-    $barcodeFilePath = $barcodeFolder . $barcodeFileName;
+    // Generar código de barras utilizando endroid/qr-code
+    $qrCode = QrCode::create($barcodeData)
+        ->setSize(300)
+        ->setMargin(10);
 
-    // Guardar la imagen en la carpeta
-    file_put_contents($barcodeFilePath, $barcode);
+    $writer = new PngWriter();
+    $result = $writer->write($qrCode);
 
-    // Escapar el nombre del archivo para guardarlo en la base de datos
-    $barcodeEscaped = $conexion->real_escape_string($barcodeFileName);
+    // Guardar la imagen del código de barras en un archivo
+    $barcodeFile = 'barcode_' . $last_idb13 . '.png';
+    $result->saveToFile($barcodeFile);
+
+    // Guardar la ruta del archivo en la base de datos
+    $barcodeEscaped = $conexion->real_escape_string($barcodeFile);
     $updateSql = "UPDATE pagoelectronico SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
 
     if ($conexion->query($updateSql) === TRUE) {
-        // Redirigir a la página deseada
-        header("location: ../capturapediemnto.php?barcode=" . urlencode($barcodeFileName));
+        header("location: ../capturapediemnto.php?barcode=" . urlencode($barcodeFile));
         exit();
     } else {
         echo "Error actualizando la imagen del código de barras: " . $conexion->error;

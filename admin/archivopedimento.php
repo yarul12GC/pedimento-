@@ -643,9 +643,9 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                         <td class="text-center" colspan="4"><?php echo htmlspecialchars($rowpe['MedioRecepcion']); ?></td>
                     </tr>
                     <tr>
-                        <th colspan="6" class="text-center">
+                    <th colspan="6" class="text-center">
                             <?php if (!empty($rowpe['barcode_image'])) : ?>
-                                <img src="data:image/png;base64,<?php echo base64_encode($rowpe['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
+                                <img src="../admin/bloque13/barcodes/<?php echo htmlspecialchars($rowpe['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
                             <?php else : ?>
                                 No se encontró el código de barras.
                             <?php endif; ?>
