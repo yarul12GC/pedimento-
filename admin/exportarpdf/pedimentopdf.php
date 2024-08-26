@@ -582,25 +582,24 @@ if ($resultpagoe->num_rows > 0) {
 
     // Verifica si existe la imagen del código de barras
     if (!empty($rowpe['barcode_image'])) {
-        // Codifica la imagen en Base64
-        $barcode_image_base64 = base64_encode($rowpe['barcode_image']);
-        $barcode_image_data = 'data:image/png;base64,' . $barcode_image_base64;
+        // Ruta de la imagen del código de barras
+        $barcode_image_path = '../bloque13/barcodes/' . htmlspecialchars($rowpe['barcode_image']);
 
-        // Agrega la información adicional del pedimento
+        // Agrega la información adicional del pedimento y la imagen del código de barras
         $html .= '
         <style>
             .barcode-container {
                 text-align: center;
             }
             .barcode-image {
-                width: 310px;
+               width: 310px;
                 height: 45px;
             }
         </style>
         <table border="0" cellpadding="2" cellspacing="0" style="border-collapse: collapse; width: 100%;">
             <tr>
-                <td colspan="7" style="border-collapse: collapse; width: 100%;  text-align: center;">
-                    <img src="' . $barcode_image_data . '" class="barcode-image">
+                <td colspan="7" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <img src="' . $barcode_image_path . '" class="barcode-image">
                 </td>
             </tr>
             <tr>
@@ -818,6 +817,45 @@ if ($resultdembar->num_rows > 0) {
     echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en los datos monetarios</td></tr>";
 }
 
+
+$html .= '
+<table border="0" cellpadding="1" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
+    <tbody>
+       
+    
+    </tbody>
+</table>';
+
+    $html .= '
+<table border="0" cellpadding="1" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
+    <tbody>
+       
+       <tbody>
+                    <tr>
+                        <td>
+
+                            <p>El pago de las contribuciones puede realizarse mediante el servicio de “Pago
+                                Electrónico Centralizado Aduanero” (PECA), conforme a lo establecido en la Regla
+                                1.6.2. de las Reglas Generales de Comercio Exterior
+                                , con la posibilidad de que la cuenta bancaria del Importador-Exportador sea
+                                afectada directamente por el Banco. El agente o apoderado aduanal que utilice el
+                                servicio de PECA, deberá imprimir la
+                                certificación bancaria en el campo correspondiente del pedimento o en el
+                                documento oficial, conforme al Apéndice 20 “Certificación de Pago Electrónico
+                                Centralizado” del Anexo 22 de las RCGMCE.
+                            </p>
+                            <p>
+                                El Importador-Exportador podrá solicitar la certificación de la información
+                                contenida en este pedimento en: Administración General de Aduanas,
+                                Administración de Operación Aduanera “7”, Av. Hidalgo Núm. 77,
+                                Módulo IV, P.B., Col. Guerrero, C.P. 06300., México, D.F.
+                            </p>
+
+                        </td>
+                    </tr>
+                </tbody>
+    </tbody>
+</table>';
 
 
 // Añadir contenido HTML al PDF

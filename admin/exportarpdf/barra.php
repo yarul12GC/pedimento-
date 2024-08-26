@@ -582,29 +582,28 @@ if ($resultpagoe->num_rows > 0) {
 
     // Verifica si existe la imagen del código de barras
     if (!empty($rowpe['barcode_image'])) {
-        // Codifica la imagen en Base64
-        $barcode_image_base64 = base64_encode($rowpe['barcode_image']);
-        $barcode_image_data = 'data:image/png;base64,' . $barcode_image_base64;
+        // Ruta de la imagen del código de barras
+        $barcode_image_path = '../bloque13/barcodes/' . htmlspecialchars($rowpe['barcode_image']);
 
-        // Agrega la información adicional del pedimento
+        // Agrega la información adicional del pedimento y la imagen del código de barras
         $html .= '
         <style>
             .barcode-container {
                 text-align: center;
             }
             .barcode-image {
-                width: 200px;
-                height: auto;
+               width: 310px;
+                height: 45px;
             }
         </style>
         <table border="0" cellpadding="2" cellspacing="0" style="border-collapse: collapse; width: 100%;">
             <tr>
-                <td colspan="7" style="border-collapse: collapse; width: 100%;  text-align: center;">
-                    <img src="' . $barcode_image_data . '" class="barcode-image">
+                <td colspan="7" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <img src="' . $barcode_image_path . '" class="barcode-image">
                 </td>
             </tr>
             <tr>
-                <th colspan="7" style="padding-bottom: 10px; font-weight: bold;">***DEPÓSITO ELECTRÓNICO***</th>
+                <th colspan="7" style="padding-bottom: 10px; font-weight: bold; text-align: center;">***DEPÓSITO ELECTRÓNICO***</th>
             </tr>
             <tr>
                 <th style="font-weight: bold; width: 12%;">PATENTE:</th>
@@ -817,6 +816,8 @@ if ($resultdembar->num_rows > 0) {
 } else {
     echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en los datos monetarios</td></tr>";
 }
+
+
 
 // Añadir contenido HTML al PDF
 $pdf->writeHTML($html, true, false, true, false, '');
