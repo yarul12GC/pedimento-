@@ -122,7 +122,7 @@ foreach ($secciones as $idSeccion => $data) {
         foreach ($cuadropermisop4 as $rowPermisos) {
             $html .= '
         <tr>
-            <td colspan="1" style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowPermisos['idapendice9']) . '</td>
+            <td colspan="1" style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowPermisos['claveapendice9']) . '</td>
             <td colspan="3" style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowPermisos['numpermiso']) . '</td>
             <td colspan="2" style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowPermisos['firmapermiso']) . '</td>
             <td colspan="2" style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowPermisos['valcomdls']) . '</td>
@@ -157,7 +157,7 @@ foreach ($secciones as $idSeccion => $data) {
         foreach ($cuadrocomplementos as $rowcomplementos) {
             $html .= '
         <tr>
-            <td colspan="2" style="text-align: center;border-left: 1px solid black;">' . htmlspecialchars($rowcomplementos['idapendice8']) . '</td>
+            <td colspan="2" style="text-align: center;border-left: 1px solid black;">' . htmlspecialchars($rowcomplementos['claveapendice8p']) . '</td>
             <td colspan="3" style="text-align: center;border-left: 1px solid black;">' . htmlspecialchars($rowcomplementos['complemento1']) . '</td>
             <td colspan="2" style="text-align: center;border-left: 1px solid black;">' . htmlspecialchars($rowcomplementos['complemento2']) . '</td>
             <td colspan="3" style="text-align: center;border-left: 1px solid black; border-right: 1px solid black;">' . htmlspecialchars($rowcomplementos['complemento3']) . '</td>
@@ -243,10 +243,10 @@ foreach ($secciones as $idSeccion => $data) {
         foreach ($cuadrocontribuciones as $rowocontribuciones) {
             $html .= '
         <tr>
-            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['idapendice12']) . '</td>
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['claveapendice12p']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['tasa']) . '</td>
-            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['idapendice18']) . '</td>
-            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['idapendice13']) . '</td>
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['claveapendice18p']) . '</td>
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['claveapendice13p']) . '</td>
             <td style="border-left: 1px solid black; text-align: center; ">$' . htmlspecialchars($rowocontribuciones['importe']) . '</td>
         </tr>';
         }

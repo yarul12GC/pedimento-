@@ -1076,7 +1076,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                     foreach ($cuadrocomplementos as $rowcomplementos) {
                                 ?>
                                         <tr>
-                                            <td colspan="2" class="text-center"><?php echo htmlspecialchars($rowcomplementos['idapendice8']); ?></td>
+                                            <td colspan="2" class="text-center"><?php echo htmlspecialchars($rowcomplementos['claveapendice8p']); ?></td>
                                             <td colspan="3" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento1']); ?></td>
                                             <td colspan="2" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento2']); ?></td>
                                             <td colspan="3" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento3']); ?></td>

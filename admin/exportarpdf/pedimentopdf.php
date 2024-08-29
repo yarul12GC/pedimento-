@@ -233,7 +233,6 @@ $html .= '
 include_once '../bloque19/consultap.php';
 
 include_once '../bloque20/pdfpartidas.php';
-
 $html .= '<p style=" text-align: center; font-size: 8px;"><strong>******************* FIN DEL PEDIMENTO *******************</strong></p>';
 
 include_once '../bloque29/pdffother.php';
