@@ -2,8 +2,17 @@
 include_once '../sesion.php';
 include_once '../conexion.php';
 include_once '../public/mensaje.php';
-$pedimento_id = $_SESSION['pedimento_id'];
+function verificarRedireccionPedimento($pedimento_id) {
+    // Verifica si el ID del pedimento no está establecido o está vacío
+    if (!isset($pedimento_id) || empty($pedimento_id)) {
+        // Redirige a la página archivopedimentocap.php
+        header("Location: archivopedimentocap.php");
+        exit(); // Asegura que el script se detenga después de la redirección
+    }
+}
 
+// Llama a la función pasando la variable de sesión pedimento_id
+verificarRedireccionPedimento($_SESSION['pedimento_id']);
 $agenteNombre = isset($_SESSION['agente_nombre']) ? $_SESSION['agente_nombre'] : 'N/A';
 $agenteApellidoP = isset($_SESSION['agente_apellidoP']) ? $_SESSION['agente_apellidoP'] : 'N/A';
 $agenteApellidoM = isset($_SESSION['agente_apellidoM']) ? $_SESSION['agente_apellidoM'] : 'N/A';
