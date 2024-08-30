@@ -122,6 +122,9 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
             ?>
 
         </table>
+
+        <br><br>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-section">
@@ -201,10 +204,9 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     <?php
                     }
                     ?>
-
-
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="form-section">
                     <table class="table table-bordered table-hover">
@@ -268,6 +270,8 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                 </div>
             </div>
         </div>
+
+
         <table class="table table-bordered table-hover">
             <?php
             $queryimpoex =  " SELECT * FROM importadorexportador WHERE idpedimentoc = ?";
@@ -1347,289 +1351,8 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
     </table>
 </div>
-<?php
-function fetchData($conexion, $query, $pedimento_id, $sectionKey, &$secciones)
-{
-    $stmt = $conexion->prepare($query);
-    $stmt->bind_param("i", $pedimento_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $secciones[$row['section_id']][$sectionKey][] = $row;
-        }
-    }
-}
-
-$secciones = [];
-
-$queries = [
-    'partida1' => "SELECT p.*, 
-                              a11.clave AS claveapp11, 
-                              a4.clave AS claveapp4 
-                          FROM partida1 p
-                          INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
-                          INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
-                          WHERE p.idpedimentoc = ? ORDER BY section_id",
-
-    'partida2' => "SELECT descripcion, section_id FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id",
-    'partida3' => "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id",
-    'permisos' => "SELECT * FROM permisop WHERE idpedimentoc = ? ORDER BY section_id",
-    'complementos' => "SELECT compl.*,
-               ap8.clave AS claveapendice8p 
-                FROM complementosp compl
-                INNER JOIN apendice8 ap8 ON compl.idapendice8 = ap8.idapendice8 
-                 WHERE compl.idpedimentoc = ? 
-                 ORDER BY compl.section_id",
-    'observaciones' => "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id",
-    'contribuciones' => "SELECT * FROM contribuciones WHERE idpedimentoc = ? ORDER BY section_id"
-];
-
-// Ejecutar las consultas
-foreach ($queries as $key => $query) {
-    fetchData($conexion, $query, $pedimento_id, $key, $secciones);
-}
-
-
-foreach ($secciones as $idSeccion => $data) {
-    $cuadropart1 = $data['partida1'] ?? [];
-    $cuadropart2 = $data['partida2'] ?? [];
-    $cuadropart3 = $data['partida3'] ?? [];
-    $cuadropermisop4 = $data['permisos'] ?? [];
-    $cuadrocomplementos = $data['complementos'] ?? [];
-    $cuadroobservaciones = $data['observaciones'] ?? [];
-    $cuadrocontribuciones = $data['contribuciones'] ?? [];
-?>
-    <div class="duplicate-container">
-        <div class="row row-cols-auto table-section">
-            <div class="col-md-1">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>SECCION.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="15" class="text-center">1</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-8">
-                <!-- Tabla para partida1 -->
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>FRACCION</th>
-                            <th>SUBD./NICO</th>
-                            <th>VINC</th>
-                            <th>MET VAL</th>
-                            <th>UMC</th>
-                            <th>CANT UMC</th>
-                            <th>UMT</th>
-                            <th>CANT UMT</th>
-                            <th>P.V/C</th>
-                            <th>P.O/D</th>
-                        </tr>
-                        <tr>
-                            <th class="text-center" colspan="10">IDENTIF</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3">VAL.ADU./USD</th>
-                            <th colspan="2">IMP.PRECIO PAG.</th>
-                            <th colspan="2">PRECIO UNIT.</th>
-                            <th colspan="3">VAL. AGREG.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($cuadropart1 as $sectionData) {
-                        ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($sectionData['fraccionA']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['nico']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['vinc']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['claveapp11']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['umc']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['cantumc']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['umt']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['cant']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['claveapp4']); ?></td>
-                                <td><?php echo htmlspecialchars($sectionData['pod']); ?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-
-
-                        <?php
-                        if (!empty($cuadropart2)) {
-                            foreach ($cuadropart2 as $rowPart2) {
-                        ?>
-                                <tr>
-                                    <td colspan="10" class="text-center"><?php echo htmlspecialchars($rowPart2['descripcion']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron descripciones en partida2.</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-
-
-                        <?php
-                        if (!empty($cuadropart3)) {
-                            foreach ($cuadropart3 as $rowPart3) {
-                        ?>
-                                <tr>
-                                    <td colspan="3"><?php echo htmlspecialchars($rowPart3['valaduusd']); ?></td>
-                                    <td colspan="2"><?php echo htmlspecialchars($rowPart3['imppreciopag']); ?></td>
-                                    <td colspan="2"><?php echo htmlspecialchars($rowPart3['preciounitario']); ?></td>
-                                    <td colspan="3"><?php echo htmlspecialchars($rowPart3['valoragregado']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron descripciones en partida3.</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                        <tr>
-                            <th colspan="1">PERMISO</th>
-                            <th colspan="3">NUMERO DE PERMISO</th>
-                            <th colspan="2">FIRMA DE PERMISO</th>
-                            <th colspan="2">VAL. COM. DLS</th>
-                            <th colspan="2">CANTIDAD UMT</th>
-                        </tr>
-                        <?php
-                        if (!empty($cuadropermisop4)) {
-                            foreach ($cuadropermisop4 as $rowPermisos) {
-                        ?>
-                                <tr>
-                                    <td colspan="1"><?php echo htmlspecialchars($rowPermisos['idapendice9']); ?></td>
-                                    <td colspan="3"><?php echo htmlspecialchars($rowPermisos['numpermiso']); ?></td>
-                                    <td colspan="2"><?php echo htmlspecialchars($rowPermisos['firmapermiso']); ?></td>
-                                    <td colspan="2"><?php echo htmlspecialchars($rowPermisos['valcomdls']); ?></td>
-                                    <td colspan="2"><?php echo htmlspecialchars($rowPermisos['cantidadumt']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron permisos</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-
-                        <tr>
-                            <th colspan="2" class="text-center">IDENTIF</th>
-                            <th colspan="3" class="text-center">COMPLEMENTO 1</th>
-                            <th colspan="2" class="text-center">COMPLEMENTO 2</th>
-                            <th colspan="3" class="text-center">COMPLEMENTO 3</th>
-
-                        </tr>
-                        <?php
-                        if (!empty($cuadrocomplementos)) {
-                            foreach ($cuadrocomplementos as $rowcomplementos) {
-                        ?>
-                                <tr>
-                                    <td colspan="2" class="text-center"><?php echo htmlspecialchars($rowcomplementos['claveapendice8p']); ?></td>
-                                    <td colspan="3" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento1']); ?></td>
-                                    <td colspan="2" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento2']); ?></td>
-                                    <td colspan="3" class="text-center"><?php echo htmlspecialchars($rowcomplementos['complemento3']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron complementos</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                        <tr>
-                            <th colspan="10" class="text-center  bg-secondary text-light">OBSERVACIONES A NIVEL PARTIDA
-                            </th>
-                        </tr>
-
-                        <?php
-                        if (!empty($cuadroobservaciones)) {
-                            foreach ($cuadroobservaciones as $rowobservacionesnp) {
-                        ?>
-                                <tr>
-                                    <td colspan="10" class="text-center"><?php echo htmlspecialchars($rowobservacionesnp['descripcionnp']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron complementos</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-
-                    </tbody>
-                </table>
-
-
-
-            </div>
-            <div class="col-md-1">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>CON</th>
-                            <th>TASA</th>
-                            <th>T.T.</th>
-                            <th>F.P.</th>
-                            <th>IMPORTE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            if (!empty($cuadrocontribuciones)) {
-                                foreach ($cuadrocontribuciones as $rowocontribuciones) {
-                            ?>
-                                    <td><?php echo htmlspecialchars($rowocontribuciones['idapendice12']); ?></td>
-                                    <td><?php echo htmlspecialchars($rowocontribuciones['tasa']); ?></td>
-                                    <td><?php echo htmlspecialchars($rowocontribuciones['idapendice18']); ?></td>
-                                    <td><?php echo htmlspecialchars($rowocontribuciones['idapendice13']); ?></td>
-                                    <td>$<?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
-                        </tr>
-
-                    <?php
-                                }
-                            } else {
-                    ?>
-                    <tr>
-                        <td colspan="10">No se encontraron complementos</td>
-                    </tr>
-                <?php
-                            }
-                ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-<?php
-}
+<?php include_once 'bloque20/partida1.php';
 ?>
 
 <p style=" text-align: center; font-size: 15px;"><strong>******************* FIN DEL PEDIMENTO *******************</strong></p>
@@ -1670,7 +1393,7 @@ foreach ($secciones as $idSeccion => $data) {
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th colspan="10"class="text-center table-dark">
+                                <th colspan="10" class="text-center table-dark">
                                     AGENTE ADUANAL, APODERADO ADUANAL O EL ALMACÉN
                                 </th>
                             </tr>

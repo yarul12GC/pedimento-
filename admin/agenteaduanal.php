@@ -18,53 +18,54 @@ include('../sesion.php');
         ?>
     </header>
 
-    <section class="zona1">
-
-        <fieldset class="fiel">
-            <legend>Agentes Aduanales</legend>
-            <br>
-            <input type="text" name="buscar" placeholder="Buscar" class="form-control buscar" oninput="filtrarTabla()">
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Nuevo Agente Aduanal</button><br><br>
-            <?php
-            $consultar = "SELECT * FROM agenteaduanal ORDER BY idagente DESC";
-            $queryagente = mysqli_query($conexion, $consultar);
-            $cantidad = mysqli_num_rows($queryagente);
-            ?>
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark">
+    <section class="zona1 p-4">
+    <fieldset class="border p-4 rounded">
+        <legend class="w-auto p-2 mb-4 bg-primary text-white rounded">Agentes Aduanales</legend>
+        <div class="d-flex mb-4">
+            <input type="text" name="buscar" placeholder="Buscar" class="form-control me-2" oninput="filtrarTabla()">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Nuevo Agente Aduanal
+            </button>
+        </div>
+        <?php
+        $consultar = "SELECT * FROM agenteaduanal ORDER BY idagente DESC";
+        $queryagente = mysqli_query($conexion, $consultar);
+        $cantidad = mysqli_num_rows($queryagente);
+        ?>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
                     <th>NOMBRE AGENTE</th>
                     <th>CURP</th>
                     <th>RFC</th>
                     <th>DOMICILIO</th>
-                    <th>CODIGO POSTAL</th>
-                    <th class="cent">ACCIONES</th>
-                </thead>
-                <tbody class="table-group-divider">
-                    <?php while ($row = mysqli_fetch_array($queryagente)) { ?>
+                    <th>CÓDIGO POSTAL</th>
+                    <th class="text-center">ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_array($queryagente)) { ?>
+                    <tr>
+                        <td><i class="fas fa-user"></i> <?php echo $row['nombreagente'] . ' ' . $row['apellidoP'] . ' ' . $row['apellidoM']; ?></td>
+                        <td><?php echo $row['curp']; ?></td>
+                        <td><?php echo $row['rfc']; ?></td>
+                        <td><?php echo $row['estado'] . ' ' . $row['localidad']; ?></td>
+                        <td><?php echo $row['codigo_postal']; ?></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editar_<?php echo $row['idagente']; ?>">
+                                Editar
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminar(<?php echo $row['idagente']; ?>)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                <?php }; ?>
+            </tbody>
+        </table>
+    </fieldset>
+</section>
 
-                        <tr>
-
-                            <td><i class="fas fa-user"></i>
-                                <?php echo $row['nombreagente'] . ' ' . $row['apellidoP'] . ' ' . $row['apellidoM']; ?></td>
-                            <td><?php echo $row['curp']; ?></td>
-                            <td><?php echo $row['rfc']; ?></td>
-                            <td><?php echo $row['estado'] . ' ' . $row['localidad']; ?></td>
-                            <td><?php echo $row['codigo_postal']; ?></td>
-                            <td class="cent">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editar_<?php echo $row['idagente']; ?>">Editar</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="confirmarEliminar(<?php echo $row['idagente']; ?>)">Eliminar</button>
-                            </td>
-
-                        </tr>
-
-                    <?php }; ?>
-                </tbody>
-            </table>
-        </fieldset>
-    </section>
 
     <footer>
         <?php

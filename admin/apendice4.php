@@ -1,4 +1,4 @@
-4<?php
+<?php
 include '../conexion.php';
 include '../sesion.php';
 ?>
