@@ -2,17 +2,10 @@
 include_once '../sesion.php';
 include_once '../conexion.php';
 include_once '../public/mensaje.php';
-function verificarRedireccionPedimento($pedimento_id) {
-    // Verifica si el ID del pedimento no está establecido o está vacío
-    if (!isset($pedimento_id) || empty($pedimento_id)) {
-        // Redirige a la página archivopedimentocap.php
-        header("Location: archivopedimentocap.php");
-        exit(); // Asegura que el script se detenga después de la redirección
-    }
-}
+$_SESSION['page_origin'] = 'capturapediemnto';
 
-// Llama a la función pasando la variable de sesión pedimento_id
-verificarRedireccionPedimento($_SESSION['pedimento_id']);
+$pedimento_id = $_SESSION['pedimento_id'];
+
 $agenteNombre = isset($_SESSION['agente_nombre']) ? $_SESSION['agente_nombre'] : 'N/A';
 $agenteApellidoP = isset($_SESSION['agente_apellidoP']) ? $_SESSION['agente_apellidoP'] : 'N/A';
 $agenteApellidoM = isset($_SESSION['agente_apellidoM']) ? $_SESSION['agente_apellidoM'] : 'N/A';
@@ -345,11 +338,6 @@ $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agen
     include 'bloque20/modalb20.php';
     include 'bloque28/modalb28.php';
     ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </body>
 </html>

@@ -15,6 +15,9 @@ $entidadfederativa = $_POST['entidadfederativa'];
 $pais = $_POST['pais'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
+
 $sql = "INSERT INTO importadorexportador (tipoIE,
  nombreE,
   curp, 
@@ -40,13 +43,18 @@ $sql = "INSERT INTO importadorexportador (tipoIE,
   '$pais',
   '$idpedimentoc')";
 
-  if($conexion->query($sql) === TRUE){
-    $last_idb5 = $conexion->insert_id;
-    $_SESSION['bloques']['bloque5']= $last_idb5;
-
-    header("location: ../capturapediemnto.php");
-    exit();
+if ($conexion->query($sql) === TRUE) {
+  $last_idb5 = $conexion->insert_id;
+  $_SESSION['bloques']['bloque5'] = $last_idb5;
+  if ($sameSession) {
+    // Si es la misma sesión, redirige a la página de captura en curso
+    header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
   } else {
-    echo "Error:" . $sql . "<br>" . $conexion-> error;
+    // Si es una nueva sesión, redirige a la página de continuación de captura
+    header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
   }
-  $conexion->close();
+  exit();
+} else {
+  echo "Error:" . $sql . "<br>" . $conexion->error;
+}
+$conexion->close();

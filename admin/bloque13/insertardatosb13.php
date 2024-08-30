@@ -1,12 +1,13 @@
 <?php
 include_once '../../conexion.php';
 include_once '../../sesion.php';
-require 'vendor/autoload.php'; 
+require 'vendor/autoload.php';
 
 // Importar la clase de la librería
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
-function generarCadenaAlfanumerica($longitud) {
+function generarCadenaAlfanumerica($longitud)
+{
     $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $cadena = '';
     for ($i = 0; $i < $longitud; $i++) {
@@ -15,7 +16,8 @@ function generarCadenaAlfanumerica($longitud) {
     return $cadena;
 }
 
-function generarNumeroAleatorio($longitud) {
+function generarNumeroAleatorio($longitud)
+{
     $numero = '';
     for ($i = 0; $i < $longitud; $i++) {
         $numero .= rand(0, 9);
@@ -52,6 +54,10 @@ $mPresentacion = $_POST['mPresentacion'];
 $MedioRecepcion = $_POST['MedioRecepcion'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
+
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
+
 // Insertar los datos en la base de datos
 $sql = "INSERT INTO pagoelectronico (
     patente,
@@ -84,10 +90,10 @@ $sql = "INSERT INTO pagoelectronico (
 if ($conexion->query($sql) === TRUE) {
     $last_idb13 = $conexion->insert_id;
     $_SESSION['bloques']['bloque13'] = $last_idb13;
-    
+
     // Generar código de barras
     $barcodeData = $lineaC . "|" . $importePago . "|" . $banco . "|" . $fechapago . "|" . $noperacionbancar . "|" . $ntransaccionS;
-    
+
     // Crear el generador de código de barras
     $generator = new BarcodeGeneratorPNG();
     $barcode = $generator->getBarcode($barcodeData, $generator::TYPE_CODE_128);
@@ -107,12 +113,25 @@ if ($conexion->query($sql) === TRUE) {
     $barcodeEscaped = $conexion->real_escape_string($barcodeFileName);
     $updateSql = "UPDATE pagoelectronico SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
 
-    if ($conexion->query($updateSql) === TRUE) {
-        // Redirigir a la página deseada
-        header("location: ../capturapediemnto.php?barcode=" . urlencode($barcodeFileName));
-        exit();
+    // Comprobación de si es la misma sesión
+    if ($sameSession) {
+        // Si es la misma sesión, se realiza la redirección correspondiente
+        if ($conexion->query($updateSql) === TRUE) {
+            // Redirigir a la página de captura en curso y pasar el nombre del archivo de código de barras
+            header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc) . "&barcode=" . urlencode($barcodeFileName));
+            exit();
+        } else {
+            echo "Error actualizando la imagen del código de barras: " . $conexion->error;
+        }
     } else {
-        echo "Error actualizando la imagen del código de barras: " . $conexion->error;
+        // Si es una nueva sesión, se realiza otra redirección
+        if ($conexion->query($updateSql) === TRUE) {
+            // Redirigir a la página de continuación de captura y pasar el nombre del archivo de código de barras
+            header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc) . "&barcode=" . urlencode($barcodeFileName));
+            exit();
+        } else {
+            echo "Error actualizando la imagen del código de barras: " . $conexion->error;
+        }
     }
 } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;

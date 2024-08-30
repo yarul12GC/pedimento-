@@ -1,3 +1,4 @@
+
 <?php
 include_once '../sesion.php';
 include_once '../../conexion.php';
@@ -13,14 +14,8 @@ $concatenatedData = $_POST['concatenatedData'];
 // Guardar los datos en la sesión
 $_SESSION['bloques']['idapendice1'] = $concatenatedData;
 
-// Verificar si el ID del pedimento en la sesión coincide con el enviado en el formulario
-if (isset($_SESSION['idpedimento']) && $_SESSION['idpedimento'] == $idpedimentoc) {
-    // Si el pedimento en la sesión coincide con el formulario, se está completando durante la misma sesión
-    $sameSession = true;
-} else {
-    // Si no coincide, entonces es un pedimento que se está completando después de una sesión anterior
-    $sameSession = false;
-}
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
 
 // Inserción en la base de datos
 $sql = "INSERT INTO transacciones(idapendice15, tipoCambio, peso_bruto, idapendice1, idpedimentoc, concatenatedData) 
@@ -32,7 +27,6 @@ if ($conexion->query($sql) === TRUE) {
     // Guardar el último ID en la sesión
     $_SESSION['bloques']['bloque2'] = $last_idb2;
 
-    // Redirigir según la sesión, pasando el ID del pedimento en la URL
     if ($sameSession) {
         // Si es la misma sesión, redirige a la página de captura en curso
         header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));

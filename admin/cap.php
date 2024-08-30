@@ -1,5 +1,21 @@
 <?php
 include_once '../sesion.php';
+include_once '../conexion.php';
+
+$registros_por_pagina = 6;
+$query_total = "SELECT COUNT(*) as total FROM pedimentocompleto";
+$result_total = $conexion->query($query_total);
+$total_registros = $result_total->fetch_assoc()['total'];
+$total_paginas = ceil($total_registros / $registros_por_pagina);
+
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($pagina_actual - 1) * $registros_por_pagina;
+$query = "SELECT p.idpedimentoc, a.nombreagente, u.nombreusuario 
+          FROM pedimentocompleto p 
+          JOIN agenteaduanal a ON p.idagente = a.idagente 
+          JOIN usuarios u ON p.idusuario = u.usuarioID 
+          LIMIT $offset, $registros_por_pagina";
+$result = $conexion->query($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,75 +56,87 @@ include_once '../sesion.php';
         .table-hover tbody tr:hover {
             background-color: #e9ecef;
         }
+
+        .pagination {
+            justify-content: center;
+        }
     </style>
 </head>
-
 
 <body>
     <header>
         <?php include '../public/cabeza.php'; ?>
     </header>
     <section class="zona1">
-        <fieldset>
-            <div class="card">
-                <div class="card-header bg-dark text-white">
-                    Pedimentos Generados
-                </div>
 
+        <div class="card-header bg-dark text-white" style="height: 35px;">
+            Pedimentos Generados
+        </div>
 
-                <input type="text" name="buscar" placeholder="Buscar" class="form-control buscar" oninput="filtrarTabla()">
+        <div class="card-body">
+            <input type="text" name="buscar" placeholder="Buscar" class="form-control mb-3 buscar" oninput="filtrarTabla()">
 
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID Pedimento</th>
-                                <th>Agente Aduanal</th>
-                                <th>Usuario</th>
-                                <th class="cent">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include_once '../conexion.php';
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID Pedimento</th>
+                        <th>Agente Aduanal</th>
+                        <th>Usuario</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['idpedimentoc']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nombreagente']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nombreusuario']) . "</td>";
+                        echo "<td class='text-center'>";
 
-                            $query = "SELECT p.idpedimentoc, a.nombreagente, u.nombreusuario 
-                                FROM pedimentocompleto p 
-                                JOIN agenteaduanal a ON p.idagente = a.idagente 
-                                JOIN usuarios u ON p.idusuario = u.usuarioID
-                                ";
-                            $result = $conexion->query($query);
+                        // Botón para Ver Detalles
+                        echo "<a href='archivopedimento.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-primary me-2'>";
+                        echo "<i class='fas fa-eye'></i> Ver Detalles";
+                        echo "</a>";
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['idpedimentoc']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['nombreagente']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['nombreusuario']) . "</td>";
-                                echo "<td class='cent'>";
-                                echo "<a href='archivopedimento.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-primary btn-sm'>
-                                <i class='fas fa-eye'></i> Ver Detalles
-                              </a>";
-                                echo "<a href='archivopedimentocap.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-primary btn-sm'>
-                                <i class='fas fa-eye'></i> continuar
-                              </a>";
+                        // Botón para Continuar
+                        echo "<a href='archivopedimentocap.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-warning me-2'>";
+                        echo "<i class='fas fa-forward'></i> Continuar";
+                        echo "</a>";
 
-                                echo "<a href='exportarpdf/pedimentopdf.php?id=" . $row['idpedimentoc'] . "' class='btn btn-danger btn-sm'>";
-                                echo "<i class='fas fa-file-pdf'></i> Exportar PDF</a>";
+                        // Botón para Exportar PDF
+                        echo "<a href='exportarpdf/pedimentopdf.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger me-2'>";
+                        echo "<i class='fas fa-file-pdf'></i> Exportar PDF";
+                        echo "</a>";
 
+                        // Botón para Eliminar con confirmación
+                        echo "<a href='eliminar_pedimento.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger' onclick='return confirm(\"¿Estás seguro de que deseas eliminar este pedimento?\");'>";
+                        echo "<i class='fas fa-trash'></i> Eliminar";
+                        echo "</a>";
 
-                                echo "<a href='eliminar_pedimento.php?id=" . $row['idpedimentoc'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"¿Estás seguro de que deseas eliminar este pedimento?\");'>";
-                                echo "<i class='fas fa-trash'></i> Eliminar</a>";
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                            $conexion->close();
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
 
-        </fieldset>
+            <!-- Mostrar el número total de registros -->
+            <p class="text-center">Total de Pedimentos Generados: <?php echo $total_registros; ?></p>
+
+            <!-- Paginación -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <?php
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        $active = ($i == $pagina_actual) ? 'active' : '';
+                        echo "<li class='page-item $active'><a class='page-link' href='?pagina=$i'>$i</a></li>";
+                    }
+                    ?>
+                </ul>
+            </nav>
+        </div>
+
     </section>
     <footer>
         <?php include '../public/footer.php'; ?>
@@ -142,3 +170,6 @@ include_once '../sesion.php';
 </body>
 
 </html>
+<?php
+$conexion->close();
+?>

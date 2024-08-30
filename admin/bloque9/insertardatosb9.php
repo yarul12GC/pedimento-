@@ -6,6 +6,9 @@ $entrada = $_POST['entrada'];
 $pago = $_POST['pago'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
+
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
 $sql = "INSERT INTO fechas (entrada,
  pago,
   idpedimentoc)
@@ -13,16 +16,21 @@ $sql = "INSERT INTO fechas (entrada,
   '$pago',
   '$idpedimentoc')";
 
-  if($conexion->query($sql) === TRUE){
-    $last_idb9 = $conexion->insert_id;
+if ($conexion->query($sql) === TRUE) {
+  $last_idb9 = $conexion->insert_id;
 
-    $_SESSION['bloques']['pago'] = $pago;
+  $_SESSION['bloques']['pago'] = $pago;
 
-    $_SESSION['bloques']['bloque9']= $last_idb9;
-
-    header("location: ../capturapediemnto.php");
-    exit();
+  $_SESSION['bloques']['bloque9'] = $last_idb9;
+  if ($sameSession) {
+    // Si es la misma sesión, redirige a la página de captura en curso
+    header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
   } else {
-    echo "Error:" . $sql . "<br>" . $conexion-> error;
+    // Si es una nueva sesión, redirige a la página de continuación de captura
+    header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
   }
-  $conexion->close();
+  exit();
+} else {
+  echo "Error:" . $sql . "<br>" . $conexion->error;
+}
+$conexion->close();

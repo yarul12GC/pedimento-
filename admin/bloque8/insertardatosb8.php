@@ -9,6 +9,9 @@ $modelo = $_POST['modelo'];
 $nBultos = $_POST['nBultos'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
+
 $sql = "INSERT INTO permisos (aviso_electronico,
  idapendice1,
   marca, 
@@ -22,13 +25,19 @@ $sql = "INSERT INTO permisos (aviso_electronico,
   '$nBultos', 
   '$idpedimentoc')";
 
-  if($conexion->query($sql) === TRUE){
-    $last_idb8 = $conexion->insert_id;
-    $_SESSION['bloques']['bloque8']= $last_idb8;
+if ($conexion->query($sql) === TRUE) {
+  $last_idb8 = $conexion->insert_id;
+  $_SESSION['bloques']['bloque8'] = $last_idb8;
 
-    header("location: ../capturapediemnto.php");
-    exit();
+  if ($sameSession) {
+    // Si es la misma sesión, redirige a la página de captura en curso
+    header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
   } else {
-    echo "Error:" . $sql . "<br>" . $conexion-> error;
+    // Si es una nueva sesión, redirige a la página de continuación de captura
+    header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
   }
-  $conexion->close();
+  exit();
+} else {
+  echo "Error:" . $sql . "<br>" . $conexion->error;
+}
+$conexion->close();

@@ -14,9 +14,17 @@ $PATENTE = $_POST['PATENTE'];
 $ultimo_digito_anio = $_POST['ultimo_digito_anio'];
 $numeracion_progresiva = $_POST['numeracion_progresiva'];
 
-$sql = "INSERT INTO dpedimento (Nopedimento, Toper, idapendice2, idapendice16, idpedimentoc, anio_validacion, clave_aduana, patente, ultimo_digito_anio, numeracion_progresiva) VALUES ('$Nopedimento', '$Toper', '$idapendice2', '$idapendice16', '$idpedimentoc', '$anio_validacion', '$clave_aduana', '$PATENTE', '$ultimo_digito_anio', '$numeracion_progresiva')";
+// Verificar si la sesión está iniciada y la variable de sesión existe
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
 
-if ($conexion->query($sql) === TRUE) {
+// Usar declaraciones preparadas para evitar inyección SQL
+$stmt = $conexion->prepare("
+    INSERT INTO dpedimento (Nopedimento, Toper, idapendice2, idapendice16, idpedimentoc, anio_validacion, clave_aduana, patente, ultimo_digito_anio, numeracion_progresiva) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
+$stmt->bind_param("sssiiissss", $Nopedimento, $Toper, $idapendice2, $idapendice16, $idpedimentoc, $anio_validacion, $clave_aduana, $PATENTE, $ultimo_digito_anio, $numeracion_progresiva);
+
+if ($stmt->execute()) {
     $last_idb1 = $conexion->insert_id;
 
     $_SESSION['bloques']['PATENTE'] = $PATENTE;
@@ -29,11 +37,17 @@ if ($conexion->query($sql) === TRUE) {
 
     $_SESSION['bloques']['bloque1'] = $last_idb1;
 
-    header("Location: ../capturapediemnto.php?id=$last_idb1");
+    if ($sameSession) {
+        // Si es la misma sesión, redirige a la página de captura en curso
+        header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
+    } else {
+        // Si es una nueva sesión, redirige a la página de continuación de captura
+        header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
+    }
     exit();
 } else {
-    echo "Error: " . $sql . "<br>" . $conexion->error;
+    echo "Error: " . $stmt->error;
 }
 
+$stmt->close();
 $conexion->close();
-?>

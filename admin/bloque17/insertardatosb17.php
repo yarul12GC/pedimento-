@@ -9,7 +9,9 @@ $complemento2 = isset($_POST['complemento2']) ? $_POST['complemento2'] : [];
 $complemento3 = isset($_POST['complemento3']) ? $_POST['complemento3'] : [];
 $idpedimentoc = $_POST['idpedimentoc'];
 
-// Preparar las consultas SQL
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
+
 $queries = [];
 for ($i = 0; $i < count($idapendice8); $i++) {
     $idapendice8_val = $conexion->real_escape_string($idapendice8[$i]);
@@ -33,8 +35,13 @@ if ($conexion->query($sql) === TRUE) {
     }
     $_SESSION['bloques']['bloque17'] = $inserted_ids; // Almacenar los IDs insertados en la sesión
 
-    // Redirigir a la página donde se muestran los datos
-    header("Location: ../capturapediemnto.php");
+    if ($sameSession) {
+        // Si es la misma sesión, redirige a la página de captura en curso
+        header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
+    } else {
+        // Si es una nueva sesión, redirige a la página de continuación de captura
+        header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
+    }
     exit();
 } else {
     echo "Error: " . $sql . "<br>" . $conexion->error;
@@ -42,4 +49,3 @@ if ($conexion->query($sql) === TRUE) {
 
 // Cerrar la conexión
 $conexion->close();
-?>

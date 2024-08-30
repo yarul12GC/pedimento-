@@ -5,6 +5,9 @@ include_once '../../sesion.php';
 $idpedimentoc = $_POST['idpedimentoc'];
 $observaciones = $_POST['descripcion'];
 
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
+
 foreach ($observaciones as $observacion) {
     $sql = "INSERT INTO observaciones(descripcion, idpedimentoc) VALUES ('$observacion', '$idpedimentoc')";
 
@@ -19,6 +22,11 @@ foreach ($observaciones as $observacion) {
     }
 }
 
-header("location: ../capturapediemnto.php");
+if ($sameSession) {
+    // Si es la misma sesión, redirige a la página de captura en curso
+    header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
+} else {
+    // Si es una nueva sesión, redirige a la página de continuación de captura
+    header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
+}
 exit();
-?>

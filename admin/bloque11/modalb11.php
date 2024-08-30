@@ -1,7 +1,8 @@
 <head>
-   
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
+
 <body>
     <div class="modal fade" id="bloque11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw;">
@@ -185,7 +186,7 @@
             }
 
             if (allFormsSubmitted) {
-                window.location.href = 'capturapediemnto.php';
+                location.reload(); // Recarga la página en lugar de redirigir
             }
         });
 

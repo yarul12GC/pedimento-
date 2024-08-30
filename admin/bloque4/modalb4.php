@@ -128,7 +128,7 @@
             var tipoCambioMXN = parseFloat(document.getElementById('tipo-cambio-input').value) || 0;
             document.getElementById('hidden-tipo-cambio-form1').value = tipoCambioMXN.toFixed(2);
             document.getElementById('hidden-tipo-cambio-form2').value = tipoCambioMXN.toFixed(2);
-            
+
             var precioPagado = parseFloat(document.getElementById('precio-pagado').value) || 0;
             var Vseguros = parseFloat(document.getElementById('incrementables-Vseguros').value) || 0;
             var flete = parseFloat(document.getElementById('incrementables-flete').value) || 0;
@@ -187,7 +187,7 @@
             }
 
             if (allFormsSubmitted) {
-                window.location.href = 'capturapediemnto.php';
+                location.reload(); // Recarga la página en lugar de redirigir
             }
         });
     </script>

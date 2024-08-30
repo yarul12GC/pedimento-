@@ -8,13 +8,8 @@ $idapendice3arribo = $_POST['idapendice3arribo'];
 $idapendice3salida = $_POST['idapendice3salida'];
 $idpedimentoc = $_POST['idpedimentoc'];
 
-if (isset($_SESSION['idpedimento']) && $_SESSION['idpedimento'] == $idpedimentoc) {
-    // Si el pedimento en la sesión coincide con el formulario, se está completando durante la misma sesión
-    $sameSession = true;
-} else {
-    // Si no coincide, entonces es un pedimento que se está completando después de una sesión anterior
-    $sameSession = false;
-}
+$sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
+
 
 $sql = "INSERT INTO transporte(idapendice3entrtadaSalida, idapendice3arribo, idapendice3salida, idpedimentoc)
 VALUES ('$idapendice3entradasalida', '$idapendice3arribo', '$idapendice3salida', '$idpedimentoc')";
