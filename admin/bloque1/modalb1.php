@@ -96,8 +96,6 @@
         </div>
     </div>
 
- 
-
     <script>
         function concatenarPedimento() {
             var campo1 = document.getElementById('num-pedimento-1').value;

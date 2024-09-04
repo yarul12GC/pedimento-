@@ -4,7 +4,6 @@ include_once '../sesion.php';
 include_once '../public/mensaje.php';
 
 $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
 ?>
 
 <!DOCTYPE html>
@@ -25,102 +24,15 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     <section class="zona1">
         <table class="table table-bordered table-hover">
             <?php
-            $querydpm =  " SELECT dp.*, 
-        a2.clave AS clave_apendice2,
-        a16.clave AS clave_apendice16
-        FROM dpedimento dp
-        INNER JOIN apendice2 a2 ON dp.idapendice2 = a2.idapendice2
-        INNER JOIN apendice16 a16 ON dp.idapendice16 = a16.idapendice16
-        WHERE idpedimentoc = ?";
-            $stmtdpm = $conexion->prepare($querydpm);
-            $stmtdpm->bind_param("i", $pedimento_id);
-            $stmtdpm->execute();
-            $resultdpm = $stmtdpm->get_result();
-
-            if ($resultdpm->num_rows > 0) {
-                $datodpm = $resultdpm->fetch_assoc();
-            ?>
-                <tr>
-                    <th>NUM.PEDIMENTO</th>
-                    <td><?php echo htmlspecialchars($datodpm['Nopedimento']); ?></td>
-                    <th>T.OPER</th>
-                    <td><?php echo htmlspecialchars($datodpm['Toper']); ?></td>
-                    <th>CVE PEDIMENTO</th>
-                    <td><?php echo htmlspecialchars($datodpm['clave_apendice2']); ?></td>
-                    <th>REGIMEN</th>
-                    <td><?php echo htmlspecialchars($datodpm['clave_apendice16']); ?></td>
-                </tr>
-            <?php
-            } else {
-            ?>
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>NUM.PEDIMENTO</th>
-                        <td></td>
-                        <th>T.OPER</th>
-                        <td></td>
-                        <th>CVE PEDIMENTO</th>
-                        <td></td>
-                        <th>REGIMEN</th>
-                        <td></td>
-                    </tr>
-                </table>
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-database"></i>
-                </button>
-            <?php
-            }
+            include_once 'bloque1/tablab1edit.php'
             ?>
         </table>
 
 
         <table class="table table-bordered table-hover">
             <?php
-            $querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1
-            FROM transacciones ts
-            INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
-            INNER JOIN apendice1 a1 ON ts.idapendice1 = a1.idapendice1
-            WHERE idpedimentoc = ?";
-            $stmttransac = $conexion->prepare($querytransac);
-            $stmttransac->bind_param("i", $pedimento_id);
-            $stmttransac->execute();
-            $resulttransac = $stmttransac->get_result();
-
-            if ($resulttransac->num_rows > 0) {
-                $datotransac = $resulttransac->fetch_assoc();
+            include_once 'bloque2/tablab2edit.php'
             ?>
-                <tr>
-                    <th>DESTINO/ORIGEN</th>
-                    <td><?php echo htmlspecialchars($datotransac['clavea15']); ?></td>
-                    <th>TIPO DE CAMBIO</th>
-                    <td><?php echo htmlspecialchars($datotransac['tipoCambio']); ?></td>
-                    <th>PESO BRUTO</th>
-                    <td><?php echo htmlspecialchars($datotransac['peso_bruto']); ?></td>
-                    <th>ADUANA</th>
-                    <td><?php echo htmlspecialchars($datotransac['clavea1']); ?></td>
-                </tr>
-            <?php
-            } else {
-            ?>
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>DESTINO/ORIGEN</th>
-                        <td></td>
-                        <th>TIPO DE CAMBIO</th>
-                        <td></td>
-                        <th>PESO BRUTO</th>
-                        <td></td>
-                        <th>ADUANA</th>
-                        <td></td>
-                    </tr>
-                </table>
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque2">
-                    <i class="fas fa-database"></i>
-                </button>
-            <?php
-            }
-            ?>
-
         </table>
 
         <br><br>
@@ -128,144 +40,18 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         <div class="row">
             <div class="col-md-6">
                 <div class="form-section">
-
-
                     <?php
-                    $querytransp =  "SELECT 
-                                t.*,
-                                a1.clave AS clave_entrtadaSalida, 
-                                a2.clave AS clave_arribo, 
-                                a3.clave AS clave_salida
-                                FROM 
-                                transporte t
-                                INNER JOIN 
-                                apendice3 a1 ON t.idapendice3entrtadaSalida = a1.idapendice3
-                                INNER JOIN 
-                                apendice3 a2 ON t.idapendice3arribo = a2.idapendice3
-                                INNER JOIN 
-                                apendice3 a3 ON t.idapendice3salida = a3.idapendice3
-                                WHERE idpedimentoc = ?";
-
-                    $stmttransp = $conexion->prepare($querytransp);
-                    $stmttransp->bind_param("i", $pedimento_id);
-                    $stmttransp->execute();
-                    $resulttransp = $stmttransp->get_result();
-
-                    if ($resulttransp->num_rows > 0) {
-                        $datostrnsp = $resulttransp->fetch_assoc();
-                    ?>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th colspan="3" class="text-center table-dark">MEDIOS DE TRANSPORTE</th>
-                                </tr>
-                                <tr>
-                                    <th>ENTRADA SALIDA</th>
-                                    <th>ARRIBO</th>
-                                    <th>SALIDA</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                            <tr>
-                                <td><?php echo htmlspecialchars($datostrnsp['clave_entrtadaSalida']); ?></td>
-                                <td><?php echo htmlspecialchars($datostrnsp['clave_arribo']); ?></td>
-                                <td><?php echo htmlspecialchars($datostrnsp['clave_salida']); ?></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    <?php
-                    } else {
+                    include_once 'bloque3/tablab3edit.php'
                     ?>
 
-
-                        <table class="table table-bordered table-hover">
-                            <thead class="text-center table-dark">
-                                <tr>
-                                    <th colspan="8" class="text-center">MEDIOS DE TRANSPORTE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>ENTRADA SALIDA</th>
-                                    <th>ARRIBO</th>
-                                    <th>SALIDA</th>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque3">
-                            <i class="fas fa-database"></i>
-                        </button>
-                    <?php
-                    }
-                    ?>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-section">
-                    <table class="table table-bordered table-hover">
-                        <tbody>
-                            <?php
-                            $queryvaloresp =  " SELECT * FROM valoresp WHERE idpedimentoc = ?";
-
-                            $stmtvaloresp = $conexion->prepare($queryvaloresp);
-                            $stmtvaloresp->bind_param("i", $pedimento_id);
-                            $stmtvaloresp->execute();
-                            $resultvaloresp = $stmtvaloresp->get_result();
-
-                            if ($resultvaloresp->num_rows > 0) {
-                                $datosvp = $resultvaloresp->fetch_assoc();
-                            ?>
-                                <tr>
-                                    <th>VALOR EN DOLARES</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>VALOR ADUANA</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>PRECIO PAGADO/VALOR COMERCIAL</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
-                                </tr>
-                        </tbody>
                     <?php
-                            } else {
+                    include_once 'bloque4/tablab4edit.php'
                     ?>
-                        <table class="table table-bordered table-hover">
-                            <tbody>
-
-                                <tr>
-                                    <th>VALOR EN DOLARES</th>
-                                    <td></td>
-                                </tr>
-
-                                <tr>
-                                    <th>VALOR ADUANA</th>
-                                    <td></td>
-                                </tr>
-
-                                <tr>
-                                    <th>PRECIO PAGADO/VALOR COMERCIAL</th>
-                                    <td></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque4">
-                            <i class="fas fa-database"></i>
-                        </button>
-
-                    <?php
-                            }
-                    ?>
-                    </table>
 
                 </div>
             </div>
@@ -1518,6 +1304,8 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     include 'bloque16/modalb16.php';
     include 'bloque17/modalb17.php';
     include 'bloque18/modalb18.php';
+    include 'bloque4/modalb4editar.php';
+
     /*include 'bloque20/modalb20.php';
     include 'bloque28/modalb28.php';
     */

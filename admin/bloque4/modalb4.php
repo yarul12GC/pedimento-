@@ -41,30 +41,33 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5>INCREMENTABLES</h5>
-                            <form id="form1" action="../admin/bloque6/insetardatosb6.php" method="post">
-                                <input type="hidden" id="hidden-tipo-cambio-form1" name="tipoCambioMXN" value="">
-                                <div class="form-group">
-                                    <label for="incrementables-flete">FLETES</label>
-                                    <input type="number" class="form-control" id="incrementables-flete" name="fletes" required oninput="calcularValores()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="incrementables-Vseguros">SEGUROS Vseguros</label>
-                                    <input type="number" class="form-control" id="incrementables-Vseguros" name="Vseguros" required oninput="calcularValores()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="incrementables-seguro">SEGUROS</label>
-                                    <input type="number" class="form-control" id="incrementables-seguro" name="seguros" required oninput="calcularValores()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="incrementables-embalajes">EMBALAJES</label>
-                                    <input type="number" class="form-control" id="incrementables-embalajes" name="embalajes" required oninput="calcularValores()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="incrementables-otros">OTROS</label>
-                                    <input type="number" class="form-control" id="incrementables-otros" name="otrosincrement" required oninput="calcularValores()">
-                                </div>
-                                <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
-                            </form>
+
+                            
+                                <form id="form1" action="../admin/bloque6/insetardatosb6.php" method="post">
+                                    <input type="hidden" id="hidden-tipo-cambio-form1" name="tipoCambioMXN" value="">
+                                    <div class="form-group">
+                                        <label for="incrementables-flete">FLETES</label>
+                                        <input type="number" class="form-control" id="incrementables-flete" name="fletes" required oninput="calcularValores()">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incrementables-Vseguros">SEGUROS Vseguros</label>
+                                        <input type="number" class="form-control" id="incrementables-Vseguros" name="Vseguros" required oninput="calcularValores()">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incrementables-seguro">SEGUROS</label>
+                                        <input type="number" class="form-control" id="incrementables-seguro" name="seguros" required oninput="calcularValores()">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incrementables-embalajes">EMBALAJES</label>
+                                        <input type="number" class="form-control" id="incrementables-embalajes" name="embalajes" required oninput="calcularValores()">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="incrementables-otros">OTROS</label>
+                                        <input type="number" class="form-control" id="incrementables-otros" name="otrosincrement" required oninput="calcularValores()">
+                                    </div>
+                                    <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+                                </form>
+                            
                         </div>
 
                         <div class="col-md-4">
@@ -111,6 +114,7 @@
                                     <input type="number" class="form-control" id="precio-pagado-mxn" name="precioPagado" required readonly>
                                 </div>
                                 <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
+                                <input type="hidden" id="hidden-tipo-cambio-form3" name="tipoCambioMXN" value="">
                             </form>
                         </div>
                     </div>
@@ -123,11 +127,16 @@
         </div>
     </div>
 
+
+
+
     <script>
         function calcularValores() {
             var tipoCambioMXN = parseFloat(document.getElementById('tipo-cambio-input').value) || 0;
             document.getElementById('hidden-tipo-cambio-form1').value = tipoCambioMXN.toFixed(2);
             document.getElementById('hidden-tipo-cambio-form2').value = tipoCambioMXN.toFixed(2);
+            document.getElementById('hidden-tipo-cambio-form3').value = tipoCambioMXN.toFixed(2);
+
 
             var precioPagado = parseFloat(document.getElementById('precio-pagado').value) || 0;
             var Vseguros = parseFloat(document.getElementById('incrementables-Vseguros').value) || 0;

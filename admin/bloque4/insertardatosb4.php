@@ -7,12 +7,14 @@ $valorDolares = $_POST['valorDolares'];
 $valorAduna = $_POST['valorAduna'];
 $precioPagado = $_POST['precioPagado'];
 $idpedimentoc = $_POST['idpedimentoc'];
+$tipoCambioMXN = $_POST['tipoCambioMXN'];
+
 
 $sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
 
 
-$sql = "INSERT INTO valoresp(valorDolares, valorAduna, precioPagado, idpedimentoc)
-VALUES ('$valorDolares', '$valorAduna', '$precioPagado', '$idpedimentoc')";
+$sql = "INSERT INTO valoresp(tipoCambioMXN, valorDolares, valorAduna, precioPagado, idpedimentoc)
+VALUES ('$tipoCambioMXN', '$valorDolares', '$valorAduna', '$precioPagado', '$idpedimentoc')";
 
 if ($conexion->query($sql) === TRUE) {
     $last_idb4 = $conexion->insert_id;
