@@ -34,7 +34,6 @@
                 </div>
 
                 <div class="row">
-                    <!-- Bloque 4: Totales -->
                     <div class="col-md-4">
                         <h5>TOTALES</h5>
                         <form id="edit-form1" action="../admin/bloque4/editarDatosb4.php" method="post">
@@ -58,7 +57,6 @@
                         </form>
                     </div>
 
-                    <!-- Bloque 6: Incrementables -->
                     <div class="col-md-4">
                         <h5>INCREMENTABLES</h5>
                         <?php
@@ -97,7 +95,6 @@
                         ?>
                     </div>
 
-                    <!-- Bloque 7: Decrementables -->
                     <div class="col-md-4">
                         <h5>DECREMENTABLES</h5>
                         <?php
@@ -181,7 +178,7 @@
             }
 
             if (allFormsSubmitted) {
-                location.reload(); // Recarga la página en lugar de redirigir
+                location.reload();
             }
         });
 

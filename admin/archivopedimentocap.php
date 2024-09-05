@@ -58,795 +58,92 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         </div>
 
 
-        <table class="table table-bordered table-hover">
-            <?php
-            $queryimpoex =  " SELECT * FROM importadorexportador WHERE idpedimentoc = ?";
+        <?php
+        include_once 'bloque5/tablab5edit.php'
+        ?>
 
-            $stmtimpoex = $conexion->prepare($queryimpoex);
-            $stmtimpoex->bind_param("i", $pedimento_id);
-            $stmtimpoex->execute();
-            $resultimpoex = $stmtimpoex->get_result();
+        <?php
+        include_once 'bloque6/tablab6edit.php'
+        ?>
 
-            if ($resultimpoex->num_rows > 0) {
-                $datosimport = $resultimpoex->fetch_assoc();
-            ?>
-                <thead class="text-center ">
+
+        <?php
+        include_once 'bloque7/tablab7edit.php'
+        ?>
+
+
+        <?php
+        include_once 'bloque8/tablab8edit.php'
+        ?>
+
+
+
+        <br><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-section">
+
+
+                    <?php
+                    include_once 'bloque9/tablab9edit.php'
+                    ?>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <?php
+                include_once 'bloque10/tablab10edit.php'
+                ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-section">
+                    <?php
+                    include_once 'bloque11/tablab11edit.php'
+                    ?>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-section">
+
+                    <?php
+                    include_once 'bloque12/tablab12edit.php'
+                    ?>
+
+                </div>
+            </div>
+        </div>
+
+
+        <?php
+        include_once 'bloque13/tablab13edit.php'
+        ?>
+
+        <br><br>
+
+        <?php
+        $queryprovocom = "SELECT * FROM provedorocomprador WHERE idpedimentoc = ?";
+
+        $stmtprovocom = $conexion->prepare($queryprovocom);
+        $stmtprovocom->bind_param("i", $pedimento_id);
+        $stmtprovocom->execute();
+        $resultprovocom = $stmtprovocom->get_result();
+
+        if ($resultprovocom->num_rows > 0) {
+            $rowpro = $resultprovocom->fetch_assoc();
+        ?>
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        <th colspan="14" class="text-center table-dark">DATOS DEL IMPORTADOR/EXPORTADOR</th>
+                        <th colspan="14" class="text-center table-dark">DATOS DEL PROVEEDOR O COMPRADOR</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th colspan="7" scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
-                        <td colspan="7"><?php echo htmlspecialchars($datosimport['nombreE']); ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">RFC</th>
-                        <td colspan="13"><?php echo htmlspecialchars($datosimport['rfc']); ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">CURP</th>
-                        <td colspan="13"><?php echo htmlspecialchars($datosimport['curp']); ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" colspan="14" class="text-center table-dark">DOMICILIO</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">CALLE</th>
-                        <td><?php echo htmlspecialchars($datosimport['Calle']); ?></td>
-                        <th scope="row">NUMERO INTERIOR</th>
-                        <td><?php echo htmlspecialchars($datosimport['numeroInterior']); ?></td>
-                        <th scope="row">NUMERO EXTERIOR</th>
-                        <td><?php echo htmlspecialchars($datosimport['numeroExterior']); ?></td>
-                        <th scope="row">CODIGO POSTAL</th>
-                        <td><?php echo htmlspecialchars($datosimport['codigoPostal']); ?></td>
-                        <th scope="row">MUNICIPIO</th>
-                        <td><?php echo htmlspecialchars($datosimport['municipio']); ?></td>
-                        <th scope="row">ENTIDAD FEDERATIVA</th>
-                        <td><?php echo htmlspecialchars($datosimport['entidadfederativa']); ?></td>
-                        <th scope="row">PAIS</th>
-                        <td><?php echo htmlspecialchars($datosimport['pais']); ?></td>
-                    </tr>
-                </tbody>
-            <?php
-            } else {
-            ?>
-
-                <table class="table table-bordered table-hover">
-                    <thead class="text-center table-dark">
-                        <tr>
-                            <th colspan="14" class="text-center table-dark">DATOS DEL IMPORTADOR/EXPORTADOR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
-                            <td colspan="13"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RFC</th>
-                            <td colspan="13"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">CURP</th>
-                            <td colspan="13"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="14" class="text-center table-dark">DOMICILIO</th>
-                        </tr>
-                        <tr>
-                            <th scope="row">CALLE</th>
-                            <td></td>
-                            <th scope="row">NUMERO INTERIOR</th>
-                            <td></td>
-                            <th scope="row">NUMERO EXTERIOR</th>
-                            <td></td>
-                            <th scope="row">CODIGO POSTAL</th>
-                            <td></td>
-                            <th scope="row">MUNICIPIO</th>
-                            <td></td>
-                            <th scope="row">ENTIDAD FEDERATIVA</th>
-                            <td></td>
-                            <th scope="row">PAIS</th>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque5">
-                    <i class="fas fa-database"></i>
-                </button>
-
-
-
-            <?php
-            }
-            ?>
-        </table>
-        <table class="table table-bordered table-hover">
-
-            <?php
-            $queryvaloresin =  " SELECT * FROM valorincrementable WHERE idpedimentoc = ?";
-
-            $stmtvaloresin = $conexion->prepare($queryvaloresin);
-            $stmtvaloresin->bind_param("i", $pedimento_id);
-            $stmtvaloresin->execute();
-            $resultvaloresin = $stmtvaloresin->get_result();
-
-            if ($resultvaloresin->num_rows > 0) {
-                $datosincr = $resultvaloresin->fetch_assoc();
-            ?>
-                <thead class="text-center">
-                    <tr>
-                        <th colspan="14" class="text-center table-dark">VALOR INCREMENTABLES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">VAL.SEGUROS</th>
-                        <th scope="row">SEGUROS</th>
-                        <th scope="row">FLETES</th>
-                        <th scope="row">EMBALAJES</th>
-                        <th scope="row">OTROS INCREMENTABLES</th>
-                    </tr>
-                    <tr>
-                        <td>$<?php echo htmlspecialchars($datosincr['Vseguros']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['seguros']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['fletes']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['embalajes']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['otrosincrement']); ?></td>
-                    </tr>
-                </tbody>
-        </table>
-    <?php
-
-            } else {
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="text-center table-dark">
-                <tr>
-                    <th colspan="14" class="text-center">VALOR INCREMENTABLES</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">VAL.SEGUROS</th>
-                    <th scope="row">SEGUROS</th>
-                    <th scope="row">FLETES</th>
-                    <th scope="row">EMBALAJES</th>
-                    <th scope="row">OTROS INCREMENTABLES</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque">
-            <i class="fas fa-database"></i>
-        </button>
-
-    <?php
-            }
-    ?>
-
-
-
-    <?php
-    $queryvaloresd =  " SELECT * FROM valordecrementable WHERE idpedimentoc = ?";
-
-    $stmtvaloresd = $conexion->prepare($queryvaloresd);
-    $stmtvaloresd->bind_param("i", $pedimento_id);
-    $stmtvaloresd->execute();
-    $resultvaloresd = $stmtvaloresd->get_result();
-
-    if ($resultvaloresd->num_rows > 0) {
-        $datosdcre = $resultvaloresd->fetch_assoc();
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="text-center">
-                <tr>
-                    <th colspan="14" class="text-center table-dark">VALOR DECREMENTABLES</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">TRANSPORTE DECREMENTABLE</th>
-                    <th scope="row">SEGURO DECREMENTABLE</th>
-                    <th scope="row">CARGA</th>
-                    <th scope="row">DESCARGA</th>
-                    <th scope="row">OTROS DECREMENTABLES</th>
-                </tr>
-                <tr></tr>
-                <td>$<?php echo htmlspecialchars($datosdcre['VsegurosD']); ?></td>
-                <td>$<?php echo htmlspecialchars($datosdcre['segurosD']); ?></td>
-                <td>$<?php echo htmlspecialchars($datosdcre['fletesD']); ?></td>
-                <td>$<?php echo htmlspecialchars($datosdcre['embalajesD']); ?></td>
-                <td>$<?php echo htmlspecialchars($datosdcre['otrosDecrement']); ?></td>
-                </tr>
-            </tbody>
-        </table>
-
-    <?php
-    } else {
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="text-center table-dark">
-                <tr>
-                    <th colspan="14" class="text-center">VALOR DECREMENTABLES</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">TRANSPORTE DECREMENTABLE</th>
-                    <th scope="row">SEGURO DECREMENTABLE</th>
-                    <th scope="row">CARGA</th>
-                    <th scope="row">DESCARGA</th>
-                    <th scope="row">OTROS DECREMENTABLES</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque7">
-            <i class="fas fa-database"></i>
-        </button>
-
-    <?php
-    }
-    ?>
-
-    <table class="table table-bordered table-hover">
-
-        <tbody>
-            <?php
-            $querypermisos =  "SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1
-                FROM permisos
-                INNER JOIN apendice1 ON permisos.idapendice1 = apendice1.idapendice1
-                WHERE idpedimentoc = ?";
-
-            $stmtpermisos = $conexion->prepare($querypermisos);
-            $stmtpermisos->bind_param("i", $pedimento_id);
-            $stmtpermisos->execute();
-            $resultpermisos = $stmtpermisos->get_result();
-
-            if ($resultpermisos->num_rows > 0) {
-                $datosperm = $resultpermisos->fetch_assoc();
-            ?>
-
-                <tr>
-                    <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
-                    <td><?php echo htmlspecialchars($datosperm['aviso_electronico']); ?></td>
-                    <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
-                    <td><?php echo htmlspecialchars($datosperm['claveapn1']); ?></td>
-                </tr>
-                <tr>
-                    <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
-                    <td colspan="3"><?php echo htmlspecialchars($datosperm['marca'] . ' ' . $datosperm['modelo'] . ' ' . $datosperm['nBultos']); ?></td>
-
-                </tr>
-            <?php
-            } else {
-            ?>
-                <table class="table table-bordered table-hover">
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
-                            <td></td>
-                            <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
-                            <td colspan="3"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-
-
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque8">
-                    <i class="fas fa-database"></i>
-                </button>
-
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
-    <br><br>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-section">
-
-
-                <?php
-                $queryfechas = "SELECT * FROM fechas WHERE idpedimentoc = ?";
-
-                $stmtfechas = $conexion->prepare($queryfechas);
-                $stmtfechas->bind_param("i", $pedimento_id);
-                $stmtfechas->execute();
-                $resultfechas = $stmtfechas->get_result();
-
-                if ($resultfechas->num_rows > 0) {
-                    $rowfech = $resultfechas->fetch_assoc();
-                ?>
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center">
-                            <tr>
-                                <th colspan="8" class="text-center table-dark">FECHAS</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <tr>
-                            <th>ENTRADAS</th>
-                            <td><?php echo htmlspecialchars($rowfech['entrada']); ?></td>
-                        </tr>
-                        <tr>
-                            <th>PAGO</th>
-                            <td><?php echo htmlspecialchars($rowfech['pago']); ?></td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                <?php
-                } else {
-                ?>
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center table-dark">
-                            <tr>
-                                <th colspan="8" class="text-center">FECHAS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <th>ENTRADAS</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>PAGO</th>
-                                <td></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque9">
-                        <i class="fas fa-database"></i>
-                    </button>
-
-                <?php
-                }
-                ?>
-
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="form-section">
-                <table class="table table-bordered table-hover">
-                    <thead class="text-center">
-                        <tr>
-                            <th colspan="8" class="text-center table-dark">TASA NIVEL PEDIMENTO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>CONTRIB</th>
-                            <th>CVE.T.TASA</th>
-                            <th>TASA</th>
-                        </tr>
-                        <?php
-                        $querytasasp = "
-            SELECT 
-                tasapedimento.*, 
-                apendice18.idapendice18, 
-                apendice18.clave AS clavea18,
-                apendice12.idapendice12, 
-                apendice12.clave AS clavea12
-            FROM 
-                tasapedimento
-            INNER JOIN 
-                apendice18 ON tasapedimento.idapendice18 = apendice18.idapendice18
-            INNER JOIN 
-                apendice12 ON tasapedimento.idapendice12 = apendice12.idapendice12
-            WHERE tasapedimento.idpedimentoc = ?
-        ";
-
-                        $stmttasasp = $conexion->prepare($querytasasp);
-                        $stmttasasp->bind_param("i", $pedimento_id);
-                        $stmttasasp->execute();
-                        $resulttasasp = $stmttasasp->get_result();
-
-                        $cuadrotasasp = [];
-                        if ($resulttasasp->num_rows > 0) {
-                            while ($rowtsp = $resulttasasp->fetch_assoc()) {
-                                $cuadrotasasp[] = $rowtsp;
-                            }
-                        }
-
-                        if (!empty($cuadrotasasp)) {
-                            foreach ($cuadrotasasp as $rowtsp) {
-                        ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($rowtsp['clavea12']); ?></td>
-                                    <td><?php echo htmlspecialchars($rowtsp['clavea18']); ?></td>
-                                    <td>$<?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
-                                </tr>
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="3" class="text-center">No hay datos disponibles</td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque10">
-                    <i class="fas fa-database"></i>
-                </button>
-
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-section">
-
-                <table class="table table-bordered table-hover">
-                    <thead class="text-center">
-                        <tr>
-                            <th colspan="8" class="text-center table-dark">CUADRO DE LIQUIDACION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <th>CONCEPTO</th>
-                            <th>F.P.</th>
-                            <th>IMPORTE</th>
-                        </tr>
-
-                        <?php
-                        $queryLiquidacion = "
-                                SELECT cl.*, 
-                                    a12_cl.idapendice12 AS id_apendice12_cl, 
-                                    a12_cl.clave AS clavetpa12_cl,
-                                    a13_cl.idapendice13 AS id_apendice13_cl, 
-                                    a13_cl.clave AS clavetpa13_cl
-                                FROM cuadrodeliquidacion cl
-                                INNER JOIN apendice12 a12_cl ON cl.idapendice12 = a12_cl.idapendice12
-                                INNER JOIN apendice13 a13_cl ON cl.idapendice13 = a13_cl.idapendice13
-                                WHERE cl.idpedimentoc = ?
-                            ";
-
-                        $stmtLiquidacion = $conexion->prepare($queryLiquidacion);
-                        $stmtLiquidacion->bind_param("i", $pedimento_id);
-                        $stmtLiquidacion->execute();
-                        $resultLiquidacion = $stmtLiquidacion->get_result();
-
-                        $cuadroLiquidacion = [];
-                        if ($resultLiquidacion->num_rows > 0) {
-                            while ($row = $resultLiquidacion->fetch_assoc()) {
-                                $cuadroLiquidacion[] = $row;
-                            }
-                        } else {
-                        }
-
-                        if (!empty($cuadroLiquidacion)) {
-                            foreach ($cuadroLiquidacion as $row) {
-                        ?>
-
-                                <?php
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['clavetpa12_cl']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['clavetpa13_cl']) . "</td>";
-                                echo "<td>$" . htmlspecialchars($row['importe']) . "</td>";
-                                echo "</tr>";
-                                ?>
-
-
-                            <?php
-                            }
-                        } else {
-                            ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-
-                            </tr>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque11">
-                    <i class="fas fa-database"></i>
-                </button>
-
-            <?php
-                        }
-            ?>
-
-            </tbody>
-            </table>
-
-
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-section">
-
-
-                <?php
-                $querytotales = "SELECT * FROM total WHERE idpedimentoc = ?";
-
-                $stmttotales = $conexion->prepare($querytotales);
-                $stmttotales->bind_param("i", $pedimento_id);
-                $stmttotales->execute();
-                $resulttotales = $stmttotales->get_result();
-
-                if ($resulttotales->num_rows > 0) {
-                    $rowt = $resulttotales->fetch_assoc();
-                ?>
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center">
-                            <tr>
-                                <th colspan="8" class="text-center table-dark">TOTALES</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <tr>
-                            <th>EFECTIVO</th>
-                            <td>$<?php echo htmlspecialchars($rowt['efectivo']); ?></td>
-                        </tr>
-                        <tr>
-                            <th>OTROS</th>
-                            <td>$<?php echo htmlspecialchars($rowt['otros']); ?></td>
-                        </tr>
-                        <tr>
-                            <th>TOTAL</th>
-                            <td>$<?php echo htmlspecialchars($rowt['total']); ?></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                <?php
-                } else {
-                ?>
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center table-dark">
-                            <tr>
-                                <th colspan="8" class="text-center">TOTALES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>EFECTIVO</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>OTROS</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>TOTAL</th>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque12">
-                        <i class="fas fa-database"></i>
-                    </button>
-
-
-                <?php
-                }
-                ?>
-
-            </div>
-        </div>
-    </div>
-
-
-    <?php
-    $querypagoe = "SELECT * FROM pagoelectronico WHERE idpedimentoc = ?";
-
-    $stmtpagoe = $conexion->prepare($querypagoe);
-    $stmtpagoe->bind_param("i", $pedimento_id);
-    $stmtpagoe->execute();
-    $resultpagoe = $stmtpagoe->get_result();
-
-    if ($resultpagoe->num_rows > 0) {
-        $rowpe = $resultpagoe->fetch_assoc();
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="text-center">
-                <tr>
-                    <th colspan="6" class="text-center table-dark">DEPOSITO REFERENCIADO - LINEA DE CAPTURA</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tr>
-                <th colspan="6" class="text-center">***DEPOSITO ELECTRONICO***</th>
-            </tr>
-            <tr>
-                <th>PATENTE</th>
-                <td><?php echo htmlspecialchars($rowpe['patente']); ?></td>
-                <th>PEDIMENTO</th>
-                <td><?php echo htmlspecialchars($rowpe['pedimento']); ?></td>
-                <th>ADUANA</th>
-                <td><?php echo htmlspecialchars($rowpe['aduana']); ?></td>
-            </tr>
-            <tr>
-                <th scope="row" colspan="2" class="text-center">BANCO</th>
-                <td colspan="4" class="text-center"><?php echo htmlspecialchars($rowpe['banco']); ?></td>
-            </tr>
-            <tr>
-                <th colspan="2" scope="row" class="text-center">LINEA DE CAPTURA</th>
-                <td colspan="4" class="text-center"><?php echo htmlspecialchars($rowpe['lineaC']); ?></td>
-            </tr>
-            <tr>
-                <th>IMPORTE PAGADO</th>
-                <td>$<?php echo htmlspecialchars($rowpe['importePago']); ?></td>
-                <th>FECHA PAGADA</th>
-                <td colspan="3"><?php echo htmlspecialchars($rowpe['fechapago']); ?></td>
-            </tr>
-            <tr>
-                <th class="text-center" colspan="2" scope="row">NUMERO DE OPERACIÓN BANCARIA</th>
-                <td class="text-center" colspan="4"><?php echo htmlspecialchars($rowpe['noperacionbancar']); ?></td>
-            </tr>
-            <tr>
-                <th class="text-center" colspan="2" scope="row">NUMERO DE TRANSACCION SAT</th>
-                <td class="text-center" colspan="4"><?php echo htmlspecialchars($rowpe['ntransaccionS']); ?></td>
-            </tr>
-            <tr>
-                <th class="text-center" colspan="2" scope="row">MEDIO DE PRESENTACION</th>
-                <td class="text-center" colspan="4"><?php echo htmlspecialchars($rowpe['mPresentacion']); ?></td>
-            </tr>
-            <tr>
-                <th class="text-center" colspan="2" scope="row">MEDIO DE RECEPCION/COBRO</th>
-                <td class="text-center" colspan="4"><?php echo htmlspecialchars($rowpe['MedioRecepcion']); ?></td>
-            </tr>
-            <tr>
-                <th colspan="6" class="text-center">
-                    <?php if (!empty($rowpe['barcode_image'])) : ?>
-                        <img src="../admin/bloque13/barcodes/<?php echo htmlspecialchars($rowpe['barcode_image']); ?>" alt="Código de Barras" width="400" height="80">
-                    <?php else : ?>
-                        No se encontró el código de barras.
-                    <?php endif; ?>
-                </th>
-            </tr>
-            </tbody>
-        </table>
-    <?php
-    } else {
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="text-center table-dark">
-                <tr>
-                    <th colspan="14" class="text-center table-dark">DEPOSITO REFERENCIADO - LINEA DE CAPTURA</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th colspan="14" class="text-center">***DEPOSITO ELECTRONICO***</th>
-
-                </tr>
-
-                <tr>
-                    <th>PATENTE</th>
-                    <td></td>
-                    <th>PEDIMENTO</th>
-                    <td></td>
-                    <th>ADUANA</th>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">BANCO</th>
-                    <td colspan="13"></td>
-                </tr>
-                <tr>
-                    <th scope="row">LINEA DE CAPTURA</th>
-                    <td colspan="13"></td>
-                </tr>
-                <tr>
-                    <th>IMPORTE PAGADO</th>
-                    <td></td>
-                    <th>FECHA PAGADA</th>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <th scope="row">NUMERO DE OPERACIÓN BANCARIA</th>
-                    <td colspan="13"></td>
-                </tr>
-                <tr>
-                    <th scope="row">NUMERO DE TRANSACCION SAT</th>
-                    <td colspan="13"></td>
-                </tr>
-                <tr>
-                    <th scope="row">MEDIO DE PRESENTACION</th>
-                    <td colspan="13"></td>
-                </tr>
-                <tr>
-                    <th scope="row">MEDIO DE RECEPCION/COBRO</th>
-                    <td colspan="13"></td>
-                </tr>
-
-                <tr>
-                    <th colspan="14" class="text-center"> </th>
-
-                </tr>
-
-
-            </tbody>
-        </table>
-
-        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque13">
-            <i class="fas fa-database"></i>
-        </button>
-    <?php
-    }
-    ?>
-    <br><br>
-
-    <?php
-    $queryprovocom = "SELECT * FROM provedorocomprador WHERE idpedimentoc = ?";
-
-    $stmtprovocom = $conexion->prepare($queryprovocom);
-    $stmtprovocom->bind_param("i", $pedimento_id);
-    $stmtprovocom->execute();
-    $resultprovocom = $stmtprovocom->get_result();
-
-    if ($resultprovocom->num_rows > 0) {
-        $rowpro = $resultprovocom->fetch_assoc();
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th colspan="14" class="text-center table-dark">DATOS DEL PROVEEDOR O COMPRADOR</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tr>
-                <th>ID.FISCAL</th>
-                <th>NOMBRE,DENOMINACION O RAZON SOCIAL</th>
-                <th>DOMICILIO</th>
-                <th>VINCULACION</th>
-            </tr>
-            <tr>
-                <td><?php echo htmlspecialchars($rowpro['idfiscal']); ?></td>
-                <td><?php echo htmlspecialchars($rowpro['nombreDORS']); ?></td>
-                <td><?php echo htmlspecialchars('CALLE: ' . $rowpro['calle'] . ' NO. E ' . $rowpro['noexterior'] . ' NO. I ' . $rowpro['nointerior'] . ' C.P. ' . $rowpro['codigo_postal'] . ' CIUDAD: ' . $rowpro['localidad'] . ' ESTADO ' . $rowpro['entidadF'] . ' PAIS: ' . $rowpro['pais']); ?></td>
-                <td><?php echo htmlspecialchars($rowpro['vinculacion']); ?></td>
-            </tr>
-            </tbody>
-        </table>
-    <?php
-    } else {
-    ?>
-        <table class="table table-bordered table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th colspan="14" class="text-center">DATOS DEL PROVEEDOR O COMPRADOR</th>
-                </tr>
-            </thead>
-            <tbody>
+                <tbody></tbody>
                 <tr>
                     <th>ID.FISCAL</th>
                     <th>NOMBRE,DENOMINACION O RAZON SOCIAL</th>
@@ -854,27 +151,51 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     <th>VINCULACION</th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo htmlspecialchars($rowpro['idfiscal']); ?></td>
+                    <td><?php echo htmlspecialchars($rowpro['nombreDORS']); ?></td>
+                    <td><?php echo htmlspecialchars('CALLE: ' . $rowpro['calle'] . ' NO. E ' . $rowpro['noexterior'] . ' NO. I ' . $rowpro['nointerior'] . ' C.P. ' . $rowpro['codigo_postal'] . ' CIUDAD: ' . $rowpro['localidad'] . ' ESTADO ' . $rowpro['entidadF'] . ' PAIS: ' . $rowpro['pais']); ?></td>
+                    <td><?php echo htmlspecialchars($rowpro['vinculacion']); ?></td>
                 </tr>
-            </tbody>
-
-        </table>
-        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque14">
-            <i class="fas fa-database"></i>
-        </button>
-    <?php
-    }
-    ?>
-
-
-
-
-    <tbody>
+                </tbody>
+            </table>
         <?php
-        $querydmonetarios = " SELECT dmonetarios.numfactura, 
+        } else {
+        ?>
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th colspan="14" class="text-center">DATOS DEL PROVEEDOR O COMPRADOR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>ID.FISCAL</th>
+                        <th>NOMBRE,DENOMINACION O RAZON SOCIAL</th>
+                        <th>DOMICILIO</th>
+                        <th>VINCULACION</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque14">
+                <i class="fas fa-database"></i>
+            </button>
+        <?php
+        }
+        ?>
+
+
+
+
+        <tbody>
+            <?php
+            $querydmonetarios = " SELECT dmonetarios.numfactura, 
                 dmonetarios.fecha, 
                 a14.clave AS claveapn14, 
                 a5.clave AS claveapn5, 
@@ -886,152 +207,208 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                 INNER JOIN apendice5 a5 ON dmonetarios.idapendice5 = a5.idapendice5
                 WHERE idpedimentoc = ?";
 
-        $stmtdmonetarios = $conexion->prepare($querydmonetarios);
-        $stmtdmonetarios->bind_param("i", $pedimento_id);
-        $stmtdmonetarios->execute();
-        $resultdmonetarios = $stmtdmonetarios->get_result();
+            $stmtdmonetarios = $conexion->prepare($querydmonetarios);
+            $stmtdmonetarios->bind_param("i", $pedimento_id);
+            $stmtdmonetarios->execute();
+            $resultdmonetarios = $stmtdmonetarios->get_result();
 
-        if ($resultdmonetarios->num_rows > 0) {
-            $rowdm = $resultdmonetarios->fetch_assoc();
-        ?>
+            if ($resultdmonetarios->num_rows > 0) {
+                $rowdm = $resultdmonetarios->fetch_assoc();
+            ?>
+                <table class="table table-bordered table-hover">
+                    <tbody>
+
+                        <tr>
+                            <th>NUM.FACTURA</th>
+                            <th>FECHA</th>
+                            <th>INCOTERM</th>
+                            <th>MONEDA</th>
+                            <th>VAL.MON.FACT</th>
+                            <th>FACTOR MON. FACT</th>
+                            <th>VAL. DOLARES</th>
+
+                        </tr>
+                        <tr>
+                            <td><?php echo htmlspecialchars($rowdm['numfactura']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['fecha']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['claveapn14']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['claveapn5']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['valmonfact']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['factormonfact']); ?></td>
+                            <td><?php echo htmlspecialchars($rowdm['valdolares']); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            <?php
+            } else {
+            ?>
+
+                <table class="table table-bordered table-hover">
+
+                    <tbody>
+                        <tr>
+                            <th>NUM.FACTURA</th>
+                            <th>FECHA</th>
+                            <th>INCOTERM</th>
+                            <th>MONEDA</th>
+                            <th>FACT</th>
+                            <th>VAL.MON.FACT</th>
+                            <th>FACTOR MON. FACT</th>
+                            <th>VAL. DOLARES</th>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque15">
+                    <i class="fas fa-database"></i>
+                </button>
+
+            <?php
+            }
+            ?>
+
+            <br><br>
+
+            <?php
+            $querydembar = "SELECT * FROM dembarque WHERE idpedimentoc = ?";
+
+            $stmtdembar = $conexion->prepare($querydembar);
+            $stmtdembar->bind_param("i", $pedimento_id);
+            $stmtdembar->execute();
+            $resultdembar = $stmtdembar->get_result();
+
+            if ($resultdembar->num_rows > 0) {
+                $rowemb = $resultdembar->fetch_assoc();
+            ?><table class="table table-bordered table-hover">
+
+                    <tbody>
+                        <tr>
+                            <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
+                            <td><?php echo htmlspecialchars($rowemb['numeroembarque']); ?></td>
+
+                            <th>M</th>
+                            <td><?php echo htmlspecialchars($rowemb['nconocimiento']); ?></td>
+
+                            <th>H</th>
+                            <td><?php echo htmlspecialchars($rowemb['nhouse']); ?></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            <?php
+            } else {
+            ?>
+                <table class="table table-bordered table-hover">
+
+                    <tbody>
+                        <tr>
+                            <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
+                            <td></td>
+
+                            <th>M</th>
+                            <td></td>
+
+                            <th>H</th>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque16">
+                    <i class="fas fa-database"></i>
+                </button>
+
+
+            <?php
+            }
+            ?>
+
             <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>CLAVE/COMPL. IDENTIFICADOR</th>
+                        <th>COMPLEMENTO 1</th>
+                        <th>COMPLEMENTO 2</th>
+                        <th>COMPLEMENTO 3</th>
+                    </tr>
+                </thead>
                 <tbody>
-
-                    <tr>
-                        <th>NUM.FACTURA</th>
-                        <th>FECHA</th>
-                        <th>INCOTERM</th>
-                        <th>MONEDA</th>
-                        <th>VAL.MON.FACT</th>
-                        <th>FACTOR MON. FACT</th>
-                        <th>VAL. DOLARES</th>
-
-                    </tr>
-                    <tr>
-                        <td><?php echo htmlspecialchars($rowdm['numfactura']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['fecha']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['claveapn14']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['claveapn5']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['valmonfact']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['factormonfact']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['valdolares']); ?></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        <?php
-        } else {
-        ?>
-
-            <table class="table table-bordered table-hover">
-
-                <tbody>
-                    <tr>
-                        <th>NUM.FACTURA</th>
-                        <th>FECHA</th>
-                        <th>INCOTERM</th>
-                        <th>MONEDA</th>
-                        <th>FACT</th>
-                        <th>VAL.MON.FACT</th>
-                        <th>FACTOR MON. FACT</th>
-                        <th>VAL. DOLARES</th>
-
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-
-            </table>
-            <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque15">
-                <i class="fas fa-database"></i>
-            </button>
-
-        <?php
-        }
-        ?>
-
-        <br><br>
-
-        <?php
-        $querydembar = "SELECT * FROM dembarque WHERE idpedimentoc = ?";
-
-        $stmtdembar = $conexion->prepare($querydembar);
-        $stmtdembar->bind_param("i", $pedimento_id);
-        $stmtdembar->execute();
-        $resultdembar = $stmtdembar->get_result();
-
-        if ($resultdembar->num_rows > 0) {
-            $rowemb = $resultdembar->fetch_assoc();
-        ?><table class="table table-bordered table-hover">
-
-                <tbody>
-                    <tr>
-                        <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
-                        <td><?php echo htmlspecialchars($rowemb['numeroembarque']); ?></td>
-
-                        <th>M</th>
-                        <td><?php echo htmlspecialchars($rowemb['nconocimiento']); ?></td>
-
-                        <th>H</th>
-                        <td><?php echo htmlspecialchars($rowemb['nhouse']); ?></td>
-
-                    </tr>
-                </tbody>
-            </table>
-        <?php
-        } else {
-        ?>
-            <table class="table table-bordered table-hover">
-
-                <tbody>
-                    <tr>
-                        <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
-                        <td></td>
-
-                        <th>M</th>
-                        <td></td>
-
-                        <th>H</th>
-                        <td></td>
-
-                    </tr>
-                </tbody>
-
-            </table>
-            <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque16">
-                <i class="fas fa-database"></i>
-            </button>
-
-
-        <?php
-        }
-        ?>
-
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>CLAVE/COMPL. IDENTIFICADOR</th>
-                    <th>COMPLEMENTO 1</th>
-                    <th>COMPLEMENTO 2</th>
-                    <th>COMPLEMENTO 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $querycomplemento = "
+                    <?php
+                    $querycomplemento = "
                  SELECT c.*, a.clave AS claveap8
                     FROM complementos c
                     INNER JOIN apendice8 a ON c.idapendice8 = a.idapendice8
                     WHERE c.idpedimentoc = ?
                                             ";
+
+                    $stmtcomplemento = $conexion->prepare($querycomplemento);
+                    $stmtcomplemento->bind_param("i", $pedimento_id);
+                    $stmtcomplemento->execute();
+                    $resultcomplemento = $stmtcomplemento->get_result();
+
+                    $cuadrocomplemento = [];
+                    if ($resultcomplemento->num_rows > 0) {
+                        while ($rowcomp = $resultcomplemento->fetch_assoc()) {
+                            $cuadrocomplemento[] = $rowcomp;
+                        }
+                    } else {
+                    }
+
+                    if (!empty($cuadrocomplemento)) {
+                        foreach ($cuadrocomplemento as $rowcomp) {
+                    ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($rowcomp['claveap8']); ?></td>
+                                <td><?php echo htmlspecialchars($rowcomp['complemento']); ?></td>
+                                <td><?php echo htmlspecialchars($rowcomp['Complemento2']); ?></td>
+                                <td><?php echo htmlspecialchars($rowcomp['Complemento3']); ?></td>
+                            </tr>
+                        <?php
+                        }
+                    } else {
+
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque17">
+                <i class="fas fa-database"></i>
+            </button>
+        <?php
+                    }
+        ?>
+        </tbody>
+
+        </table>
+
+
+        <table class="table table-bordered table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th class="text-center table-dark">OBSERVACIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $querycomplemento = "SELECT * FROM observaciones WHERE idpedimentoc = ?";
 
                 $stmtcomplemento = $conexion->prepare($querycomplemento);
                 $stmtcomplemento->bind_param("i", $pedimento_id);
@@ -1050,102 +427,46 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     foreach ($cuadrocomplemento as $rowcomp) {
                 ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($rowcomp['claveap8']); ?></td>
-                            <td><?php echo htmlspecialchars($rowcomp['complemento']); ?></td>
-                            <td><?php echo htmlspecialchars($rowcomp['Complemento2']); ?></td>
-                            <td><?php echo htmlspecialchars($rowcomp['Complemento3']); ?></td>
+                            <td><?php echo htmlspecialchars($rowcomp['descripcion']); ?></td>
                         </tr>
                     <?php
                     }
                 } else {
-
                     ?>
+
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                     </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque17">
+        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque18">
             <i class="fas fa-database"></i>
         </button>
     <?php
                 }
     ?>
     </tbody>
-
     </table>
-
-
-    <table class="table table-bordered table-hover">
-        <thead class="text-center">
-            <tr>
-                <th class="text-center table-dark">OBSERVACIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $querycomplemento = "SELECT * FROM observaciones WHERE idpedimentoc = ?";
-
-            $stmtcomplemento = $conexion->prepare($querycomplemento);
-            $stmtcomplemento->bind_param("i", $pedimento_id);
-            $stmtcomplemento->execute();
-            $resultcomplemento = $stmtcomplemento->get_result();
-
-            $cuadrocomplemento = [];
-            if ($resultcomplemento->num_rows > 0) {
-                while ($rowcomp = $resultcomplemento->fetch_assoc()) {
-                    $cuadrocomplemento[] = $rowcomp;
-                }
-            } else {
-            }
-
-            if (!empty($cuadrocomplemento)) {
-                foreach ($cuadrocomplemento as $rowcomp) {
-            ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($rowcomp['descripcion']); ?></td>
-                    </tr>
-                <?php
-                }
-            } else {
-                ?>
-
+    <div class="form-section">
+        <table class="table table-bordered table-hover">
+            <thead>
                 <tr>
-                    <td></td>
+                    <th class="text-center table-dark">PATIDAS</th>
                 </tr>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque18">
-        <i class="fas fa-database"></i>
-    </button>
-<?php
-            }
-?>
-</tbody>
-</table>
-<div class="form-section">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th class="text-center table-dark">PATIDAS</th>
-            </tr>
-        </thead>
+            </thead>
 
 
-    </table>
-</div>
+        </table>
+    </div>
 
-<?php include_once 'bloque20/partida1.php';
-?>
+    <?php include_once 'bloque20/partida1.php';
+    ?>
 
-<p style=" text-align: center; font-size: 15px;"><strong>******************* FIN DEL PEDIMENTO *******************</strong></p>
-<div class="form-section">
-    <div class="row">
-        <?php
-        $queryagente = "SELECT 
+    <p style=" text-align: center; font-size: 15px;"><strong>******************* FIN DEL PEDIMENTO *******************</strong></p>
+    <div class="form-section">
+        <div class="row">
+            <?php
+            $queryagente = "SELECT 
             p.*, 
             a.nombreagente, 
             a.apellidoP, 
@@ -1167,116 +488,116 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         WHERE 
             p.idpedimentoc = ?;";
 
-        $stmtagente = $conexion->prepare($queryagente);
-        $stmtagente->bind_param("i", $pedimento_id);
-        $stmtagente->execute();
-        $resultagente = $stmtagente->get_result();
+            $stmtagente = $conexion->prepare($queryagente);
+            $stmtagente->bind_param("i", $pedimento_id);
+            $stmtagente->execute();
+            $resultagente = $stmtagente->get_result();
 
-        if ($resultagente->num_rows > 0) {
-            while ($rowagente = $resultagente->fetch_assoc()) {
-        ?>
-                <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th colspan="10" class="text-center table-dark">
-                                    AGENTE ADUANAL, APODERADO ADUANAL O EL ALMACÉN
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th colspan="5">NOMBRE O RAZ. SOC.</th>
-                                <td colspan="5"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
-                            </tr>
-                            <tr>
-                                <th>RFC</th>
-                                <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
-                                <th>P. Moral</th>
-                                <th>RFC</th>
-                                <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
-                                <th>P. Física</th>
-                                <th>CURP</th>
-                                <td><?php echo htmlspecialchars($rowagente['curp']); ?></td>
-                            </tr>
-                            <tr>
-                                <th colspan="10" class="text-center table-dark">
-                                    MANDATARIO / PERSONA AUTORIZADA
-                                </th>
-                            </tr>
-                            <tr>
-                                <th colspan="2">NOMBRE</th>
-                                <td colspan="8"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
-                            </tr>
-                            <tr>
-                                <th>RFC</th>
-                                <td colspan="4"><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
-                                <th>CURP</th>
-                                <td colspan="4"><?php echo htmlspecialchars($rowagente['curp']); ?></td>
-                            </tr>
+            if ($resultagente->num_rows > 0) {
+                while ($rowagente = $resultagente->fetch_assoc()) {
+            ?>
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th colspan="10" class="text-center table-dark">
+                                        AGENTE ADUANAL, APODERADO ADUANAL O EL ALMACÉN
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th colspan="5">NOMBRE O RAZ. SOC.</th>
+                                    <td colspan="5"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>RFC</th>
+                                    <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                    <th>P. Moral</th>
+                                    <th>RFC</th>
+                                    <td><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                    <th>P. Física</th>
+                                    <th>CURP</th>
+                                    <td><?php echo htmlspecialchars($rowagente['curp']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="10" class="text-center table-dark">
+                                        MANDATARIO / PERSONA AUTORIZADA
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">NOMBRE</th>
+                                    <td colspan="8"><?php echo htmlspecialchars($rowagente['nombreagente']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>RFC</th>
+                                    <td colspan="4"><?php echo htmlspecialchars($rowagente['rfc']); ?></td>
+                                    <th>CURP</th>
+                                    <td colspan="4"><?php echo htmlspecialchars($rowagente['curp']); ?></td>
+                                </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th class="text-center table-dark">
-                                    DECLARO BAJO PROTESTA DE DECIR VERDAD, EN LOS TÉRMINOS DE LO DISPUESTO POR EL ARTÍCULO 81 DE LA LEY ADUANERA
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th colspan="3" class="text-center">PATENTE O AUTORIZACIÓN:</th>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-center">
-                                    <?php echo htmlspecialchars($rowagente['patente']); ?>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-        <?php
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center table-dark">
+                                        DECLARO BAJO PROTESTA DE DECIR VERDAD, EN LOS TÉRMINOS DE LO DISPUESTO POR EL ARTÍCULO 81 DE LA LEY ADUANERA
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th colspan="3" class="text-center">PATENTE O AUTORIZACIÓN:</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <?php echo htmlspecialchars($rowagente['patente']); ?>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            <?php
+                }
+            } else {
+                echo "<p class='text-center'>No se encontraron registros del agente aduanal.</p>";
             }
-        } else {
-            echo "<p class='text-center'>No se encontraron registros del agente aduanal.</p>";
-        }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
 
-<div class="form-section">
-    <table class="table table-bordered table-hover">
-        <tbody>
-            <tr>
-                <td>
+    <div class="form-section">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td>
 
-                    <p>El pago de las contribuciones puede realizarse mediante el servicio de “Pago
-                        Electrónico Centralizado Aduanero” (PECA), conforme a lo establecido en la Regla
-                        1.6.2. de las Reglas Generales de Comercio Exterior
-                        , con la posibilidad de que la cuenta bancaria del Importador-Exportador sea
-                        afectada directamente por el Banco. El agente o apoderado aduanal que utilice el
-                        servicio de PECA, deberá imprimir la
-                        certificación bancaria en el campo correspondiente del pedimento o en el
-                        documento oficial, conforme al Apéndice 20 “Certificación de Pago Electrónico
-                        Centralizado” del Anexo 22 de las RCGMCE.
-                    </p>
-                    <p>
-                        El Importador-Exportador podrá solicitar la certificación de la información
-                        contenida en este pedimento en: Administración General de Aduanas,
-                        Administración de Operación Aduanera “7”, Av. Hidalgo Núm. 77,
-                        Módulo IV, P.B., Col. Guerrero, C.P. 06300., México, D.F.
-                    </p>
+                        <p>El pago de las contribuciones puede realizarse mediante el servicio de “Pago
+                            Electrónico Centralizado Aduanero” (PECA), conforme a lo establecido en la Regla
+                            1.6.2. de las Reglas Generales de Comercio Exterior
+                            , con la posibilidad de que la cuenta bancaria del Importador-Exportador sea
+                            afectada directamente por el Banco. El agente o apoderado aduanal que utilice el
+                            servicio de PECA, deberá imprimir la
+                            certificación bancaria en el campo correspondiente del pedimento o en el
+                            documento oficial, conforme al Apéndice 20 “Certificación de Pago Electrónico
+                            Centralizado” del Anexo 22 de las RCGMCE.
+                        </p>
+                        <p>
+                            El Importador-Exportador podrá solicitar la certificación de la información
+                            contenida en este pedimento en: Administración General de Aduanas,
+                            Administración de Operación Aduanera “7”, Av. Hidalgo Núm. 77,
+                            Módulo IV, P.B., Col. Guerrero, C.P. 06300., México, D.F.
+                        </p>
 
-                </td>
-            </tr>
-        </tbody>
+                    </td>
+                </tr>
+            </tbody>
 
-    </table>
-</div>
+        </table>
+    </div>
 
 
     </section>
@@ -1297,6 +618,7 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     include 'bloque9/modalb9.php';
     include 'bloque10/modalb10.php';
     include 'bloque11/modalb11.php';
+    include 'bloque11/modalediatrb11.php';
     include 'bloque12/modalb12.php';
     include 'bloque13/modalb13.php';
     include 'bloque14/modalb14.php';
@@ -1305,7 +627,6 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     include 'bloque17/modalb17.php';
     include 'bloque18/modalb18.php';
     include 'bloque4/modalb4editar.php';
-
     /*include 'bloque20/modalb20.php';
     include 'bloque28/modalb28.php';
     */

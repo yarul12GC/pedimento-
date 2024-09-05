@@ -13,15 +13,15 @@ if ($resultvaloresp->num_rows > 0) {
 
         <tr>
             <th>VALOR EN DOLARES</th>
-            <td>$<?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
+            <td><?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
         </tr>
         <tr>
             <th>VALOR ADUANA</th>
-            <td>$<?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
+            <td><?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
         </tr>
         <tr>
             <th>PRECIO PAGADO/VALOR COMERCIAL</th>
-            <td>$<?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
+            <td><?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
         </tr>
         </tbody>
     </table>
