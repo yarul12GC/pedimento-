@@ -23,10 +23,10 @@ if ($conexion->query($sql) === TRUE) {
     $_SESSION['bloques']['bloque15'] = $last_idb15;
 
     if ($sameSession) {
-        // Si es la misma sesión, redirige a la página de captura en curso
+        
         header("Location: ../capturapediemnto.php?id=" . urlencode($idpedimentoc));
     } else {
-        // Si es una nueva sesión, redirige a la página de continuación de captura
+
         header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc));
     }
     exit();

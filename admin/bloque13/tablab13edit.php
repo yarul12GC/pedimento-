@@ -68,6 +68,9 @@ if ($resultpagoe->num_rows > 0) {
         </tr>
         </tbody>
     </table>
+    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editarBloque13_<?php echo $pedimento_id; ?>">
+    Editar Bloque 13
+</button>
 <?php
 } else {
 ?>
@@ -131,7 +134,7 @@ if ($resultpagoe->num_rows > 0) {
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque13">
+    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque131">
         <i class="fas fa-database"></i>
     </button>
 <?php

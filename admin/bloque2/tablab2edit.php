@@ -3,7 +3,7 @@
 $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Consulta para obtener los datos del pedimento relacionado
-$querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1
+$querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1, a1.seccion
             FROM transacciones ts
             INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
             INNER JOIN apendice1 a1 ON ts.idapendice1 = a1.idapendice1
@@ -25,7 +25,7 @@ if ($resulttransac->num_rows > 0) {
             <th>PESO BRUTO</th>
             <td><?php echo htmlspecialchars($datotransac['peso_bruto']); ?></td>
             <th>ADUANA</th>
-            <td><?php echo htmlspecialchars($datotransac['clavea1']); ?></td>
+            <td><?php echo htmlspecialchars($datotransac['clavea1'] . $datotransac['seccion']); ?></td>
         </tr>
     </table>
     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editarBloque2_<?php echo $pedimento_id; ?>">

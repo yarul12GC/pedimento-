@@ -10,7 +10,7 @@ if ($resultprovocom->num_rows > 0) {
     $rowpro = $resultprovocom->fetch_assoc();
 
     $html .= '
-<table border="0" cellpadding="1" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
+<table border="0" cellpadding="3" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
     <thead>
         <tr style="background-color: #6c757d; color: #ffffff;">
             <th colspan="4" style="text-align: center; border: none;">DATOS DEL PROVEEDOR O COMPRADOR</th>

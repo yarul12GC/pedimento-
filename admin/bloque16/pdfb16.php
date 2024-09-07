@@ -1,7 +1,7 @@
 <?php
 
 $html .= '
-<table border="1" cellpadding="1" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
+<table border="1" cellpadding="2" cellspacing="0" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 6px; margin: 0; padding: 0;">
     <thead>
         <tr style="background-color: #6c757d; ">
             <th style="text-align: center; color: #ffffff;">TRANPORTE:</th>
