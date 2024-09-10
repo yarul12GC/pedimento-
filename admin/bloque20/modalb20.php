@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="fraccionA">Fracción A</label>
+                                <label for="fraccionA">FRACCION A.</label>
                                 <input type="text" class="form-control" id="fraccionA" name="fraccionA" required>
                             </div>
                             <div class="form-group">
@@ -47,7 +47,7 @@
                                 <input type="text" class="form-control" id="umc" name="umc" required>
                             </div>
                             <div class="form-group">
-                                <label for="cantumc">Cantidad UMC</label>
+                                <label for="cantumc">CANTIDAD UMC</label>
                                 <input type="text" class="form-control" id="cantumc" name="cantumc" required>
                             </div>
                             <div class="form-group">
@@ -55,7 +55,7 @@
                                 <input type="text" class="form-control" id="umt" name="umt" required>
                             </div>
                             <div class="form-group">
-                                <label for="cant">Cantidad</label>
+                                <label for="cant">CANTIDAD</label>
                                 <input type="text" class="form-control" id="cant" name="cant" required>
                             </div>
                         </div>

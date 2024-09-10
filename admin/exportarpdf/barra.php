@@ -4,11 +4,13 @@ include_once '../../conexion.php';
 include_once '../sesion.php';
 
 // Extender la clase TCPDF para personalizar el pie de página
-class CustomPDF extends TCPDF {
+class CustomPDF extends TCPDF
+{
     public $footerHtml = '';
 
     // Sobrescribir el método Footer
-    public function Footer() {
+    public function Footer()
+    {
         // Posicionar el pie de página a 15 mm del final
         $this->SetY(-15);
         // Configuración de la fuente
@@ -91,4 +93,3 @@ $pdf->footerHtml = $htmlFooter;
 
 // Salida del PDF
 $pdf->Output('archivo_pedimento.pdf', 'I');
-?>

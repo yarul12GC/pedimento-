@@ -117,7 +117,7 @@ $newSectionId = $lastSectionId + 1;
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="10" class="text-center">
+                                    <td colspan="10" class="text-left">
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalB21-<?php echo $idSeccion; ?>">
                                             <i class="fas fa-database"></i>
                                         </button>
@@ -135,7 +135,7 @@ $newSectionId = $lastSectionId + 1;
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <td colspan="10" class="text-center">
+                                <td colspan="10" class="text-left">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalB22-<?php echo $idSeccion; ?>">
                                         <i class="fas fa-database"></i>
                                     </button>
@@ -232,12 +232,12 @@ $newSectionId = $lastSectionId + 1;
                                         <td><?php echo htmlspecialchars($rowContribuciones['tasa']); ?></td>
                                         <td><?php echo htmlspecialchars($rowContribuciones['idapendice18']); ?></td>
                                         <td><?php echo htmlspecialchars($rowContribuciones['idapendice13']); ?></td>
-                                        <td>$<?php echo htmlspecialchars($rowContribuciones['importe']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowContribuciones['importe']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <td colspan="10" class="text-left">
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalB25-<?php echo $idSeccion; ?>">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalB26-<?php echo $idSeccion; ?>">
                                         <i class="fas fa-database"></i>
                                     </button>
                                 </td>
@@ -251,6 +251,11 @@ $newSectionId = $lastSectionId + 1;
         include 'bloque20/modalb21.php';
         include 'bloque20/modalb22.php';
         include 'bloque20/modalb23.php';
+        include 'bloque20/modalb24.php';
+        include 'bloque20/modalb25.php';
+        include 'bloque20/modalb26.php';
+
+
         ?>
     <?php endforeach; ?>
 </div>
@@ -307,22 +312,80 @@ $newSectionId = $lastSectionId + 1;
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-center" colspan="10"><button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque020">
+                                <td class="text-left" colspan="10"><button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#bloque020">
                                     <i class="fas fa-database"></i></button>
                                 </td>
 
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="10"><button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque020">
-                                    <i class="fas fa-database"></i></button>
+                                <td class="text-center" colspan="10">
                                 </td>
                             </tr>
                             <tr>
-                               <td class="text-center" colspan="10"><button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque020">
-                                    <i class="fas fa-database"></i></button>
+                               <td class="text-center" colspan="10">
                                 </td>
                             </tr>
+                            <tr>
+                                <th colspan="2">PERMISO</th>
+                                <th colspan="2">NUMERO DE PERMISO</th>
+                                <th colspan="2">FIRMA DE PERMISO</th>
+                                <th colspan="2">VAL. COM. DLS</th>
+                                <th colspan="2">CANTIDAD UMT</th>
+                                
+                            </tr>
 
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="2">IDENTIF</th>
+                                <th colspan="3">COMPLEMENTO 1</th>
+                                <th colspan="2">COMPLEMENTO 2</th>
+                                <th colspan="3">COMPLEMENTO 3</th>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                                <td colspan="2"></td>
+                                <td colspan="3"></td>
+                            </tr>
+                              <tr>
+                                <td colspan="10" class="text-center table-dark">OBSERVACIONES A NIVEL PARTIDA</td>
+                            </tr>
+                            <tr>
+                                <td colspan="10"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-1">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>CON</th>
+                                <th>TASA</th>
+                                <th>T.T.</th>
+                                <th>F.P.</th>
+                                <th>IMPORTE</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
                         </tbody>
                     </table>
                 </div>
