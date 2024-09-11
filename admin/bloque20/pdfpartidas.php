@@ -247,7 +247,7 @@ foreach ($secciones as $idSeccion => $data) {
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['tasa']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['claveapendice18p']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($rowocontribuciones['claveapendice13p']) . '</td>
-            <td style="border-left: 1px solid black; text-align: center; ">$' . htmlspecialchars($rowocontribuciones['importe']) . '</td>
+            <td style="border-left: 1px solid black; text-align: center; ">' . htmlspecialchars($rowocontribuciones['importe']) . '</td>
         </tr>';
         }
     } else {

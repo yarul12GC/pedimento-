@@ -78,7 +78,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Guardar Bloque 5</button>
+                            <button type="submit" class="btn btn-success">Guardar Bloque</button>
                         </div>
                     </form>
 
@@ -164,7 +164,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Actualizar Bloque 5</button>
+                            <button type="submit" class="btn btn-success">Actualizar Bloque</button>
                         </div>
                     </form>
                 </div>

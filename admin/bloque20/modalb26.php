@@ -20,6 +20,7 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
+                                    <label for="CON">CON</label>
                                     <select class="form-control" name="idapendice12[]">
                                         <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>">
@@ -32,6 +33,8 @@
 
                             <!-- Campo de entrada para tasa -->
                             <div class="col-md-2">
+                                <label for="TASA">TASA</label>
+
                                 <input type="number" class="form-control tasa" name="tasa[]" value="" oninput="calcularPorcentaje(this)">
                             </div>
 
@@ -49,6 +52,8 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
+                                    <label for="T.T.">T.T.</label>
+
                                     <select class="form-control" name="idapendice18[]">
                                         <?php while ($apendice18 = $apendice18Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice18['idapendice18']) ?>">
@@ -68,6 +73,8 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
+                                    <label for="F.P.">F.P.</label>
+
                                     <select class="form-control" name="idapendice13[]">
                                         <?php while ($apendice13 = $apendice13Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice13['idapendice13']) ?>">
@@ -80,6 +87,8 @@
 
                             <!-- Campo de entrada para importe -->
                             <div class="col-md-2">
+                                <label for="IMPORTE">IMPORTE</label>
+
                                 <input type="text" class="form-control importe" name="importe[]" value="" readonly>
                             </div>
                         </div>
@@ -92,7 +101,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" class="btn btn-success">Guardar Datos</button>
                     </div>
                 </form>
             </div>

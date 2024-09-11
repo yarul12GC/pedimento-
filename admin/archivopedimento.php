@@ -41,7 +41,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
             ?>
                 <tr>
                     <th>NUM.PEDIMENTO</th>
-                    <td><?php echo htmlspecialchars($datodpm['Nopedimento']); ?></td>
+                    <td><?php echo htmlspecialchars($datodpm['anio_validacion'] . ' ' . $datodpm['clave_aduana'] . ' ' . $datodpm['patente'] . ' ' .  $datodpm['ultimo_digito_anio'] . $datodpm['numeracion_progresiva']); ?></td>
                     <th>T.OPER</th>
                     <td><?php echo htmlspecialchars($datodpm['Toper']); ?></td>
                     <th>CVE PEDIMENTO</th>
@@ -163,15 +163,15 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                             ?>
                                 <tr>
                                     <th>VALOR EN DOLARES</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
+                                    <td><?php echo htmlspecialchars($datosvp['valorDolares']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>VALOR ADUANA</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
+                                    <td><?php echo htmlspecialchars($datosvp['valorAduna']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>PRECIO PAGADO/VALOR COMERCIAL</th>
-                                    <td>$<?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
+                                    <td><?php echo htmlspecialchars($datosvp['precioPagado']); ?></td>
                                 </tr>
                         </tbody>
                     <?php
@@ -268,11 +268,11 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     $datosincr = $resultvaloresin->fetch_assoc();
                 ?>
                     <tr>
-                        <td>$<?php echo htmlspecialchars($datosincr['Vseguros']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['seguros']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['fletes']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['embalajes']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosincr['otrosincrement']); ?></td>
+                        <td><?php echo htmlspecialchars($datosincr['Vseguros']); ?></td>
+                        <td><?php echo htmlspecialchars($datosincr['seguros']); ?></td>
+                        <td><?php echo htmlspecialchars($datosincr['fletes']); ?></td>
+                        <td><?php echo htmlspecialchars($datosincr['embalajes']); ?></td>
+                        <td><?php echo htmlspecialchars($datosincr['otrosincrement']); ?></td>
                     </tr>
                 <?php
                 } else {
@@ -309,11 +309,11 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     if ($resultvaloresd->num_rows > 0) {
                         $datosdcre = $resultvaloresd->fetch_assoc();
                     ?>
-                        <td>$<?php echo htmlspecialchars($datosdcre['VsegurosD']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosdcre['segurosD']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosdcre['fletesD']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosdcre['embalajesD']); ?></td>
-                        <td>$<?php echo htmlspecialchars($datosdcre['otrosDecrement']); ?></td>
+                        <td><?php echo htmlspecialchars($datosdcre['VsegurosD']); ?></td>
+                        <td><?php echo htmlspecialchars($datosdcre['segurosD']); ?></td>
+                        <td><?php echo htmlspecialchars($datosdcre['fletesD']); ?></td>
+                        <td><?php echo htmlspecialchars($datosdcre['embalajesD']); ?></td>
+                        <td><?php echo htmlspecialchars($datosdcre['otrosDecrement']); ?></td>
                 </tr>
             <?php
                     } else {
@@ -458,7 +458,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                     <tr>
                                         <td><?php echo htmlspecialchars($rowtsp['clavea12']); ?></td>
                                         <td><?php echo htmlspecialchars($rowtsp['clavea18']); ?></td>
-                                        <td>$<?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
                                     </tr>
                             <?php
                                 }
@@ -524,7 +524,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                     echo "<tr>";
                                     echo "<td>" . htmlspecialchars($row['clavetpa12_cl']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['clavetpa13_cl']) . "</td>";
-                                    echo "<td>$" . htmlspecialchars($row['importe']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['importe']) . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
@@ -560,15 +560,15 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                             ?>
                                 <tr>
                                     <th>EFECTIVO</th>
-                                    <td>$<?php echo htmlspecialchars($rowt['efectivo']); ?></td>
+                                    <td><?php echo htmlspecialchars($rowt['efectivo']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>OTROS</th>
-                                    <td>$<?php echo htmlspecialchars($rowt['otros']); ?></td>
+                                    <td><?php echo htmlspecialchars($rowt['otros']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>TOTAL</th>
-                                    <td>$<?php echo htmlspecialchars($rowt['total']); ?></td>
+                                    <td><?php echo htmlspecialchars($rowt['total']); ?></td>
                                 </tr>
                             <?php
                             } else {
@@ -1146,7 +1146,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                             <td><?php echo htmlspecialchars($rowocontribuciones['tasa']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['idapendice18']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['idapendice13']); ?></td>
-                                            <td>$<?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
+                                            <td><?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
                                 </tr>
 
                             <?php

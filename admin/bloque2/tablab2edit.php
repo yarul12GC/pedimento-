@@ -124,7 +124,7 @@ if ($resulttransac->num_rows > 0) {
                     <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-success">Actualizar Bloque 2</button>
+                        <button type="submit" class="btn btn-success">Actualizar Bloque</button>
                     </div>
                 </form>
             </div>

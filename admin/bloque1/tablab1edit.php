@@ -20,7 +20,7 @@ if ($resultdpm->num_rows > 0) {
     <table class="table table-bordered table-hover">
         <tr>
             <th>NUM.PEDIMENTO</th>
-            <td><?php echo htmlspecialchars($datodpm['Nopedimento']); ?></td>
+            <td><?php echo htmlspecialchars($datodpm['anio_validacion'] . ' ' . $datodpm['clave_aduana'] . ' ' . $datodpm['patente'] . ' ' .  $datodpm['ultimo_digito_anio'] . $datodpm['numeracion_progresiva']); ?></td>
             <th>T.OPER</th>
             <td><?php echo htmlspecialchars($datodpm['Toper']); ?></td>
             <th>CVE PEDIMENTO</th>

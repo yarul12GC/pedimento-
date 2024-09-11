@@ -18,40 +18,40 @@ $resultLiquidacion = $stmtLiquidacion->get_result();
 
 $cuadroLiquidacion = [];
 if ($resultLiquidacion->num_rows > 0) {
-while ($row = $resultLiquidacion->fetch_assoc()) {
-$cuadroLiquidacion[] = $row;
-}
+    while ($row = $resultLiquidacion->fetch_assoc()) {
+        $cuadroLiquidacion[] = $row;
+    }
 }
 
 if (!empty($cuadroLiquidacion)) {
-$numRegistros = count($cuadroLiquidacion);
-$mitad = ceil($numRegistros / 2); // Calcula la mitad para dividir los registros
+    $numRegistros = count($cuadroLiquidacion);
+    $mitad = ceil($numRegistros / 2); // Calcula la mitad para dividir los registros
 
-for ($i = 0; $i < $mitad; $i++) {
-$html .= "<tr>";
+    for ($i = 0; $i < $mitad; $i++) {
+        $html .= "<tr>";
 
-// Primera columna de la tabla
-if (isset($cuadroLiquidacion[$i])) {
-    $html .= '
+        // Primera columna de la tabla
+        if (isset($cuadroLiquidacion[$i])) {
+            $html .= '
             <td style="text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['clavetpa12_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['clavetpa13_cl']) . '</td>
-            <td style="border-left: 1px solid black; text-align: center;">$' . htmlspecialchars($cuadroLiquidacion[$i]['importe']) . '</td>';
-} else {
-    $html .= "<td colspan='3' style='border-left: 1px solid black;'></td>"; // Relleno vacío si no hay más registros
-}
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['importe']) . '</td>';
+        } else {
+            $html .= "<td colspan='3' style='border-left: 1px solid black;'></td>"; // Relleno vacío si no hay más registros
+        }
 
-// Segunda columna de la tabla
-if (isset($cuadroLiquidacion[$i + $mitad])) {
-    $html .= '
+        // Segunda columna de la tabla
+        if (isset($cuadroLiquidacion[$i + $mitad])) {
+            $html .= '
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['clavetpa12_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['clavetpa13_cl']) . '</td>
-            <td style="border-left: 1px solid black; text-align: center;">$' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['importe']) . '</td>';
-} else {
-    $html .= '<td colspan="3" style="border-left: 1px solid black;"></td>'; // Relleno vacío si no hay más registros
-}
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['importe']) . '</td>';
+        } else {
+            $html .= '<td colspan="3" style="border-left: 1px solid black;"></td>'; // Relleno vacío si no hay más registros
+        }
 
-$html .= '</tr>';
-}
+        $html .= '</tr>';
+    }
 } else {
-$html .= "<tr><td colspan='6' class='text-center' style='border-left: 1px solid black;'>No se encontraron registros en el cuadro de liquidación.</td></tr>";
+    $html .= "<tr><td colspan='6' class='text-center' style='border-left: 1px solid black;'>No se encontraron registros en el cuadro de liquidación.</td></tr>";
 }

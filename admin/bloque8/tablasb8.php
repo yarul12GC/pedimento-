@@ -7,7 +7,7 @@
 
     if ($last_idb8 !== null) {
         $querybloque8 = "
-       SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS clavea1
+       SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS clavea1, apendice1.seccion
 FROM permisos
 INNER JOIN apendice1 ON permisos.idapendice1 = apendice1.idapendice1
 WHERE permisos.idpermisos
@@ -24,7 +24,7 @@ WHERE permisos.idpermisos
                         <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
                         <td><?php echo htmlspecialchars($datosb8['aviso_electronico']); ?></td>
                         <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
-                        <td><?php echo htmlspecialchars($datosb8['clavea1']); ?></td>
+                        <td><?php echo htmlspecialchars($datosb8['clavea1'] . $datosb8['seccion']); ?></td>
                     </tr>
                     <tr>
                         <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>

@@ -89,7 +89,7 @@
                 <br>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="editb12SubmitAllFormsedit" class="btn btn-success">Guardar Cambios</button>
+                    <button type="button" id="editb12SubmitAllFormsedit" class="btn btn-success">Actualizar Bloque</button>
                 </div>
             </div>
         </div>

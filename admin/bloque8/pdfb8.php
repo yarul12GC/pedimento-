@@ -1,7 +1,7 @@
 <?php
 // Consulta para obtener permisos
 $querypermisos =  "
-    SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1
+    SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1, apendice1.seccion
     FROM permisos
     INNER JOIN apendice1 ON permisos.idapendice1 = apendice1.idapendice1
     WHERE idpedimentoc = ?";
@@ -58,7 +58,7 @@ if ($resultpagoe->num_rows > 0) {
 // Continuar con la consulta de permisos para obtener la clave de apéndice 1
 if (isset($datosperm)) {
     $html .= '
-                <td align="center">' . htmlspecialchars($datosperm['claveapn1']) . '</td>
+                <td align="center">' . htmlspecialchars($datosperm['claveapn1'].$datosperm['seccion']) . '</td>
             </tr>
         </tbody>
     </table>';

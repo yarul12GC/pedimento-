@@ -24,7 +24,7 @@ if ($last_idb1 !== null) {
         <table class="table table-bordered table-hover">
             <tr>
                 <th>NUM.PEDIMENTO</th>
-                <td><?php echo htmlspecialchars($datosb1['Nopedimento']); ?></td>
+                <td><?php echo htmlspecialchars($datosb1['anio_validacion'] . ' ' . $datosb1['clave_aduana'] . ' ' . $datosb1['patente'] . ' ' .  $datosb1['ultimo_digito_anio'] . $datosb1['numeracion_progresiva']); ?></td>
                 <th>T.OPER</th>
                 <td><?php echo htmlspecialchars($datosb1['Toper']); ?></td>
                 <th>CVE PEDIMENTO</th>

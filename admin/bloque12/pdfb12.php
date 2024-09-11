@@ -17,15 +17,15 @@ if ($resulttotales->num_rows > 0) {
             </tr>
             <tr>
                 <th style="border: 1px solid black; font-weight: bold; "> EFECTIVO</th>
-                <td style="border: 1px solid black;"> $' . htmlspecialchars($rowt['efectivo']) . '</td>
+                <td style="border: 1px solid black;"> ' . htmlspecialchars($rowt['efectivo']) . '</td>
             </tr>
             <tr>
                 <th style="border: 1px solid black; font-weight: bold; "> OTROS</th>
-                <td style="border: 1px solid black;"> $' . htmlspecialchars($rowt['otros']) . '</td>
+                <td style="border: 1px solid black;"> ' . htmlspecialchars($rowt['otros']) . '</td>
             </tr>
             <tr>
                 <th style="border: 1px solid black; font-weight: bold; "> TOTAL</th>
-                <td style="border: 1px solid black;"> $' . htmlspecialchars($rowt['total']) . '</td>
+                <td style="border: 1px solid black;"> ' . htmlspecialchars($rowt['total']) . '</td>
             </tr>
         </tbody>
     </table>';

@@ -11,7 +11,7 @@
 
                     <form action="../admin/bloque13/insertardatosb13.php" method="POST">
                         <div class="row">
-                            
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="patente">Patente:</label>
@@ -63,12 +63,12 @@
                             <input type="hidden" class="form-control" name="mPresentacion" id="mPresentacion" value="Pago Electrónico" required readonly>
                             <input type="hidden" class="form-control" name="MedioRecepcion" id="MedioRecepcion" value="Efectivo - Cargo a Cuenta" required readonly>
                             <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
-                            
+
                         </div>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Guardar Bloque 13</button>
+                            <button type="submit" class="btn btn-success">Guardar Bloque</button>
                         </div>
                     </form>
 

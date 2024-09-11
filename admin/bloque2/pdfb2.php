@@ -1,5 +1,5 @@
-<?php 
-$querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1
+<?php
+$querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1, a1.seccion
                  FROM transacciones ts
                  INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
                  INNER JOIN apendice1 a1 ON ts.idapendice1 = a1.idapendice1
@@ -21,7 +21,7 @@ if ($resulttransac->num_rows > 0) {
             <th style="font-weight: bold; width: 15%;">PESO BRUTO</th>
             <td style="width: 10%; text-align: left;">' . htmlspecialchars($datotransac['peso_bruto']) . '</td>
             <th style="font-weight: bold; width: 15%;">ADUANA</th>
-            <td style="width: 10%; text-align: left;">' . htmlspecialchars($datotransac['clavea1']) . '</td>
+            <td style="width: 10%; text-align: left;">' . htmlspecialchars($datotransac['clavea1'] . $datotransac['seccion']) . '</td>
         </tr>
     </table>';
 } else {

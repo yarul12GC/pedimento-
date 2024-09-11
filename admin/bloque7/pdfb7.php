@@ -27,11 +27,11 @@ if ($resultvaloresd->num_rows > 0) {
                 <th align="center" style="font-weight:bold;">OTROS DECREMENTABLES</th>
             </tr>
             <tr>
-                <td align="center" >$' . htmlspecialchars($datosdcre['VsegurosD']) . '</td>
-                <td align="center" >$' . htmlspecialchars($datosdcre['segurosD']) . '</td>
-                <td align="center" >$' . htmlspecialchars($datosdcre['fletesD']) . '</td>
-                <td align="center" >$' . htmlspecialchars($datosdcre['embalajesD']) . '</td>
-                <td align="center" >$' . htmlspecialchars($datosdcre['otrosDecrement']) . '</td>
+                <td align="center" >' . htmlspecialchars($datosdcre['VsegurosD']) . '</td>
+                <td align="center" >' . htmlspecialchars($datosdcre['segurosD']) . '</td>
+                <td align="center" >' . htmlspecialchars($datosdcre['fletesD']) . '</td>
+                <td align="center" >' . htmlspecialchars($datosdcre['embalajesD']) . '</td>
+                <td align="center" >' . htmlspecialchars($datosdcre['otrosDecrement']) . '</td>
             </tr>
         </tbody>
     </table>';

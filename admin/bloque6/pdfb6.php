@@ -26,11 +26,11 @@ if ($resultvaloresin->num_rows > 0) {
     while ($datosincr = $resultvaloresin->fetch_assoc()) {
         $html .= '
         <tr style="text-align: center;">
-            <td>$' . htmlspecialchars($datosincr['Vseguros']) . '</td>
-            <td>$' . htmlspecialchars($datosincr['seguros']) . '</td>
-            <td>$' . htmlspecialchars($datosincr['fletes']) . '</td>
-            <td>$' . htmlspecialchars($datosincr['embalajes']) . '</td>
-            <td>$' . htmlspecialchars($datosincr['otrosincrement']) . '</td>
+            <td>' . htmlspecialchars($datosincr['Vseguros']) . '</td>
+            <td>' . htmlspecialchars($datosincr['seguros']) . '</td>
+            <td>' . htmlspecialchars($datosincr['fletes']) . '</td>
+            <td>' . htmlspecialchars($datosincr['embalajes']) . '</td>
+            <td>' . htmlspecialchars($datosincr['otrosincrement']) . '</td>
         </tr>';
     }
 } else {
