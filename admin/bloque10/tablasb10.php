@@ -13,7 +13,9 @@
             apendice18.idapendice18, 
             apendice18.clave AS clavea18,
             apendice12.idapendice12, 
-            apendice12.clave AS clavea12
+            apendice12.clave AS clavea12,
+            apendice12.descripcion AS descripciona12
+
         FROM 
             tasapedimento
         INNER JOIN 
@@ -41,7 +43,7 @@
                     </tr>
                     <?php while ($datosb10 = $resultbloque10->fetch_assoc()) { ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($datosb10['clavea12']); ?></td>
+                            <td><?php echo htmlspecialchars($datosb10['clavea12'].$datosb10['descripciona12']); ?></td>
                             <td><?php echo htmlspecialchars($datosb10['clavea18']); ?></td>
                             <td><?php echo htmlspecialchars($datosb10['tasa']); ?></td>
                         </tr>

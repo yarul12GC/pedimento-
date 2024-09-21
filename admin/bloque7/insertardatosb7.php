@@ -14,8 +14,8 @@ $idpedimentoc = $_POST['idpedimentoc'];
 $sameSession = isset($_SESSION['pedimento_id']) && $_SESSION['pedimento_id'] == $idpedimentoc;
 
 
-$sql = "INSERT INTO valordecrementable (VsegurosD, segurosD, fletesD, embalajesD, otrosDecrement, idpedimentoc)
-        VALUES ('$VsegurosD', '$segurosD', '$fletesD', '$embalajesD', '$otrosDecrement', '$idpedimentoc')";
+$sql = "INSERT INTO valordecrementable (VsegurosD, tipoCambioMXN, segurosD, fletesD, embalajesD, otrosDecrement, idpedimentoc)
+        VALUES ('$VsegurosD', '$tipoCambioMXN', '$segurosD', '$fletesD', '$embalajesD', '$otrosDecrement', '$idpedimentoc')";
 
 if ($conexion->query($sql) === TRUE) {
     $last_idb7 = $conexion->insert_id;

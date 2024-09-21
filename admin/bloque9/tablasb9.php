@@ -11,7 +11,7 @@
         $resultbloque9 = $conexion->query($querybloque9);
         if ($resultbloque9 && $resultbloque9->num_rows > 0) {
             $datosb9 = $resultbloque9->fetch_assoc();
-            ?>
+    ?>
 
 
             <table class="table table-bordered table-hover">
@@ -24,21 +24,33 @@
 
                     <tr>
                         <th>ENTRADAS</th>
-                        <td><?php echo htmlspecialchars($datosb9['entrada']); ?></td>
+                        <td>
+                            <?php
+                            // Asumimos que $datosb9['entrada'] es una fecha en formato válido
+                            $entrada_fecha = date("d-m-Y", strtotime($datosb9['entrada']));
+                            echo htmlspecialchars($entrada_fecha);
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <th>PAGO</th>
-                        <td><?php echo htmlspecialchars($datosb9['pago']); ?></td>
-
+                        <td>
+                            <?php
+                            // Asumimos que $datosb9['pago'] es una fecha en formato válido
+                            $pago_fecha = date("d-m-Y", strtotime($datosb9['pago']));
+                            echo htmlspecialchars($pago_fecha);
+                            ?>
+                        </td>
                     </tr>
+
                 </tbody>
             </table>
 
 
-            <?php
+        <?php
 
         } else {
-            ?>
+        ?>
 
 
             <table class="table table-bordered table-hover">
@@ -72,9 +84,8 @@
 
 
 
-            <?php
+        <?php
         }
-
     } else {
         ?>
         <table class="table table-bordered table-hover">
@@ -107,7 +118,7 @@
         </button>
 
 
-        <?php
+    <?php
     }
 
 

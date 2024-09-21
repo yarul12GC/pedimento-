@@ -31,7 +31,7 @@
                                     die("Conexión fallida: " . $conexion->connect_error);
                                 }
                                 ?>
-                                <label for="agenteSelect">DESTINO O ORIGEN (APENDICE11)</label><br>
+                                <label for="agenteSelect">MET VAL</label><br>
                                 <select class="form-control" name="idapendice11">
                                     <?php while ($apendice11 = $apendice11Result->fetch_assoc()) : ?>
                                         <option value="<?= $apendice11['idapendice11'] ?>"
@@ -45,8 +45,24 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="umc">UMC</label>
-                                <input type="text" class="form-control" id="umc" name="umc" value="<?php echo htmlspecialchars($sectionData['umc']); ?>" required>
+                                <?php
+                                include('../conexion.php');
+
+                                $apendice7Result = $conexion->query("SELECT idapendice7, clave as clave7 FROM apendice7");
+
+                                if ($conexion->connect_error) {
+                                    die("Conexión fallida: " . $conexion->connect_error);
+                                }
+                                ?>
+                                <label for="agenteSelect">UMC</label><br>
+                                <select class="form-control" name="umc">
+                                    <?php while ($apendice7 = $apendice7Result->fetch_assoc()) : ?>
+                                        <option value="<?= $apendice7['idapendice7'] ?>"
+                                            <?= ($apendice7['idapendice7'] == $sectionData['umc']) ? 'selected' : '' ?>>
+                                            <?= $apendice7['clave7'] ?>
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="cantumc">CANTIDAD UMC</label>
@@ -65,7 +81,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <?php
-                                $apendice4Result = $conexion->query("SELECT idapendice4, clave as clave4 FROM apendice4");
+                                $apendice4Result = $conexion->query("SELECT idapendice4, clave2 as clave4 FROM apendice4");
 
                                 if ($conexion->connect_error) {
                                     die("Conexión fallida: " . $conexion->connect_error);
@@ -82,9 +98,24 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pod">POD</label>
-                                <input type="text" class="form-control" id="pod" name="pod" value="<?php echo htmlspecialchars($sectionData['pod']); ?>" required>
+                                <?php
+                                $apendice4Result = $conexion->query("SELECT idapendice4, clave2 as clave4 FROM apendice4");
+
+                                if ($conexion->connect_error) {
+                                    die("Conexión fallida: " . $conexion->connect_error);
+                                }
+                                ?>
+                                <label for="pod">POD</label><br>
+                                <select class="form-control" name="pod">
+                                    <?php while ($apendice4 = $apendice4Result->fetch_assoc()) : ?>
+                                        <option value="<?= $apendice4['clave4'] ?>"
+                                            <?= ($apendice4['clave4'] == $sectionData['pod']) ? 'selected' : '' ?>>
+                                            <?= $apendice4['clave4'] ?>
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+
                             <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($sectionData['idpedimentoc']); ?>">
                             <input type="hidden" name="section_id" value="<?php echo htmlspecialchars($sectionData['section_id']); ?>">
                             <input type="hidden" name="idpartida1" value="<?php echo htmlspecialchars($sectionData['idpartida1']); ?>">

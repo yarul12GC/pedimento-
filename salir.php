@@ -5,5 +5,4 @@ $_SESSION['mensaje'] = '¡Has cerrado sesión exitosamente!';
 
 session_destroy();
 
-header('Location: index.php');
-?>
+header('Location: ../index.php');

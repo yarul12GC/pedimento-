@@ -16,6 +16,7 @@
                                 SELECT cl.*, 
                                     a12_cl.idapendice12 AS id_apendice12_cl, 
                                     a12_cl.clave AS clavetpa12_cl,
+                                    a12_cl.descripcion AS descripciona12_cl,
                                     a13_cl.idapendice13 AS id_apendice13_cl, 
                                     a13_cl.clave AS clavetpa13_cl
                                 FROM cuadrodeliquidacion cl
@@ -39,7 +40,7 @@
         if (!empty($cuadroLiquidacion)) {
             foreach ($cuadroLiquidacion as $row) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['clavetpa12_cl']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['clavetpa12_cl'] . $row['descripciona12_cl']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['clavetpa13_cl']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['importe']) . "</td>";
                 echo "</tr>";

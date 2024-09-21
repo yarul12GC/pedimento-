@@ -12,7 +12,7 @@
                 <form id="bloque-nuevo-form" action="../admin/bloque21/insertardatosb21.php" method="post">
                     <div class="row">
                         <div class="form-group">
-                            <label for="descripcion">OBSERVACION</label>
+                            <label for="descripcion">IDENTIF</label>
                             <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                         </div>
 

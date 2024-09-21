@@ -19,7 +19,9 @@
                     apendice18.idapendice18, 
                     apendice18.clave AS clavea18,
                     apendice12.idapendice12, 
-                    apendice12.clave AS clavea12
+                    apendice12.clave AS clavea12,
+                    apendice12.descripcion AS descripciona12
+
                 FROM 
                     tasapedimento
                 INNER JOIN 
@@ -48,7 +50,7 @@
                 foreach ($cuadrotasasp as $rowtsp) {
             ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($rowtsp['clavea12']); ?></td>
+                        <td><?php echo htmlspecialchars($rowtsp['clavea12'] . $rowtsp['descripciona12']); ?></td>
                         <td><?php echo htmlspecialchars($rowtsp['clavea18']); ?></td>
                         <td><?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
                     </tr>
@@ -73,7 +75,7 @@
                 <tr>
                     <td colspan="3" class="text-center">
                         <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque10">
-                            <i class="fas fa-database"></i> Agregar
+                            <i class="fas fa-database"></i>
                         </button>
                     </td>
                 </tr>

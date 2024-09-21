@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($resultado === "Inicio de sesión exitoso.") {
         if ($_SESSION['tipoUsuarioID'] == 4) {
-            echo '<script>window.location.href = "admin/index.php";</script>';
+            echo '<script>window.location.href = "user/panel.php";</script>';
             exit;
         } else {
             echo '<script>alert("No tiene permisos para acceder a esta área.");</script>';

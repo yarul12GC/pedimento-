@@ -3,6 +3,8 @@ $queryLiquidacion = "
 SELECT cl.*, 
     a12_cl.idapendice12 AS id_apendice12_cl, 
     a12_cl.clave AS clavetpa12_cl,
+    a12_cl.descripcion AS descripciona12_cl,
+
     a13_cl.idapendice13 AS id_apendice13_cl, 
     a13_cl.clave AS clavetpa13_cl
 FROM cuadrodeliquidacion cl
@@ -33,7 +35,7 @@ if (!empty($cuadroLiquidacion)) {
         // Primera columna de la tabla
         if (isset($cuadroLiquidacion[$i])) {
             $html .= '
-            <td style="text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['clavetpa12_cl']) . '</td>
+            <td style="text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['clavetpa12_cl'].$cuadroLiquidacion[$i]['descripciona12_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['clavetpa13_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i]['importe']) . '</td>';
         } else {
@@ -43,7 +45,7 @@ if (!empty($cuadroLiquidacion)) {
         // Segunda columna de la tabla
         if (isset($cuadroLiquidacion[$i + $mitad])) {
             $html .= '
-            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['clavetpa12_cl']) . '</td>
+            <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['clavetpa12_cl'].$cuadroLiquidacion[$i + $mitad]['descripciona12_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['clavetpa13_cl']) . '</td>
             <td style="border-left: 1px solid black; text-align: center;">' . htmlspecialchars($cuadroLiquidacion[$i + $mitad]['importe']) . '</td>';
         } else {

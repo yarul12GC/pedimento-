@@ -6,11 +6,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $clave = mysqli_real_escape_string($conexion, $_POST['clave']);
     $contenido = mysqli_real_escape_string($conexion, $_POST['descripcion']);
-    
+    $contribucion = mysqli_real_escape_string($conexion, $_POST['contribucion']);
+    $nivel = mysqli_real_escape_string($conexion, $_POST['nivel']);
+
+
     // Validar que los campos no estén vacíos
     if (!empty($clave) && !empty($contenido)) {
         // Insertar en la base de datos
-        $query = "INSERT INTO apendice12 (clave, descripcion) VALUES ('$clave', '$contenido')";
+        $query = "INSERT INTO apendice12 (clave, descripcion,contribucion, nivel) VALUES ('$clave', '$contenido', '$contribucion', '$nivel')";
 
         if (mysqli_query($conexion, $query)) {
             // Redirigir a una página de éxito o mostrar un mensaje de éxito
@@ -32,4 +35,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../apendice12.php");
     exit();
 }
-?>

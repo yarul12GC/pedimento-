@@ -82,13 +82,13 @@
                             <select class="form-control" name="idapendice12[]" onchange="calculateSum()">
                                 <?php
                                 include_once('../conexion.php');
-                                $apendice12Result = $conexion->query("SELECT idapendice12, clave as clave12 FROM apendice12");
+                                $apendice12Result = $conexion->query("SELECT idapendice12, descripcion as clave12, descripcion AS descripcionAP FROM apendice12");
                                 if ($conexion->connect_error) {
                                     die("Conexión fallida: " . $conexion->connect_error);
                                 }
                                 ?>
                                 <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
-                                    <option value="<?= htmlspecialchars($apendice12['idapendice12']); ?>"><?= htmlspecialchars($apendice12['clave12']); ?></option>
+                                    <option value="<?= htmlspecialchars($apendice12['idapendice12']); ?>"><?= htmlspecialchars($apendice12['descripcionAP']); ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>

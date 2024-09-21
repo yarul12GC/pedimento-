@@ -32,7 +32,7 @@
                                     die("Conexión fallida: " . $conexion->connect_error);
                                 }
                                 ?>
-                                <label for="agenteSelect">DESTINO O ORIGEN (APENDICE4)</label><br>
+                                <label for="agenteSelect">MET VAL</label><br>
                                 <select class="form-control" name="idapendice11">
                                     <?php while ($apendice11 = $apendice11Result->fetch_assoc()) : ?>
                                         <option value="<?= $apendice11['idapendice11'] ?>"><?= $apendice11['clave11'] ?></option>
@@ -43,9 +43,23 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="umc">UMC</label>
-                                <input type="text" class="form-control" id="umc" name="umc" required>
+                                <?php
+                                include('../conexion.php');
+
+                                $apendice7Result = $conexion->query("SELECT idapendice7, clave as clave7 FROM apendice7");
+
+                                if ($conexion->connect_error) {
+                                    die("Conexión fallida: " . $conexion->connect_error);
+                                }
+                                ?>
+                                <label for="agenteSelect">UMC</label><br>
+                                <select class="form-control" name="umc">
+                                    <?php while ($apendice7 = $apendice7Result->fetch_assoc()) : ?>
+                                        <option value="<?= $apendice7['clave7'] ?>"><?= $apendice7['clave7'] ?></option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="cantumc">CANTIDAD UMC</label>
                                 <input type="text" class="form-control" id="cantumc" name="cantumc" required>
@@ -64,12 +78,12 @@
                             <div class="form-group">
                                 <?php
                                 include('../conexion.php');
-                                $apendice4Result = $conexion->query("SELECT idapendice4, clave as clave4 FROM apendice4");
+                                $apendice4Result = $conexion->query("SELECT idapendice4, clave2 as clave4 FROM apendice4");
                                 if ($conexion->connect_error) {
                                     die("Conexión fallida: " . $conexion->connect_error);
                                 }
                                 ?>
-                                <label for="agenteSelect">DESTINO O ORIGEN (APENDICE4)</label><br>
+                                <label for="agenteSelect">P.V/C</label><br>
                                 <select class="form-control" name="idapendice4">
                                     <?php while ($apendice4 = $apendice4Result->fetch_assoc()) : ?>
                                         <option value="<?= $apendice4['idapendice4'] ?>"><?= $apendice4['clave4'] ?></option>
@@ -77,9 +91,21 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pod">POD</label>
-                                <input type="text" class="form-control" id="pod" name="pod" required>
+                                <?php
+                                include('../conexion.php');
+                                $apendice4Result = $conexion->query("SELECT idapendice4, clave2 as clave4 FROM apendice4");
+                                if ($conexion->connect_error) {
+                                    die("Conexión fallida: " . $conexion->connect_error);
+                                }
+                                ?>
+                                <label for="agenteSelect">POD</label><br>
+                                <select class="form-control" name="pod">
+                                    <?php while ($apendice4 = $apendice4Result->fetch_assoc()) : ?>
+                                        <option value="<?= $apendice4['clave4'] ?>"><?= $apendice4['clave4'] ?></option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+
                             <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
                             <input type="hidden" name="section_id" value="<?php echo $newSectionId; ?>">
                         </div>

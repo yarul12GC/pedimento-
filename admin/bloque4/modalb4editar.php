@@ -184,9 +184,9 @@
 
         function calcularValoresEdicion() {
             var tipoCambioMXN = parseFloat(document.getElementById('edit-tipo-cambio-input').value) || 0;
-            document.getElementById('edit-hidden-tipo-cambio-form1').value = tipoCambioMXN.toFixed(2);
-            document.getElementById('edit-hidden-tipo-cambio-form2').value = tipoCambioMXN.toFixed(2);
-            document.getElementById('edit-hidden-tipo-cambio-form3').value = tipoCambioMXN.toFixed(2);
+            document.getElementById('edit-hidden-tipo-cambio-form1').value = tipoCambioMXN;
+            document.getElementById('edit-hidden-tipo-cambio-form2').value = tipoCambioMXN;
+            document.getElementById('edit-hidden-tipo-cambio-form3').value = tipoCambioMXN;
 
 
 

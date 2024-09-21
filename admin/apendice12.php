@@ -63,7 +63,9 @@ include '../sesion.php';
                 <thead class="table-dark">
                     <tr>
                         <th>CLAVE</th>
-                        <th>COMPLEMENTO</th>
+                        <th>CONTRIBUCIÓN</th>
+                        <th>ABREVIACIÓN</th>
+                        <th>NIVEL</th>
                         <th class="cent">ACCIONES</th>
                     </tr>
                 </thead>
@@ -71,7 +73,9 @@ include '../sesion.php';
                     <?php while ($row = mysqli_fetch_array($queryapendice12)) { ?>
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
+                            <td> <?php echo $row['contribucion']; ?> </td>
                             <td> <?php echo $row['descripcion']; ?></td>
+                            <td> <?php echo $row['nivel']; ?></td>
                             <td class="cent">
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editar_<?php echo $row['idapendice12']; ?>">Editar</button>
@@ -115,13 +119,22 @@ include '../sesion.php';
                                     <label class="control-label mb-3" for="clave">CLAVE </label>
                                     <input class="form-control" type="text" name="clave" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="contribucion">CONTRIBUCION </label>
+                                    <input class="form-control" type="text" name="contribucion" required>
+                                </div>
+
 
                             </div>
                             <div class="col-md-6">
 
                                 <div class="mb-3">
-                                    <label class="control-label mb-3" for="descripcion">CONTENIDO </label>
+                                    <label class="control-label mb-3" for="descripcion">ABREVIACIÓN </label>
                                     <input class="form-control" type="text" name="descripcion" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="nivel">NIVEL </label>
+                                    <input class="form-control" type="text" name="nivel" required>
                                 </div>
 
                             </div>
@@ -141,7 +154,7 @@ include '../sesion.php';
     <?php
     $queryapendice12 = mysqli_query($conexion, $consultar);
     while ($row = mysqli_fetch_array($queryapendice12)) {
-        ?>
+    ?>
 
         <div class="modal fade" id="editar_<?php echo $row['idapendice12']; ?>" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,14 +175,24 @@ include '../sesion.php';
                                         <input class="form-control" type="text" name="clave"
                                             value="<?php echo $row['clave']; ?>">
                                     </div>
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="clave">CONTRIBUCION </label>
+                                        <input class="form-control" type="text" name="contribucion"
+                                            value="<?php echo $row['contribucion']; ?>">
+                                    </div>
 
                                 </div>
                                 <div class="col-md-6">
 
                                     <div class="mb-3">
-                                        <label class="control-label mb-3" for="contenido">CONTENIDO </label>
+                                        <label class="control-label mb-3" for="contribucion">ABREVIACIÓN </label>
                                         <input class="form-control" type="text" name="descripcion" required
                                             value="<?php echo $row['descripcion']; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="nivel">NIVEL </label>
+                                        <input class="form-control" type="text" name="nivel" required
+                                            value="<?php echo $row['nivel']; ?>">
                                     </div>
 
                                 </div>
@@ -185,7 +208,7 @@ include '../sesion.php';
                 </div>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 

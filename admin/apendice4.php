@@ -63,6 +63,7 @@ include '../sesion.php';
                 <thead class="table-dark">
                     <tr>
                         <th>CLAVE</th>
+                        <th>CLAVE 2</th>
                         <th>COMPLEMENTO</th>
                         <th class="cent">ACCIONES</th>
                     </tr>
@@ -71,6 +72,8 @@ include '../sesion.php';
                     <?php while ($row = mysqli_fetch_array($queryapendice4)) { ?>
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
+                            <td> <?php echo $row['clave2']; ?> </td>
+
                             <td> <?php echo $row['descripcion']; ?></td>
                             <td class="cent">
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
@@ -115,6 +118,10 @@ include '../sesion.php';
                                     <label class="control-label mb-3" for="clave">CLAVE </label>
                                     <input class="form-control" type="text" name="clave" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="control-label mb-3" for="clave2">CLAVE 2 </label>
+                                    <input class="form-control" type="text" name="clave2" required>
+                                </div>
 
                             </div>
                             <div class="col-md-6">
@@ -141,7 +148,7 @@ include '../sesion.php';
     <?php
     $queryapendice4 = mysqli_query($conexion, $consultar);
     while ($row = mysqli_fetch_array($queryapendice4)) {
-        ?>
+    ?>
 
         <div class="modal fade" id="editar_<?php echo $row['idapendice4']; ?>" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -161,6 +168,11 @@ include '../sesion.php';
                                         <label class="control-label mb-3" for="clave">CLAVE </label>
                                         <input class="form-control" type="text" name="clave"
                                             value="<?php echo $row['clave']; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="control-label mb-3" for="clave2">CLAVE 2</label>
+                                        <input class="form-control" type="text" name="clave2"
+                                            value="<?php echo $row['clave2']; ?>">
                                     </div>
 
                                 </div>
@@ -185,7 +197,7 @@ include '../sesion.php';
                 </div>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../home.php">
+            <a class="navbar-brand" href="../admin/panel.php">
                 <img src="../media/locenca.png" alt="Logo" width="40" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,6 @@
                             CATALOGOS
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="../admin/index.php">Usuarios</a></li>
                             <li><a class="dropdown-item" href="../admin/agenteaduanal.php">Agentes</a></li>
                         </ul>
                     </li>
@@ -65,12 +65,12 @@
                             <li><a class="dropdown-item" href="../admin/apendice20.php">APENDICE 20</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice21.php">APENDICE 21</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice22.php">APENDICE 22</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice23.php">APENDICE 23</a></li>
+                            <li><a class="dropdown-item" href="../admin/apendice23.php">EQUIVALENCIAS</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            BLOQUES PEDIMENTO
+                            GENERAR PEDIMENTO
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
                             <li><a class="dropdown-item" href="panelpedimento.php">PANEL PEDIMENTO</a></li>

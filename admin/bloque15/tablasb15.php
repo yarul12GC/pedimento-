@@ -40,7 +40,14 @@
                     </tr>
                     <tr>
                         <td><?php echo htmlspecialchars($datosb15['numfactura']); ?></td>
-                        <td><?php echo htmlspecialchars($datosb15['fecha']); ?></td>
+                        <td colspan="3">
+                            <?php
+                            // Asumimos que $rowpe['fechapago'] es una fecha en formato válido (por ejemplo, YYYY-MM-DD)
+                            $fecha_pago_formateada = date("d-m-Y", strtotime($datosb15['fecha']));
+                            echo htmlspecialchars($fecha_pago_formateada);
+                            ?>
+                        </td>
+
                         <td><?php echo htmlspecialchars($datosb15['claveapn14']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['claveapn5']); ?></td>
                         <td><?php echo htmlspecialchars($datosb15['valmonfact']); ?></td>

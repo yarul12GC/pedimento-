@@ -12,6 +12,7 @@
             cuadrodeliquidacion.*, 
             apendice12.idapendice12, 
             apendice12.clave AS clavetpa12,
+            apendice12.descripcion AS descripciona12,
             apendice13.idapendice13, 
             apendice13.clave AS clavetpa13
         FROM 
@@ -42,7 +43,7 @@
                     </tr>
                     <?php while ($datosb11 = $resultbloque11->fetch_assoc()) { ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($datosb11['clavetpa12']); ?></td>
+                            <td><?php echo htmlspecialchars($datosb11['clavetpa12'] . $datosb11['descripciona12']); ?></td>
                             <td><?php echo htmlspecialchars($datosb11['clavetpa13']); ?></td>
                             <td><?php echo htmlspecialchars($datosb11['importe']); ?></td>
                         </tr>

@@ -17,16 +17,21 @@ $secciones = [];
 
 $queries = [
     'partida1' => "SELECT p.*, 
-                      a11.clave AS claveapp11, 
-                      a4.clave AS claveapp4 
-                  FROM partida1 p
-                  INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
-                  INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
-                  WHERE p.idpedimentoc = ? ORDER BY section_id",
-
+    a11.clave AS claveapp11, 
+    a4.clave2 AS claveapp4 
+FROM partida1 p
+INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
+INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
+WHERE p.idpedimentoc = ? ORDER BY section_id",
     'partida2' => "SELECT * FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id",
     'partida3' => "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id",
-    'permisos' => "SELECT * FROM permisop WHERE idpedimentoc = ? ORDER BY section_id",
+    'permisos' => "SELECT per.*, 
+           ap9.clave AS claveapendice9 
+    FROM permisop per 
+    INNER JOIN apendice9 ap9 ON per.idapendice9 = ap9.idapendice9 
+    WHERE per.idpedimentoc = ? 
+    ORDER BY per.section_id
+",
     'complementos' => "SELECT compl.*,
        ap8.clave AS claveapendice8p 
         FROM complementosp compl
@@ -34,7 +39,15 @@ $queries = [
          WHERE compl.idpedimentoc = ? 
          ORDER BY compl.section_id",
     'observaciones' => "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id",
-    'contribuciones' => "SELECT * FROM contribuciones WHERE idpedimentoc = ? ORDER BY section_id"
+    'contribuciones' => "SELECT cont.*,
+            ap12.descripcion AS claveapendice12p, 
+             ap13.clave AS claveapendice13p,
+             ap18.clave AS claveapendice18p 
+FROM contribuciones cont
+INNER JOIN apendice12 ap12 ON cont.idapendice12 = ap12.idapendice12
+INNER JOIN apendice13 ap13 ON cont.idapendice13 = ap13.idapendice13
+INNER JOIN apendice18 ap18 on cont.idapendice18 = ap18.idapendice18
+WHERE cont.idpedimentoc = ? ORDER BY cont.section_id"
 ];
 
 // Ejecutar las consultas
@@ -164,7 +177,7 @@ $newSectionId = $lastSectionId + 1;
                             <?php if (!empty($data['permisos'])): ?>
                                 <?php foreach ($data['permisos'] as $rowPermisos): ?>
                                     <tr>
-                                        <td colspan="1"><?php echo htmlspecialchars($rowPermisos['idapendice9']); ?></td>
+                                        <td colspan="1"><?php echo htmlspecialchars($rowPermisos['claveapendice9']); ?></td>
                                         <td colspan="2"><?php echo htmlspecialchars($rowPermisos['numpermiso']); ?></td>
                                         <td colspan="2"><?php echo htmlspecialchars($rowPermisos['firmapermiso']); ?></td>
                                         <td colspan="2"><?php echo htmlspecialchars($rowPermisos['valcomdls']); ?></td>
@@ -259,10 +272,10 @@ $newSectionId = $lastSectionId + 1;
                             <?php if (!empty($data['contribuciones'])): ?>
                                 <?php foreach ($data['contribuciones'] as $rowContribuciones): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($rowContribuciones['idapendice12']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowContribuciones['claveapendice12p']); ?></td>
                                         <td><?php echo htmlspecialchars($rowContribuciones['tasa']); ?></td>
-                                        <td><?php echo htmlspecialchars($rowContribuciones['idapendice18']); ?></td>
-                                        <td><?php echo htmlspecialchars($rowContribuciones['idapendice13']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowContribuciones['claveapendice18p']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowContribuciones['claveapendice13p']); ?></td>
                                         <td><?php echo htmlspecialchars($rowContribuciones['importe']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>

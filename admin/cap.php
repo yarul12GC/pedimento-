@@ -10,7 +10,7 @@ $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $registros_por_pagina;
-$query = "SELECT p.idpedimentoc, a.nombreagente, u.nombreusuario 
+$query = "SELECT p.idpedimentoc, a.nombreagente, u.Nombre 
           FROM pedimentocompleto p 
           JOIN agenteaduanal a ON p.idagente = a.idagente 
           JOIN usuarios u ON p.idusuario = u.usuarioID 
@@ -91,7 +91,7 @@ $result = $conexion->query($query);
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['idpedimentoc']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['nombreagente']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['nombreusuario']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['Nombre']) . "</td>";
                         echo "<td class='text-center'>";
 
                         // Botón para Ver Detalles
@@ -105,7 +105,7 @@ $result = $conexion->query($query);
                         echo "</a>";
 
                         // Botón para Exportar PDF
-                        echo "<a href='exportarpdf/pedimentopdf.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger me-2'>";
+                        echo "<a href='exportarpdfadm/pedimentopdf.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger me-2'>";
                         echo "<i class='fas fa-file-pdf'></i> Exportar PDF";
                         echo "</a>";
 

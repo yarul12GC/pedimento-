@@ -45,7 +45,14 @@
                         <th>IMPORTE PAGADO</th>
                         <td><?php echo htmlspecialchars($datosb13['importePago']); ?></td>
                         <th>FECHA PAGADA</th>
-                        <td colspan="3"><?php echo htmlspecialchars($datosb13['fechapago']); ?></td>
+                        <td colspan="3">
+                            <?php
+                            // Asumimos que $rowpe['fechapago'] es una fecha en formato válido (por ejemplo, YYYY-MM-DD)
+                            $fecha_pago_formateada = date("d-m-Y", strtotime($datosb13['fechapago']));
+                            echo htmlspecialchars($fecha_pago_formateada);
+                            ?>
+                        </td>
+
                     </tr>
                     <tr>
                         <th class="text-center" colspan="2" scope="row">NUMERO DE OPERACIÓN BANCARIA</th>

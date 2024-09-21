@@ -22,12 +22,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nombreE">Nombre / Razón Social</label>
+                                    <label for="nombreE">NOMBRE / RAZON SOCIAL</label>
                                     <input type="text" class="form-control" id="nombreE" name="nombreE" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="curp">CURP</label>
-                                    <input type="text" class="form-control" id="curp" name="curp" required>
+                                    <input type="text" class="form-control" id="curp" name="curp">
                                 </div>
                                 <div class="form-group">
                                     <label for="rfc">RFC</label>
@@ -37,38 +37,38 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Calle">Calle</label>
+                                    <label for="Calle">CALLE</label>
                                     <input type="text" class="form-control" id="Calle" name="Calle" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numeroInterior">Número Interior</label>
+                                    <label for="numeroInterior">NUMERO INTERIOR</label>
                                     <input type="text" class="form-control" id="numeroInterior" name="numeroInterior"
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numeroExterior">Número Exterior</label>
+                                    <label for="numeroExterior">NUMERO EXTERIOR</label>
                                     <input type="text" class="form-control" id="numeroExterior" name="numeroExterior"
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="codigoPostal">Código Postal</label>
+                                    <label for="codigoPostal">CODIGO POSTAl</label>
                                     <input type="text" class="form-control" id="codigoPostal" name="codigoPostal"
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="municipio">Municipio</label>
+                                    <label for="municipio">MUNICIPIO</label>
                                     <input type="text" class="form-control" id="municipio" name="municipio" required>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="entidadfederativa">Entidad Federativa</label>
+                                    <label for="entidadfederativa">ENTIDAD FEDERATIVA</label>
                                     <input type="text" class="form-control" id="entidadfederativa"
                                         name="entidadfederativa" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pais">País</label>
+                                    <label for="pais">PAIS</label>
                                     <input type="text" class="form-control" id="pais" name="pais" required>
                                 </div>
                                 <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
@@ -112,12 +112,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nombreE">Nombre / Razón Social</label>
+                                    <label for="nombreE">NOMBRE / RAZON SOCIAL</label>
                                     <input type="text" class="form-control" id="nombreE" name="nombreE" value="<?php echo htmlspecialchars($datosimport['nombreE']); ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="curp">CURP</label>
-                                    <input type="text" class="form-control" id="curp" name="curp" value="<?php echo htmlspecialchars($datosimport['curp']); ?>" required>
+                                    <input type="text" class="form-control" id="curp" name="curp" value="<?php echo htmlspecialchars($datosimport['curp']); ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="rfc">RFC</label>
@@ -127,34 +127,34 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Calle">Calle</label>
+                                    <label for="Calle">CALLE</label>
                                     <input type="text" class="form-control" id="Calle" name="Calle" value="<?php echo htmlspecialchars($datosimport['Calle']); ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numeroInterior">Número Interior</label>
-                                    <input type="text" class="form-control" id="numeroInterior" name="numeroInterior" value="<?php echo htmlspecialchars($datosimport['numeroInterior']); ?>" required>
+                                    <label for="numeroInterior">NUMERO INTERIOR</label>
+                                    <input type="text" class="form-control" id="numeroInterior" name="numeroInterior" value="<?php echo htmlspecialchars($datosimport['numeroInterior']); ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="numeroExterior">Número Exterior</label>
+                                    <label for="numeroExterior">NUMERO EXTERIOR</label>
                                     <input type="text" class="form-control" id="numeroExterior" name="numeroExterior" value="<?php echo htmlspecialchars($datosimport['numeroExterior']); ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="codigoPostal">Código Postal</label>
+                                    <label for="codigoPostal">CODIGO POSTAL</label>
                                     <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" value="<?php echo htmlspecialchars($datosimport['codigoPostal']); ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="municipio">Municipio</label>
+                                    <label for="municipio">MUNICIPIO</label>
                                     <input type="text" class="form-control" id="municipio" name="municipio" value="<?php echo htmlspecialchars($datosimport['municipio']); ?>" required>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="entidadfederativa">Entidad Federativa</label>
+                                    <label for="entidadfederativa">ENTIDAD FEDERATIVA</label>
                                     <input type="text" class="form-control" id="entidadfederativa" name="entidadfederativa" value="<?php echo htmlspecialchars($datosimport['entidadfederativa']); ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pais">País</label>
+                                    <label for="pais">PAIS</label>
                                     <input type="text" class="form-control" id="pais" name="pais" value="<?php echo htmlspecialchars($datosimport['pais']); ?>" required>
                                 </div>
                                 <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">

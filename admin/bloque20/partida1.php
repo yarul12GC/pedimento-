@@ -652,7 +652,7 @@ if (isset($_POST['show_sections'])) {
             const valaduusd = parseFloat(valaduusdInput.value) || 0;
             const tasa = parseFloat(tasaInput.value) || 0;
 
-            const importe = valaduusd * tasa;
+            const importe = (valaduusd * tasa) / 100;
 
             importeInput.value = importe.toFixed(2);
         }

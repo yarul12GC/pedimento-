@@ -60,7 +60,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         <table class="table table-bordered table-hover">
             <?php
-            $querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1
+            $querytransac =  "SELECT ts.*, a15.clave AS clavea15, a1.clave AS clavea1, a1.seccion
             FROM transacciones ts
             INNER JOIN apendice15 a15 ON ts.idapendice15 = a15.idapendice15
             INNER JOIN apendice1 a1 ON ts.idapendice1 = a1.idapendice1
@@ -81,7 +81,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     <th>PESO BRUTO</th>
                     <td><?php echo htmlspecialchars($datotransac['peso_bruto']); ?></td>
                     <th>ADUANA</th>
-                    <td><?php echo htmlspecialchars($datotransac['clavea1']); ?></td>
+                    <td><?php echo htmlspecialchars($datotransac['clavea1'] . $datotransac['seccion']); ?></td>
                 </tr>
             <?php
             } else {
@@ -328,7 +328,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
             <tbody>
                 <?php
-                $querypermisos =  "SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1
+                $querypermisos =  "SELECT permisos.*, apendice1.idapendice1, apendice1.clave AS claveapn1, apendice1.seccion
                 FROM permisos
                 INNER JOIN apendice1 ON permisos.idapendice1 = apendice1.idapendice1
                 WHERE idpedimentoc = ?";
@@ -346,7 +346,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                         <th scope="row">ACUSE ELECTRONICO DE VALIDACION</th>
                         <td><?php echo htmlspecialchars($datosperm['aviso_electronico']); ?></td>
                         <th scope="row">CLAVE DE LA SECCION ADUANERA DE DESPACHO</th>
-                        <td><?php echo htmlspecialchars($datosperm['claveapn1']); ?></td>
+                        <td><?php echo htmlspecialchars($datosperm['claveapn1'] . $datosperm['seccion']); ?></td>
                     </tr>
                     <tr>
                         <tH scope="row">MARCAS, NUMERO Y TOTAL DE BULTOS:</tH>
@@ -384,16 +384,35 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                             if ($resultfechas->num_rows > 0) {
                                 $rowfech = $resultfechas->fetch_assoc();
                             ?>
-
                                 <tr>
                                     <th>ENTRADAS</th>
-                                    <td><?php echo htmlspecialchars($rowfech['entrada']); ?></td>
+                                    <td>
+                                        <?php
+                                        // Verifica si la fecha de 'entrada' está presente y formatea la fecha
+                                        if (!empty($rowfech['entrada'])) {
+                                            $fecha_entrada_formateada = date("d-m-Y", strtotime($rowfech['entrada']));
+                                            echo htmlspecialchars($fecha_entrada_formateada);
+                                        } else {
+                                            echo "N/A"; // En caso de que no haya fecha
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>PAGO</th>
-                                    <td><?php echo htmlspecialchars($rowfech['pago']); ?></td>
-
+                                    <td>
+                                        <?php
+                                        // Verifica si la fecha de 'pago' está presente y formatea la fecha
+                                        if (!empty($rowfech['pago'])) {
+                                            $fecha_pago_formateada = date("d-m-Y", strtotime($rowfech['pago']));
+                                            echo htmlspecialchars($fecha_pago_formateada);
+                                        } else {
+                                            echo "N/A"; // En caso de que no haya fecha
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
+
                             <?php
                             } else {
                                 echo "<tr><td colspan='3' class='text-center'>No se encontraron registros en el cuadro de fechas.</td></tr>";
@@ -428,7 +447,11 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                 apendice18.idapendice18, 
                                 apendice18.clave AS clavea18,
                                 apendice12.idapendice12, 
-                                apendice12.clave AS clavea12
+                                apendice12.clave AS clavea12,
+                                apendice12.descripcion AS descripciona12
+
+
+
                             FROM 
                                 tasapedimento
                             INNER JOIN 
@@ -456,7 +479,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                 foreach ($cuadrotasasp as $rowtsp) {
                             ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($rowtsp['clavea12']); ?></td>
+                                        <td><?php echo htmlspecialchars($rowtsp['clavea12'] . $rowtsp['descripciona12']); ?></td>
                                         <td><?php echo htmlspecialchars($rowtsp['clavea18']); ?></td>
                                         <td><?php echo htmlspecialchars($rowtsp['tasa']); ?></td>
                                     </tr>
@@ -497,6 +520,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                 SELECT cl.*, 
                                     a12_cl.idapendice12 AS id_apendice12_cl, 
                                     a12_cl.clave AS clavetpa12_cl,
+                                    a12_cl.descripcion AS descripciona12_cl,
                                     a13_cl.idapendice13 AS id_apendice13_cl, 
                                     a13_cl.clave AS clavetpa13_cl
                                 FROM cuadrodeliquidacion cl
@@ -522,7 +546,7 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                             if (!empty($cuadroLiquidacion)) {
                                 foreach ($cuadroLiquidacion as $row) {
                                     echo "<tr>";
-                                    echo "<td>" . htmlspecialchars($row['clavetpa12_cl']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['clavetpa12_cl'] . $row['descripciona12_cl']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['clavetpa13_cl']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['importe']) . "</td>";
                                     echo "</tr>";
@@ -624,7 +648,17 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                         <th>IMPORTE PAGADO</th>
                         <td>$<?php echo htmlspecialchars($rowpe['importePago']); ?></td>
                         <th>FECHA PAGADA</th>
-                        <td colspan="3"><?php echo htmlspecialchars($rowpe['fechapago']); ?></td>
+                        <td colspan="3">
+                            <?php
+                            // Verifica si la fecha de 'fechapago' está presente y formatea la fecha
+                            if (!empty($rowpe['fechapago'])) {
+                                $fecha_pago_formateada = date("d-m-Y", strtotime($rowpe['fechapago']));
+                                echo htmlspecialchars($fecha_pago_formateada);
+                            } else {
+                                echo "N/A"; // En caso de que no haya fecha
+                            }
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center" colspan="2" scope="row">NUMERO DE OPERACIÓN BANCARIA</th>
@@ -734,7 +768,17 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                     </tr>
                     <tr>
                         <td><?php echo htmlspecialchars($rowdm['numfactura']); ?></td>
-                        <td><?php echo htmlspecialchars($rowdm['fecha']); ?></td>
+                        <td>
+                            <?php
+                            // Verifica si la fecha de 'fecha' está presente y formatea la fecha
+                            if (!empty($rowdm['fecha'])) {
+                                $fecha_formateada = date("d-m-Y", strtotime($rowdm['fecha']));
+                                echo htmlspecialchars($fecha_formateada);
+                            } else {
+                                echo "N/A"; // En caso de que no haya fecha
+                            }
+                            ?>
+                        </td>
                         <td><?php echo htmlspecialchars($rowdm['claveapn14']); ?></td>
                         <td><?php echo htmlspecialchars($rowdm['claveapn5']); ?></td>
                         <td><?php echo htmlspecialchars($rowdm['valmonfact']); ?></td>
@@ -902,12 +946,12 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         $queries = [
             'partida1' => "SELECT p.*, 
-                              a11.clave AS claveapp11, 
-                              a4.clave AS claveapp4 
-                          FROM partida1 p
-                          INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
-                          INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
-                          WHERE p.idpedimentoc = ? ORDER BY section_id",
+                      a11.clave AS claveapp11, 
+                      a4.clave2 AS claveapp4 
+                  FROM partida1 p
+                  INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
+                  INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
+                  WHERE p.idpedimentoc = ? ORDER BY section_id",
 
             'partida2' => "SELECT descripcion, section_id FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id",
             'partida3' => "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id",
@@ -919,7 +963,15 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                  WHERE compl.idpedimentoc = ? 
                  ORDER BY compl.section_id",
             'observaciones' => "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id",
-            'contribuciones' => "SELECT * FROM contribuciones WHERE idpedimentoc = ? ORDER BY section_id"
+            'contribuciones' => "SELECT cont.*,
+            ap12.descripcion AS claveapendice12p, 
+             ap13.clave AS claveapendice13p,
+             ap18.clave AS claveapendice18p 
+FROM contribuciones cont
+INNER JOIN apendice12 ap12 ON cont.idapendice12 = ap12.idapendice12
+INNER JOIN apendice13 ap13 ON cont.idapendice13 = ap13.idapendice13
+INNER JOIN apendice18 ap18 on cont.idapendice18 = ap18.idapendice18
+WHERE cont.idpedimentoc = ? ORDER BY cont.section_id"
         ];
 
         // Ejecutar las consultas
@@ -1137,28 +1189,28 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <?php
-                                    if (!empty($cuadrocontribuciones)) {
-                                        foreach ($cuadrocontribuciones as $rowocontribuciones) {
-                                    ?>
-                                            <td><?php echo htmlspecialchars($rowocontribuciones['idapendice12']); ?></td>
+                                <?php
+                                if (!empty($cuadrocontribuciones)) {
+                                    foreach ($cuadrocontribuciones as $rowocontribuciones) {
+                                ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($rowocontribuciones['claveapendice12p']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['tasa']); ?></td>
-                                            <td><?php echo htmlspecialchars($rowocontribuciones['idapendice18']); ?></td>
-                                            <td><?php echo htmlspecialchars($rowocontribuciones['idapendice13']); ?></td>
+                                            <td><?php echo htmlspecialchars($rowocontribuciones['claveapendice18p']); ?></td>
+                                            <td><?php echo htmlspecialchars($rowocontribuciones['claveapendice13p']); ?></td>
                                             <td><?php echo htmlspecialchars($rowocontribuciones['importe']); ?></td>
-                                </tr>
+                                        </tr>
 
-                            <?php
-                                        }
-                                    } else {
-                            ?>
-                            <tr>
-                                <td colspan="10">No se encontraron complementos</td>
-                            </tr>
-                        <?php
+                                    <?php
                                     }
-                        ?>
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="10">No se encontraron complementos</td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

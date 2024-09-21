@@ -1,20 +1,35 @@
 <?php
+// Iniciar sesión si aún no está iniciada
 if (session_status() == PHP_SESSION_NONE) {
-    ob_start(); // Inicia el buffering de salida
     session_start();
-    $output = ob_get_contents(); // Obtiene el contenido del buffer
-    if (!empty($output)) {
-        error_log('Salida antes de session_start(): ' . $output);
-    }
-    ob_end_clean(); // Limpia el buffer para evitar enviar contenido accidental
 }
 
-if (!isset($_SESSION['usuarioID'])) { 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['email'])) {
+    header("Location: https://certicenca.cencacomex.com.mx/");
+    exit();
+}
+
+// Verificar el tiempo de inactividad de la sesión
+$tiempoInactividad = 1200; // 20 minutos (en segundos)
+if (isset($_SESSION['tiempo']) && (time() - $_SESSION['tiempo'] > $tiempoInactividad)) {
+    session_unset(); // Eliminar todas las variables de sesión
+    session_destroy(); // Destruir la sesión
+    header("Location: https://certicenca.cencacomex.com.mx/");
+    exit();
+}
+
+// Actualizar el tiempo de la última actividad de la sesión
+$_SESSION['tiempo'] = time();
+
+// Verificar si el usuario tiene el ID almacenado en la sesión
+if (!isset($_SESSION['usuarioID'])) {
     echo '<script> 
             alert("Acceso denegado, no autenticado.");
             window.location = "../index.php";
           </script>';
     exit();
 }
+
+// Si el usuario está autenticado, se puede obtener el ID del usuario
 $idUsuario = $_SESSION['usuarioID'];
-?>

@@ -16,12 +16,12 @@ function fetchData($conexion, $query, $idPedimento, $sectionKey, &$secciones)
 $secciones = [];
 $queries = [
     'partida1' => "SELECT p.*, 
-                      a11.clave AS claveapp11, 
-                      a4.clave AS claveapp4 
-                  FROM partida1 p
-                  INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
-                  INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
-                  WHERE p.idpedimentoc = ? ORDER BY section_id",
+    a11.clave AS claveapp11, 
+    a4.clave2 AS claveapp4 
+FROM partida1 p
+INNER JOIN apendice11 a11 ON p.idapendice11 = a11.idapendice11
+INNER JOIN apendice4 a4 ON p.idapendice4 = a4.idapendice4
+WHERE p.idpedimentoc = ? ORDER BY section_id",
 
     'partida2' => "SELECT descripcion, section_id FROM partida2 WHERE idpedimentoc = ? ORDER BY section_id",
     'partida3' => "SELECT * FROM partida3 WHERE idpedimentoc = ? ORDER BY section_id",
@@ -39,9 +39,9 @@ $queries = [
                  WHERE compl.idpedimentoc = ? 
                  ORDER BY compl.section_id",
     'observaciones' => "SELECT * FROM observacionesnp WHERE idpedimentoc = ? ORDER BY section_id",
-    
+
     'contribuciones' => "SELECT cont.*,
-                   ap12.clave AS claveapendice12p, 
+                   ap12.descripcion AS claveapendice12p, 
                     ap13.clave AS claveapendice13p,
                     ap18.clave AS claveapendice18p 
      FROM contribuciones cont

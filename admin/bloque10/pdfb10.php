@@ -5,7 +5,9 @@ SELECT
     apendice18.idapendice18, 
     apendice18.clave AS clavea18,
     apendice12.idapendice12, 
-    apendice12.clave AS clavea12
+    apendice12.clave AS clavea12,
+    apendice12.descripcion AS descripciona12
+
 FROM 
     tasapedimento
 INNER JOIN 
@@ -41,7 +43,7 @@ $html .= '
 while ($rowtsp = $resulttasasp->fetch_assoc()) {
     $html .= '
                 <tr style="margin: 0; padding: 0;">
-                    <td style="text-align: center; margin: 0; padding: 0; border-left: 1px solid black;">' . htmlspecialchars($rowtsp['clavea12']) . '</td>
+                    <td style="text-align: center; margin: 0; padding: 0; border-left: 1px solid black;">' . htmlspecialchars($rowtsp['clavea12'].$rowtsp['descripciona12']) . '</td>
                     <td style="text-align: center; margin: 0; padding: 0; border-left: 1px solid black;">' . htmlspecialchars($rowtsp['clavea18']) . '</td>
                     <td style="text-align: center; margin: 0; padding: 0; border-left: 1px solid black;">' . htmlspecialchars($rowtsp['tasa']) . '</td>
                 </tr>';
