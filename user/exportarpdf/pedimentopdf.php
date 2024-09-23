@@ -205,9 +205,11 @@ include_once '../bloque13/pdfb13.php';
 
 $html .= '</td>
 
-        <!-- Columna del 20% -->
-        <td style="width: 25%; vertical-align: top;">
-        </td>
+        <td style="width: 25%; vertical-align: top;">';
+
+include_once '../bloque30/qrpdf.php';
+
+$html .=  '</td>
     </tr>
 </table>';
 

@@ -77,6 +77,9 @@ if ($resultpagoe->num_rows > 0) {
     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editarBloque13_<?php echo $pedimento_id; ?>">
         Editar Bloque 13
     </button>
+    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#qrpago_<?php echo $pedimento_id; ?>">
+        Generar QR
+    </button>
 <?php
 } else {
 ?>
@@ -145,4 +148,5 @@ if ($resultpagoe->num_rows > 0) {
     </button>
 <?php
 }
+include 'bloque30/modalqr.php';
 ?>

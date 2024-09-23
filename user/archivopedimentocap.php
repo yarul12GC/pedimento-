@@ -338,6 +338,8 @@ $pedimento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     include 'bloque18/modalb18.php';
     include 'bloque18/modaleditb18.php';
     include 'bloque4/modalb4editar.php';
+    include 'bloque30/modalqr.php';
+
 
     ?>
 
