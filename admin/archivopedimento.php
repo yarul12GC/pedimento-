@@ -1,6 +1,6 @@
 <?php
 include_once '../conexion.php';
-include_once '../sesion.php';
+include 'sesion.php';
 include_once '../public/mensaje.php';
 
 $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;

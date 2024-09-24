@@ -1,6 +1,6 @@
 <?php
 include('../../conexion.php');
-include('../../sesion.php');
+include('../sesion.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

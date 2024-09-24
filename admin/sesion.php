@@ -1,5 +1,6 @@
 <?php
-// Iniciar sesión si aún no está iniciada
+include('../conexion.php');
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -33,3 +34,48 @@ if (!isset($_SESSION['usuarioID'])) {
 
 // Si el usuario está autenticado, se puede obtener el ID del usuario
 $idUsuario = $_SESSION['usuarioID'];
+$email = $_SESSION['email'];
+
+// Verificar si la conexión a la base de datos está establecida
+if (!isset($conexion)) {
+    die("Error de conexión a la base de datos.");
+}
+
+// Preparar la consulta para verificar el TipoUsuarioID
+$stmt = mysqli_prepare($conexion, "SELECT TipoUsuarioID FROM usuarios WHERE email = ?");
+if ($stmt === false) {
+    die("Error al preparar la consulta SQL.");
+}
+
+mysqli_stmt_bind_param($stmt, 's', $email);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+
+// Verificar si se encontró el usuario
+if (mysqli_stmt_num_rows($stmt) > 0) {
+    mysqli_stmt_bind_result($stmt, $tipoUsuarioID);
+    mysqli_stmt_fetch($stmt);
+
+    // Verificar si el TipoUsuarioID es diferente de 2
+    if ($tipoUsuarioID != 2) {
+        mysqli_stmt_close($stmt);
+        echo '<script>
+                alert("No tienes permisos para acceder a esta página.");
+                window.location = "https://certicenca.cencacomex.com.mx/";
+              </script>';
+        exit();
+    }
+} else {
+    // Usuario no encontrado
+    mysqli_stmt_close($stmt);
+    echo '<script>
+            alert("Usuario no encontrado. Por favor, inicia sesión nuevamente.");
+            window.location = "https://certicenca.cencacomex.com.mx/";
+          </script>';
+    exit();
+}
+
+// Cerrar la consulta
+mysqli_stmt_close($stmt);
+
+// Si todo está correcto, el usuario tiene acceso permitido

@@ -60,11 +60,7 @@
                             <li><a class="dropdown-item" href="../admin/apendice15.php">APENDICE 15</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice16.php">APENDICE 16</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice17.php">APENDICE 17</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice18.php">APENDICE 18</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice19.php">APENDICE 19</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice20.php">APENDICE 20</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice21.php">APENDICE 21</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice22.php">APENDICE 22</a></li>
+                            <li><a class="dropdown-item" href="../admin/apendice18.php">APENDICE 18</a></li>                    
                             <li><a class="dropdown-item" href="../admin/apendice23.php">EQUIVALENCIAS</a></li>
                         </ul>
                     </li>

@@ -1,5 +1,5 @@
 <?php
-include_once '../sesion.php';
+include 'sesion.php';
 include_once '../conexion.php';
 
 $registros_por_pagina = 6;

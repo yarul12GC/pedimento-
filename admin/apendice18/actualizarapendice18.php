@@ -1,6 +1,6 @@
 <?php
 include('../../conexion.php');
-include('../../sesion.php');
+include('../sesion.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {    $idapendice18 = mysqli_real_escape_string($conexion, $_POST['idapendice18']);
     $clave = mysqli_real_escape_string($conexion, $_POST['clave']);

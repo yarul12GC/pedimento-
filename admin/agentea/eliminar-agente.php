@@ -1,6 +1,6 @@
 <?php
 include('../../conexion.php'); 
-include('../../sesion.php');
+include('../sesion.php');
 
 if (isset($_GET['idagente'])) {
     $idagente = mysqli_real_escape_string($conexion, $_GET['idagente']);

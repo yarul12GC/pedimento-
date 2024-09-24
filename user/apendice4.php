@@ -75,6 +75,7 @@ $total_pages = ceil($total_records / $limit);
                 <thead class="table-dark">
                     <tr>
                         <th>CLAVE</th>
+                        <th>CLAVE 2</th>
                         <th>COMPLEMENTO</th>
                     </tr>
                 </thead>
@@ -82,6 +83,7 @@ $total_pages = ceil($total_records / $limit);
                     <?php while ($row = mysqli_fetch_array($queryapendice4)) { ?>
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
+                            <td> <?php echo $row['clave2']; ?> </td>
                             <td> <?php echo $row['descripcion']; ?></td>
                         </tr>
                     <?php } ?>

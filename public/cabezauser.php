@@ -54,9 +54,6 @@
                             <li><a class="dropdown-item" href="../user/apendice17.php">APENDICE 17</a></li>
                             <li><a class="dropdown-item" href="../user/apendice18.php">APENDICE 18</a></li>
                             <li><a class="dropdown-item" href="../user/apendice19.php">APENDICE 19</a></li>
-                            <li><a class="dropdown-item" href="../user/apendice20.php">APENDICE 20</a></li>
-                            <li><a class="dropdown-item" href="../user/apendice21.php">APENDICE 21</a></li>
-                            <li><a class="dropdown-item" href="../user/apendice22.php">APENDICE 22</a></li>
                             <li><a class="dropdown-item" href="../user/apendice23.php">EQUIVALENCIAS</a></li>
                         </ul>
                     </li>

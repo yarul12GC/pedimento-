@@ -1,6 +1,6 @@
 <?php
 include('../../conexion.php');
-include('../../sesion.php');
+include('../sesion.php');
 
 if (isset($_GET['idapendice6'])) {
     // Obtener el ID del registro a eliminar

@@ -1,6 +1,6 @@
 <?php
 include('../conexion.php');
-include('../sesion.php');
+include('sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

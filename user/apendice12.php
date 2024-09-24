@@ -59,14 +59,18 @@ include '../sesion.php';
                 <thead class="table-dark">
                     <tr>
                         <th>CLAVE</th>
-                        <th>COMPLEMENTO</th>
+                        <th>CONTRIBUCIÓN</th>
+                        <th>ABREVIACIÓN</th>
+                        <th>NIVEL</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <?php while ($row = mysqli_fetch_array($queryapendice12)) { ?>
                         <tr>
                             <td> <?php echo $row['clave']; ?> </td>
+                            <td> <?php echo $row['contribucion']; ?> </td>
                             <td> <?php echo $row['descripcion']; ?></td>
+                            <td> <?php echo $row['nivel']; ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -112,5 +116,4 @@ include '../sesion.php';
             tr[i].style.display = visible ? '' : 'none';
         }
     }
-
 </script>
