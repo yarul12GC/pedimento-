@@ -1,6 +1,6 @@
 <?php
 include_once '../../conexion.php';
-include_once '../../sesion.php';
+include_once '../sesion.php';
 
 $aviso_electronico = $_POST['aviso_electronico'];
 $idapendice1 = $_POST['idapendice1'];

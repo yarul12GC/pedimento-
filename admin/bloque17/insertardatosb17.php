@@ -1,6 +1,6 @@
 <?php
 include_once '../../conexion.php';
-include_once '../../sesion.php';
+include_once '../sesion.php';
 
 // Recibir datos del formulario
 $idapendice8 = $_POST['idapendice8'];

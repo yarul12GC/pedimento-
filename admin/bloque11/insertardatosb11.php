@@ -1,6 +1,6 @@
 <?php
 include_once '../../conexion.php';
-include_once '../../sesion.php';
+include_once '../sesion.php';
 
 // Verificar que las variables POST están definidas y no están vacías
 if (isset($_POST['idapendice12'], $_POST['idapendice13'], $_POST['importe'], $_POST['idpedimentoc'])) {

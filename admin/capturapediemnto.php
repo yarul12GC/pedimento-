@@ -1,5 +1,5 @@
 <?php
-include 'sesion.php';
+include_once 'sesion.php';
 include_once '../conexion.php';
 include_once '../public/mensaje.php';
 $_SESSION['page_origin'] = 'capturapediemnto';

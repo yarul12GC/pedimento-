@@ -1,6 +1,6 @@
 <?php
 include_once('../conexion.php');
-include 'sesion.php';
+include_once 'sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

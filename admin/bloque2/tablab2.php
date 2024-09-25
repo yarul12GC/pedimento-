@@ -1,7 +1,7 @@
 <body>
 <?php
     include_once '../conexion.php';
-    include_once '../sesion.php';
+    include_once 'sesion.php';
 
 
     $last_idb2 = isset($_SESSION['bloques']['bloque2']) ? $_SESSION['bloques']['bloque2'] : null;

@@ -1,6 +1,6 @@
 <?php
-include_once '../conexion.php';
 include 'sesion.php';
+include_once '../conexion.php';
 
 $idUsuario = $_SESSION['usuarioID'];
 
@@ -46,7 +46,7 @@ $_SESSION['agente_localidad'] = $agenteData['localidad'];
 $_SESSION['agente_patente'] = $agenteData['patente'];
 $_SESSION['agente_codigo_postal'] = $agenteData['codigo_postal'];
 
-$stmtAgente->close(); 
+$stmtAgente->close();
 
 // Inserción del pedimento en la base de datos
 $sql = "INSERT INTO pedimentocompleto (idagente, idusuario) VALUES (?, ?)";
@@ -67,4 +67,3 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conexion->close();
-?>

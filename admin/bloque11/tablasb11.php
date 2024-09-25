@@ -1,7 +1,7 @@
 <body>
     <?php
     include_once '../conexion.php';
-    include_once '../sesion.php';
+    include_once 'sesion.php';
 
     $ids_b11 = isset($_SESSION['bloques']['bloque11']) ? $_SESSION['bloques']['bloque11'] : [];
 

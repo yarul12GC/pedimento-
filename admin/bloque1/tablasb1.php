@@ -1,6 +1,6 @@
 <body>
 <?php
-include_once '../sesion.php'; // Esto no debería duplicar la llamada a session_start()
+include_once 'sesion.php'; // Esto no debería duplicar la llamada a session_start()
 include_once '../conexion.php';
 
 $last_idb1 = isset($_SESSION['bloques']['bloque1']) ? $_SESSION['bloques']['bloque1'] : null;

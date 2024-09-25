@@ -1,7 +1,7 @@
 <body>
     <?php
     include_once '../conexion.php';
-    include_once '../sesion.php';
+    include_once 'sesion.php';
 
     if (isset($_SESSION['bloques']['bloque12']) && is_array($_SESSION['bloques']['bloque12']) && count($_SESSION['bloques']['bloque12']) > 0) {
         $last_idb12 = intval(end($_SESSION['bloques']['bloque12']));

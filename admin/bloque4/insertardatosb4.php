@@ -1,6 +1,6 @@
 <?php
 include_once '../../conexion.php';
-include_once '../../sesion.php';
+include_once '../sesion.php';
 
 
 $valorDolares = $_POST['valorDolares'];

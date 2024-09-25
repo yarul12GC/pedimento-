@@ -1,6 +1,6 @@
 <body>
     <?php
-    include_once '../sesion.php';
+    include_once 'sesion.php';
     include_once '../conexion.php';
 
     $last_idb13 = isset($_SESSION['bloques']['bloque13']) ? $_SESSION['bloques']['bloque13'] : null;

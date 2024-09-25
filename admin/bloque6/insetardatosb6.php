@@ -1,6 +1,6 @@
 <?php
 include_once '../../conexion.php';
-include_once '../../sesion.php';
+include_once '../sesion.php';
 
 // Convertimos los valores recibidos a números, pero sin aplicar ningún tipo de redondeo
 $tipoCambioMXN = floatval(str_replace(',', '.', $_POST['tipoCambioMXN']));
