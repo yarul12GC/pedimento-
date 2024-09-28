@@ -17,13 +17,13 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="add-observacion-btn-<?php echo $idSeccion; ?>">Agregar Observación</button>
 
                     <input type="hidden" name="section_id" value="<?php echo $idSeccion; ?>">
                     <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="add-observacion-btn-<?php echo $idSeccion; ?>">Agregar Observación</button>
                         <button type="submit" class="btn btn-success">Guardar Datos</button>
                     </div>
                 </form>

@@ -17,7 +17,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <?php
-                                    $apendice12Result = $conexion->query("SELECT idapendice12, clave AS descripcion12 FROM apendice12");
+                                    $apendice12Result = $conexion->query("SELECT idapendice12, clave AS descripcion12, descripcion AS descrpb12 FROM apendice12");
                                     if ($conexion->error) {
                                         die("Conexión fallida: " . $conexion->error);
                                     }
@@ -27,7 +27,7 @@
                                         <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>"
                                                 <?= ($apendice12['idapendice12'] == $rowContribuciones['idapendice12']) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($apendice12['descripcion12']) ?>
+                                                <?= htmlspecialchars($apendice12['descripcion12'] . ' ' . $apendice12['descrpb12']) ?>
                                             </option>
                                         <?php endwhile; ?>
                                     </select>

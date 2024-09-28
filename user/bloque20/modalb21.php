@@ -16,7 +16,6 @@
                             <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                         </div>
 
-                        <!-- Agregar el section_id generado dinámicamente -->
                         <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
                         <input type="hidden" name="section_id" value="<?php echo $idSeccion; ?>">
                     </div>

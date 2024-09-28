@@ -13,10 +13,10 @@
                         <div class="row" id="observaciones-container">
                             <!-- Se agregarán campos aquí -->
                         </div>
-                        <button type="button" class="btn btn-primary" id="add-observacion">Agregar Observación</button>
                         <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="add-observacion">Agregar Observación</button>
                             <button type="submit" class="btn btn-success">Guardar Bloque</button>
                         </div>
                     </form>

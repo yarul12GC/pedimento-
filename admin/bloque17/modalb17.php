@@ -56,10 +56,10 @@
                             </div>
                         </div>
                         <br>
-                        <button type="button" class="btn btn-primary" id="add-complemento">Añadir Complemento</button>
                         <input type="hidden" name="idpedimentoc" value="<?php echo $pedimento_id; ?>">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="add-complemento">Añadir Complemento</button>
                             <button type="submit" class="btn btn-success">Guardar Complementos</button>
                         </div>
                     </form>

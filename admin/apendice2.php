@@ -218,9 +218,9 @@ include 'sesion.php';
         }
     }
 
-    function confirmarEliminar(usuarioID) {
+    function confirmarEliminar(idapendice2) {
         if (confirm("¿Estás seguro de que deseas eliminar este Complemento?")) {
-            window.location.href = '../admin/apendice2/eliminarapendice2.php?idapendice2=' + idapendice2;
+            window.location.href = 'apendice2/eliminarapendice2.php?idapendice2=' + idapendice2;
         }
     }
 </script>

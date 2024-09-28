@@ -46,8 +46,7 @@
                             <li><a class="dropdown-item" href="../admin/apendice8.php">APENDICE 8</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice9.php">APENDICE 9</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice10.php">APENDICE 10</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice11.php">APENDICE 11</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice12.php">APENDICE 12</a></li>
+
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -55,12 +54,14 @@
                             APENDICES
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                            <li><a class="dropdown-item" href="../admin/apendice11.php">APENDICE 11</a></li>
+                            <li><a class="dropdown-item" href="../admin/apendice12.php">APENDICE 12</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice13.php">APENDICE 13</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice14.php">APENDICE 14</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice15.php">APENDICE 15</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice16.php">APENDICE 16</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice17.php">APENDICE 17</a></li>
-                            <li><a class="dropdown-item" href="../admin/apendice18.php">APENDICE 18</a></li>                    
+                            <li><a class="dropdown-item" href="../admin/apendice18.php">APENDICE 18</a></li>
                             <li><a class="dropdown-item" href="../admin/apendice23.php">EQUIVALENCIAS</a></li>
                         </ul>
                     </li>

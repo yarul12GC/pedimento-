@@ -17,7 +17,6 @@ if (isset($_GET['idapendice1'])) {
             exit();
         } else {
             // Redirigir a una página de error o mostrar un mensaje de error
-            $error_message = "Error al eliminar el complemento: " . mysqli_error($conexion);
             header("Location: ../apendice1.php?error=" . urlencode($error_message));
             exit();
         }

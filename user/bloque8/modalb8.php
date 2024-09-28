@@ -20,7 +20,7 @@
                                 <div class="form-group">
                                     <?php
                                     include('../conexion.php');
-                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave FROM apendice1");
+                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave, seccion, descripcion FROM apendice1");
                                     if ($conexion->connect_error) {
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
@@ -28,7 +28,7 @@
                                     <label for="agenteSelect">CLAVE DE LA SECCION ADUANERA DE DESPACHO</label><br>
                                     <select class="form-control" name="idapendice1">
                                         <?php while ($apendice1 = $apendice1Result->fetch_assoc()): ?>
-                                            <option value="<?= $apendice1['idapendice1'] ?>"><?= $apendice1['clave'] ?>
+                                            <option value="<?= $apendice1['idapendice1'] ?>"><?= $apendice1['clave'] . ' ' . $apendice1['seccion']  . ' ' . $apendice1['descripcion'] ?>
                                             </option>
                                         <?php endwhile; ?>
                                     </select>
@@ -96,7 +96,7 @@
                                 <div class="form-group">
                                     <?php
                                     include('../conexion.php');
-                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave FROM apendice1");
+                                    $apendice1Result = $conexion->query("SELECT idapendice1, clave, seccion, descripcion FROM apendice1");
                                     if ($conexion->connect_error) {
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
@@ -106,12 +106,11 @@
                                         <?php while ($apendice1 = $apendice1Result->fetch_assoc()): ?>
                                             <option value="<?= $apendice1['idapendice1'] ?>"
                                                 <?php if ($datosperm['idapendice1'] == $apendice1['idapendice1']) echo 'selected'; ?>>
-                                                <?= $apendice1['clave'] ?>
+                                                <?= $apendice1['clave'] . ' ' . $apendice1['seccion']  . ' ' . $apendice1['descripcion'] ?>
                                             </option>
                                         <?php endwhile; ?>
                                     </select>
                                 </div>
-
                             </div>
 
 

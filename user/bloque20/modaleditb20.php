@@ -87,7 +87,7 @@
                                     die("Conexión fallida: " . $conexion->connect_error);
                                 }
                                 ?>
-                                <label for="agenteSelect">DESTINO O ORIGEN (APENDICE4)</label><br>
+                                <label for="agenteSelect">P.V/C</label><br>
                                 <select class="form-control" name="idapendice4">
                                     <?php while ($apendice4 = $apendice4Result->fetch_assoc()) : ?>
                                         <option value="<?= $apendice4['idapendice4'] ?>"

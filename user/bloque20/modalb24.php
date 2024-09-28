@@ -55,11 +55,12 @@
                         </div>
                     </div>
                     <br>
-                    <button type="button" class="btn btn-primary" id="add-complemento-<?php echo $idSeccion; ?>">Añadir Complemento</button>
                     <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
                     <input type="hidden" name="section_id" value="<?php echo $idSeccion; ?>">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="add-complemento-<?php echo $idSeccion; ?>">Añadir Complemento</button>
+
                         <button type="submit" class="btn btn-success">Guardar Datos</button>
                     </div>
                 </form>

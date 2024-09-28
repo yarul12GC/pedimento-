@@ -20,7 +20,7 @@ $lineaC = isset($_POST['lineaC']) ? $conexion->real_escape_string($_POST['lineaC
 $noperacionbancar = isset($_POST['noperacionbancar']) ? $conexion->real_escape_string($_POST['noperacionbancar']) : '';
 $ntransaccionS = isset($_POST['ntransaccionS']) ? $conexion->real_escape_string($_POST['ntransaccionS']) : '';
 
-$sql = "INSERT INTO pagoelectronicoQR (
+$sql = "INSERT INTO pagoelectronicoqr (
     patente,
     pedimento, 
     aduana,
@@ -68,7 +68,7 @@ if ($conexion->query($sql) === TRUE) {
 
     // Guardar la ruta del archivo en la base de datos
     $barcodeEscaped = $conexion->real_escape_string($barcodeFile);
-    $updateSql = "UPDATE pagoelectronicoQR SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
+    $updateSql = "UPDATE pagoelectronicoqr SET barcode_image='$barcodeEscaped' WHERE idpago = $last_idb13";
 
     if ($conexion->query($updateSql) === TRUE) {
         header("Location: ../archivopedimentocap.php?id=" . urlencode($idpedimentoc) . "&barcode=" . urlencode($barcodeFileName));

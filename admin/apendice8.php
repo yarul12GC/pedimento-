@@ -272,7 +272,7 @@ include 'sesion.php';
         }
     }
 
-    function confirmarEliminar(usuarioID) {
+    function confirmarEliminar(idapendice8) {
         if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
             window.location.href = '../admin/apendice8/eliminarapendice8.php?idapendice8=' + usuarioID;
         }

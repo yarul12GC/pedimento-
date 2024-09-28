@@ -164,7 +164,7 @@ $newSectionId = $lastSectionId + 1;
                             <tr>
                                 <th colspan="1">PERMISO</th>
                                 <th colspan="3">NUMERO DE PERMISO</th>
-                                <th colspan="2">FIRMA DE PERMISO</th>
+                                <th colspan="2">FIRMA DESCARGO</th>
                                 <th colspan="2">VAL. COM. DLS</th>
                                 <th colspan="2">CANTIDAD UMT</th>
                             </tr>
@@ -308,13 +308,6 @@ $newSectionId = $lastSectionId + 1;
         include 'bloque20/modaledit25.php';
         include 'bloque20/modaleditb26.php';
 
-
-
-
-
-
-
-
         ?>
     <?php endforeach; ?>
 </div>
@@ -387,7 +380,7 @@ $newSectionId = $lastSectionId + 1;
                             <tr>
                                 <th colspan="2">PERMISO</th>
                                 <th colspan="2">NUMERO DE PERMISO</th>
-                                <th colspan="2">FIRMA DE PERMISO</th>
+                                <th colspan="2">FIRMA DESCARGO</th>
                                 <th colspan="2">VAL. COM. DLS</th>
                                 <th colspan="2">CANTIDAD UMT</th>
                                 

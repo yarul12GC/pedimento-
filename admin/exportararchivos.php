@@ -95,7 +95,7 @@ $result = $conexion->query($query);
                         echo "<td class='text-center'>";
 
                         // Botón para Exportar PDF
-                        echo "<a href='exportarpdf/pedimentopdf.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger me-2'>";
+                        echo "<a href='exportarpdfadm/pedimentopdf.php?id=" . htmlspecialchars($row['idpedimentoc']) . "' class='btn btn-sm btn-outline-danger me-2'>";
                         echo "<i class='fas fa-file-pdf'></i> Exportar PDF";
                         echo "</a>";
 

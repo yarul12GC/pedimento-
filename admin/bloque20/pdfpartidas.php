@@ -111,7 +111,7 @@ foreach ($secciones as $idSeccion => $data) {
         <tr>
             <th colspan="1" style="border-left: 1px solid black; text-align: center; font-weight: bold;">PERMISO</th>
             <th colspan="3" style="border-left: 1px solid black; text-align: center; font-weight: bold;">NUMERO DE PERMISO</th>
-            <th colspan="2" style="border-left: 1px solid black; text-align: center; font-weight: bold;">FIRMA DE PERMISO</th>
+            <th colspan="2" style="border-left: 1px solid black; text-align: center; font-weight: bold;">FIRMA DESCARGO</th>
             <th colspan="2" style="border-left: 1px solid black; text-align: center; font-weight: bold;">VAL. COM. DLS</th>
             <th colspan="2" style="border-left: 1px solid black; text-align: center; border-right: 1px solid black;  font-weight: bold;">CANTIDAD UMT</th>
         </tr>

@@ -402,7 +402,7 @@ if (isset($_POST['show_sections'])) {
                             <tr>
                                 <th>PERMISO</th>
                                 <th colspan="3">NUMERO DE PERMISO</th>
-                                <th colspan="2">FIRMA DE PERMISO</th>
+                                <th colspan="2">FIRMA DESCARGO</th>
                                 <th colspan="2">VAL. COM. DLS</th>
                                 <th colspan="3">CANTIDAD UMT</th>
                             </tr>

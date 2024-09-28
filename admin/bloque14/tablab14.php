@@ -29,8 +29,20 @@
                     <tr>
                         <td><?php echo htmlspecialchars($datosb14['idfiscal']); ?></td>
                         <td><?php echo htmlspecialchars($datosb14['nombreDORS']); ?></td>
-                        <td><?php echo htmlspecialchars('CALLE: ' . $datosb14['calle'] . ' NO. E ' . $datosb14['noexterior'] . ' NO. I ' . $datosb14['nointerior'] . ' C.P. ' . $datosb14['codigo_postal'] . ' CIUDAD: ' . $datosb14['localidad'] . ' ESTADO ' . $datosb14['entidadF'] . ' PAIS: ' . $datosb14['pais']); ?></td>
-                        <td><?php echo htmlspecialchars($datosb14['vinculacion']); ?></td>
+                        <td>
+                <?php
+                echo htmlspecialchars('CALLE: ' . $datosb14['calle'] . ' NO. E ' . $datosb14['noexterior']);
+
+                // Verificar si el nointerior es diferente de 0, sn, SN, o S/N
+                $nointerior = $datosb14['nointerior'];
+                if ($nointerior !== '0' && strtolower($nointerior) !== 'sn' && strtolower($nointerior) !== 's/n') {
+                    echo htmlspecialchars(' NO. I ' . $datosb14['nointerior']);
+                }
+
+                // Continuar con el resto de los datos
+                echo htmlspecialchars(' C.P. ' . $datosb14['codigo_postal'] . ' CIUDAD: ' . $datosb14['localidad'] . ' ESTADO: ' . $datosb14['entidadF'] . ' PAIS: ' . $datosb14['pais']);
+                ?>
+            </td>                        <td><?php echo htmlspecialchars($datosb14['vinculacion']); ?></td>
                     </tr>
                 </tbody>
 

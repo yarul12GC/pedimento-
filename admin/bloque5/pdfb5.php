@@ -29,13 +29,22 @@ if ($resultimpoex->num_rows > 0) {
             <tr>
              <td colspan="14">
                 <strong>DOMICILIO:</strong><strong>AVE.</strong> ' . htmlspecialchars($datosimport['Calle']) . '
-                <strong>No. Ext</strong>' . htmlspecialchars($datosimport['numeroExterior']) . '
-                <strong>No. Int:</strong> ' . htmlspecialchars($datosimport['numeroInterior']) . '
+                <strong>No. Ext:</strong> ' . htmlspecialchars($datosimport['numeroExterior']) . '
+                ';
+
+                // Verificar si el número interior es válido (diferente de "SN", "S/N", "S.N.")
+                $numeroInterior = $datosimport['numeroInterior'];
+                if ($numeroInterior !== '0' && strtolower($numeroInterior) !== 'sn' && strtolower($numeroInterior) !== 's/n' && strtolower($numeroInterior) !== 's.n.') {
+                    // Si el número interior es válido, se incluye la descripción y el número
+                    $html .= '<strong>No. Int:</strong> ' . htmlspecialchars($numeroInterior) . ' ';
+                }
+
+                $html .= '
                 <strong>C.P:</strong> ' . htmlspecialchars($datosimport['codigoPostal']) . '
                 <strong>MUNICIPIO:</strong> ' . htmlspecialchars($datosimport['municipio']) . '
                 <strong>ENTIDAD FEDERATIVA:</strong> ' . htmlspecialchars($datosimport['entidadfederativa']) . '
                 <strong>PAIS:</strong> ' . htmlspecialchars($datosimport['pais']) . '
-             </td>
+            </td>
             </tr>
         </tbody>
     </table>';

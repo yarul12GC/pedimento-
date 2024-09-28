@@ -1,5 +1,5 @@
 <?php
-include('../conexion.php');
+include('conexion.php');
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -79,4 +79,3 @@ if (mysqli_stmt_num_rows($stmt) > 0) {
 mysqli_stmt_close($stmt);
 
 // Si todo está correcto, el usuario tiene acceso permitido
-?>

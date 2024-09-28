@@ -11,7 +11,7 @@
         $resultbloque5 = $conexion->query($querybloque5);
         if ($resultbloque5 && $resultbloque5->num_rows > 0) {
             $datosb5 = $resultbloque5->fetch_assoc();
-            ?>
+    ?>
 
             <table class="table table-bordered table-hover">
                 <thead class="text-center table-dark">
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="7"scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
+                        <th colspan="7" scope="row">NOMBRE, DENOMINACION O RAZON SOCIAL</th>
                         <td colspan="7"><?php echo htmlspecialchars($datosb5['nombreE']); ?></td>
                     </tr>
                     <tr>
@@ -38,26 +38,40 @@
                     <tr>
                         <th scope="row">CALLE</th>
                         <td><?php echo htmlspecialchars($datosb5['Calle']); ?></td>
+
                         <th scope="row">NUMERO INTERIOR</th>
-                        <td><?php echo htmlspecialchars($datosb5['numeroInterior']); ?></td>
+                        <td>
+                            <?php
+                            $numeroInterior = $datosb5['numeroInterior'];
+                            if ($numeroInterior !== '0' && strtolower($numeroInterior) !== 'sn' && strtolower($numeroInterior) !== 's/n' && strtolower($numeroInterior) !== 's.n.') {
+                                echo htmlspecialchars($numeroInterior);
+                            }
+                            ?>
+                        </td>
+
                         <th scope="row">NUMERO EXTERIOR</th>
                         <td><?php echo htmlspecialchars($datosb5['numeroExterior']); ?></td>
+
                         <th scope="row">CODIGO POSTAL</th>
                         <td><?php echo htmlspecialchars($datosb5['codigoPostal']); ?></td>
+
                         <th scope="row">MUNICIPIO</th>
                         <td><?php echo htmlspecialchars($datosb5['municipio']); ?></td>
+
                         <th scope="row">ENTIDAD FEDERATIVA</th>
                         <td><?php echo htmlspecialchars($datosb5['entidadfederativa']); ?></td>
+
                         <th scope="row">PAIS</th>
                         <td><?php echo htmlspecialchars($datosb5['pais']); ?></td>
                     </tr>
+
                 </tbody>
             </table>
 
-            <?php
+        <?php
 
         } else {
-            ?>
+        ?>
 
 
 
@@ -112,9 +126,8 @@
                 </svg> </button>
 
 
-            <?php
+        <?php
         }
-
     } else {
         ?>
 
@@ -170,7 +183,7 @@
             </svg> </button>
 
 
-        <?php
+    <?php
     }
 
 

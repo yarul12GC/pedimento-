@@ -18,7 +18,7 @@
                                     <div class="form-group">
                                         <?php
                                         include('../conexion.php');
-                                        $apendice12Result = $conexion->query("SELECT idapendice12, descripcion as clave12, descripcion AS descripcionAP12 FROM apendice12");
+                                        $apendice12Result = $conexion->query("SELECT idapendice12, clave as clave12, descripcion AS descripcionAP12 FROM apendice12");
                                         if ($conexion->connect_error) {
                                             die("Conexión fallida: " . $conexion->connect_error);
                                         }
@@ -26,7 +26,7 @@
                                         <label for="agenteSelect">CONTRIB (APENDICE 12)</label><br>
                                         <select class="form-control" name="idapendice12[]">
                                             <?php while ($apendice12 = $apendice12Result->fetch_assoc()): ?>
-                                                <option value="<?= $apendice12['idapendice12'] ?>"><?= $apendice12['clave12'] . $apendice12['descripcionAP12'] ?></option>
+                                                <option value="<?= $apendice12['idapendice12'] ?>"><?= $apendice12['clave12'] . ' ' . $apendice12['descripcionAP12'] ?></option>
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
@@ -95,10 +95,10 @@
                                             <label for="contribEdit_<?php echo $index; ?>">CONTRIB (APENDICE 12)</label><br>
                                             <select class="form-control" id="contribEdit_<?php echo $index; ?>" name="idapendice12[]">
                                                 <?php
-                                                $apendice12Result = $conexion->query("SELECT idapendice12, descripcion as clave12 FROM apendice12");
+                                                $apendice12Result = $conexion->query("SELECT idapendice12, clave as clave12, descripcion AS descripcionAP12 FROM apendice12");
                                                 while ($apendice12 = $apendice12Result->fetch_assoc()): ?>
                                                     <option value="<?= $apendice12['idapendice12']; ?>" <?= $apendice12['idapendice12'] == $rowtsp['idapendice12'] ? 'selected' : ''; ?>>
-                                                        <?= $apendice12['clave12']; ?>
+                                                        <?= $apendice12['clave12'] . ' ' . $apendice12['descripcionAP12']; ?>
                                                     </option>
                                                 <?php endwhile; ?>
                                             </select>

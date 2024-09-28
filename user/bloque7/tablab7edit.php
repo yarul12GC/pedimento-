@@ -59,11 +59,6 @@ if ($resultvaloresd->num_rows > 0) {
             </tr>
         </tbody>
     </table>
-
-    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#bloque7">
-        <i class="fas fa-database"></i>
-    </button>
-
 <?php
 }
 ?>

@@ -35,19 +35,34 @@ if ($resultimpoex->num_rows > 0) {
             <tr>
                 <th scope="row">CALLE</th>
                 <td><?php echo htmlspecialchars($datosimport['Calle']); ?></td>
+
+                <!-- Verificar si el número interior es válido -->
                 <th scope="row">NUMERO INTERIOR</th>
-                <td><?php echo htmlspecialchars($datosimport['numeroInterior']); ?></td>
+                <td>
+                    <?php
+                    $numeroInterior = $datosimport['numeroInterior'];
+                    if ($numeroInterior !== '0' && strtolower($numeroInterior) !== 'sn' && strtolower($numeroInterior) !== 's/n' && strtolower($numeroInterior) !== 's.n.') {
+                        echo htmlspecialchars($numeroInterior);
+                    }
+                    ?>
+                </td>
+
                 <th scope="row">NUMERO EXTERIOR</th>
                 <td><?php echo htmlspecialchars($datosimport['numeroExterior']); ?></td>
+
                 <th scope="row">CODIGO POSTAL</th>
                 <td><?php echo htmlspecialchars($datosimport['codigoPostal']); ?></td>
+
                 <th scope="row">MUNICIPIO</th>
                 <td><?php echo htmlspecialchars($datosimport['municipio']); ?></td>
+
                 <th scope="row">ENTIDAD FEDERATIVA</th>
                 <td><?php echo htmlspecialchars($datosimport['entidadfederativa']); ?></td>
+
                 <th scope="row">PAIS</th>
                 <td><?php echo htmlspecialchars($datosimport['pais']); ?></td>
             </tr>
+
         </tbody>
     </table>
 

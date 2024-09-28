@@ -19,9 +19,7 @@
                             <!-- Aquí se agregarán los formularios dinámicamente -->
                         </div>
                         <br>
-                        <button type="button" class="btn btn-primary" id="agregarContribucion">
-                            <i class="bi bi-plus"></i> Contribución
-                        </button>
+
                         <input type="hidden" name="idpedimentoc" value="<?php echo htmlspecialchars($pedimento_id); ?>">
 
                     </form>
@@ -56,6 +54,9 @@
                     <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="agregarContribucion">
+                            <i class="bi bi-plus"></i> Contribución
+                        </button>
                         <button type="button" id="submitAllForms2" class="btn btn-success">Guardar Bloques</button>
                     </div>
 

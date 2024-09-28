@@ -18,12 +18,12 @@
                                         <label for="idapendice12">CONCEPTO (APÉNDICE 12)</label>
                                         <select class="form-control" name="idapendice12[]" onchange="calculateSumUpdate()">
                                             <?php
-                                            $apendice12Result = $conexion->query("SELECT idapendice12, clave as clave12 FROM apendice12");
+                                            $apendice12Result = $conexion->query("SELECT idapendice12, clave as clave12, descripcion AS descrip12ap FROM apendice12");
                                             while ($apendice12 = $apendice12Result->fetch_assoc()) :
                                                 $selected = ($apendice12['idapendice12'] == $row['id_apendice12_cl']) ? 'selected' : '';
                                             ?>
                                                 <option value="<?= htmlspecialchars($apendice12['idapendice12']); ?>" <?= $selected; ?>>
-                                                    <?= htmlspecialchars($apendice12['clave12']); ?>
+                                                    <?= htmlspecialchars($apendice12['clave12'] . ' ' . $apendice12['descrip12ap']); ?>
                                                 </option>
                                             <?php endwhile; ?>
                                         </select>
