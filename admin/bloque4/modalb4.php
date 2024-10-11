@@ -50,7 +50,7 @@
                                     <input type="number" class="form-control" id="incrementables-flete" name="fletes" required oninput="calcularValores()">
                                 </div>
                                 <div class="form-group">
-                                    <label for="incrementables-Vseguros">SEGUROS Vseguros</label>
+                                    <label for="incrementables-Vseguros">SEGUROS V</label>
                                     <input type="number" class="form-control" id="incrementables-Vseguros" name="Vseguros" required oninput="calcularValores()">
                                 </div>
                                 <div class="form-group">
@@ -155,9 +155,9 @@
             var valorAduana = valorDolares * tipoCambioMXN;
             var precioPagadoMXN = precioPagado * tipoCambioMXN;
 
-            document.getElementById('valor-dolares').value = valorDolares.toFixed(2);
-            document.getElementById('valor-aduana').value = valorAduana.toFixed(2);
-            document.getElementById('precio-pagado-mxn').value = precioPagadoMXN.toFixed(2);
+            document.getElementById('valor-dolares').value = valorDolares;
+            document.getElementById('valor-aduana').value = valorAduana;
+            document.getElementById('precio-pagado-mxn').value = precioPagadoMXN;
         }
 
         async function submitForm(formId) {

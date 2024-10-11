@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">VAL. AGREG.</label>
-                                <input type="text" class="form-control" id="descripcion" name="valoragregado" required>
+                                <input type="text" class="form-control" id="descripcion" name="valoragregado">
                             </div>
                         </div>
                     </div>

@@ -824,10 +824,8 @@ $idPedimento = isset($_GET['id']) ? intval($_GET['id']) : 0;
                         <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
                         <td><?php echo htmlspecialchars($rowemb['numeroembarque']); ?></td>
 
-                        <th>M</th>
                         <td><?php echo htmlspecialchars($rowemb['nconocimiento']); ?></td>
 
-                        <th>H</th>
                         <td><?php echo htmlspecialchars($rowemb['nhouse']); ?></td>
 
                     </tr>

@@ -15,10 +15,8 @@ if ($resultdembar->num_rows > 0) {
                 <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
                 <td><?php echo htmlspecialchars($rowemb['numeroembarque']); ?></td>
 
-                <th>M</th>
                 <td><?php echo htmlspecialchars($rowemb['nconocimiento']); ?></td>
 
-                <th>H</th>
                 <td><?php echo htmlspecialchars($rowemb['nhouse']); ?></td>
 
             </tr>
@@ -35,12 +33,9 @@ if ($resultdembar->num_rows > 0) {
         <tbody>
             <tr>
                 <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
+
                 <td></td>
 
-                <th>M</th>
-                <td></td>
-
-                <th>H</th>
                 <td></td>
 
             </tr>

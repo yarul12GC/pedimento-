@@ -20,10 +20,10 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
-                                    <label for="CON">CON</label>
-                                    <select class="form-control" name="idapendice12[]">
+                                    <label for="CON-<?php echo $idSeccion; ?>">CON</label>
+                                    <select class="form-control apendice12-select" name="idapendice12[]" id="CON-<?php echo $idSeccion; ?>">
                                         <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
-                                            <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>">
+                                            <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>" data-descripcion12="<?= htmlspecialchars($apendice12['descripcion12']) ?>">
                                                 <?= htmlspecialchars($apendice12['descripcion12']) ?>
                                             </option>
                                         <?php endwhile; ?>
@@ -33,9 +33,8 @@
 
                             <!-- Campo de entrada para tasa -->
                             <div class="col-md-2">
-                                <label for="TASA">TASA</label>
-
-                                <input type="number" class="form-control tasa" name="tasa[]" value="" oninput="calcularPorcentaje(this)">
+                                <label for="TASA-<?php echo $idSeccion; ?>">TASA</label>
+                                <input type="number" class="form-control tasa" name="tasa[]" id="TASA-<?php echo $idSeccion; ?>" value="" oninput="calcularPorcentaje(this)">
                             </div>
 
                             <!-- Contenedor oculto para valaduusd -->
@@ -52,9 +51,8 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
-                                    <label for="T.T.">T.T.</label>
-
-                                    <select class="form-control" name="idapendice18[]">
+                                    <label for="T.T.-<?php echo $idSeccion; ?>">T.T.</label>
+                                    <select class="form-control" name="idapendice18[]" id="T.T.-<?php echo $idSeccion; ?>">
                                         <?php while ($apendice18 = $apendice18Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice18['idapendice18']) ?>">
                                                 <?= htmlspecialchars($apendice18['descripcion18']) ?>
@@ -73,9 +71,8 @@
                                         die("Conexión fallida: " . $conexion->connect_error);
                                     }
                                     ?>
-                                    <label for="F.P.">F.P.</label>
-
-                                    <select class="form-control" name="idapendice13[]">
+                                    <label for="F.P.-<?php echo $idSeccion; ?>">F.P.</label>
+                                    <select class="form-control" name="idapendice13[]" id="F.P.-<?php echo $idSeccion; ?>">
                                         <?php while ($apendice13 = $apendice13Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice13['idapendice13']) ?>">
                                                 <?= htmlspecialchars($apendice13['descripcion13']) ?>
@@ -87,9 +84,8 @@
 
                             <!-- Campo de entrada para importe -->
                             <div class="col-md-2">
-                                <label for="IMPORTE">IMPORTE</label>
-
-                                <input type="text" class="form-control importe" name="importe[]" value="" readonly>
+                                <label for="IMPORTE-<?php echo $idSeccion; ?>">IMPORTE</label>
+                                <input type="text" class="form-control importe" name="importe[]" id="IMPORTE-<?php echo $idSeccion; ?>" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -111,46 +107,57 @@
 
 <script>
     function calcularPorcentaje(inputElement) {
-        // Obtener la fila en la que está el input actual
         var row = inputElement.closest('.contribucion-row');
-
-        // Obtener el id de la sección
-        var idSeccion = row.getAttribute('data-seccion');
-
-        // Obtener el valor de valaduusd de los atributos data
         var valaduusd = parseFloat(row.querySelector('.valaduusd-value').getAttribute('data-valaduusd')) || 0;
-
-        // Obtener el valor de tasa del input
         var tasa = parseFloat(row.querySelector('input[name="tasa[]"]').value) || 0;
+        var descripcion12 = row.querySelector('.apendice12-select').selectedOptions[0].getAttribute('data-descripcion12');
 
-        // Verificar que ambos campos tengan valores válidos
+        var rows = document.querySelectorAll('.contribucion-row[data-seccion="' + row.getAttribute('data-seccion') + '"]');
+
+        var igiValue = 0;
+        rows.forEach(function(r) {
+            var descripcion = r.querySelector('.apendice12-select').selectedOptions[0].getAttribute('data-descripcion12');
+            if (descripcion === 'IGI') {
+                var igiInput = r.querySelector('input[name="importe[]"]');
+                igiValue = parseFloat(igiInput.value) || 0;
+            }
+        });
+
         if (!isNaN(tasa) && !isNaN(valaduusd)) {
-            // Calcular el porcentaje y asignar el resultado al campo de importe dentro de la misma fila
-            var importe = (valaduusd * tasa) / 100;
-            row.querySelector('input[name="importe[]"]').value = importe.toFixed(2); // Formatear el resultado a dos decimales
+            var dta = valaduusd * 0.008;
+            var tasav = tasa / 100;
+
+            if (descripcion12 === 'IGI') {
+                var igiImporte = valaduusd * tasav;
+                row.querySelector('input[name="importe[]"]').value = igiImporte.toFixed(2);
+                row.querySelector('input[name="importe[]"]').setAttribute('data-igi-added', 'true');
+                console.log('IGI calculado:', igiImporte);
+            } else if (descripcion12 === 'IVA') {
+                if (igiValue >= 0) {
+                    var ivaImporte = (valaduusd + igiValue + dta) * tasav;
+                    row.querySelector('input[name="importe[]"]').value = ivaImporte.toFixed(2);
+                    console.log('IVA calculado:', ivaImporte);
+                } else {
+                    alert('Debe declarar el IGI antes de calcular el IVA.');
+                    row.querySelector('input[name="importe[]"]').value = '';
+                }
+            }
         } else {
-            row.querySelector('input[name="importe[]"]').value = ''; // Limpiar el campo si los valores no son válidos
+            row.querySelector('input[name="importe[]"]').value = '';
         }
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('add-contribucion-btn-<?php echo $idSeccion; ?>').addEventListener('click', function() {
-            // Clonar la fila de contribución original
             var originalRow = document.querySelector('.contribucion-row[data-seccion="<?php echo $idSeccion; ?>"]');
             var clonedRow = originalRow.cloneNode(true);
 
-            // Limpiar los valores de los inputs en la fila clonada
-            clonedRow.querySelectorAll('input').forEach(input => input.value = '');
-
-            // Añadir la nueva fila al contenedor
-            document.getElementById('contribuciones-container-<?php echo $idSeccion; ?>').appendChild(clonedRow);
-
-            // Añadir evento para los nuevos inputs clonados
             clonedRow.querySelectorAll('input').forEach(input => {
-                input.addEventListener('input', function() {
-                    calcularPorcentaje(this);
-                });
+                input.value = '';
+                input.setAttribute('data-igi-added', 'false');
             });
+
+            document.getElementById('contribuciones-container-<?php echo $idSeccion; ?>').appendChild(clonedRow);
         });
     });
 </script>

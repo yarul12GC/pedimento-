@@ -1,5 +1,5 @@
 <body>
-<?php
+    <?php
     include_once '../conexion.php';
     include_once 'sesion.php';
 
@@ -20,10 +20,8 @@
                         <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
                         <td><?php echo htmlspecialchars($datosb16['numeroembarque']); ?></td>
 
-                        <th>M</th>
                         <td><?php echo htmlspecialchars($datosb16['nconocimiento']); ?></td>
 
-                        <th>H</th>
                         <td><?php echo htmlspecialchars($datosb16['nhouse']); ?></td>
 
                     </tr>
@@ -42,12 +40,9 @@
                 <tbody>
                     <tr>
                         <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
+
                         <td></td>
 
-                        <th>M</th>
-                        <td></td>
-
-                        <th>H</th>
                         <td></td>
 
                     </tr>
@@ -72,12 +67,9 @@
             <tbody>
                 <tr>
                     <th>NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
+
                     <td></td>
 
-                    <th>M</th>
-                    <td></td>
-
-                    <th>H</th>
                     <td></td>
 
                 </tr>

@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="valoragregado">VAL. AGREG.</label>
-                                <input type="text" class="form-control" id="valoragregado" name="valoragregado" value="<?php echo htmlspecialchars($rowPart3['valoragregado']); ?>" required>
+                                <input type="text" class="form-control" id="valoragregado" name="valoragregado" value="<?php echo htmlspecialchars($rowPart3['valoragregado']); ?>">
                             </div>
                         </div>
                     </div>

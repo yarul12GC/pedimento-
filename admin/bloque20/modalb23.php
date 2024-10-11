@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="descripcion">FIRMA DE PERMISO</label>
+                                <label for="descripcion">FIRMA DESCARGO</label>
                                 <input type="text" class="form-control" id="firmapermiso" name="firmapermiso" required>
                             </div>
                             <div class="form-group">

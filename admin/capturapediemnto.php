@@ -28,7 +28,7 @@ $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agen
     <link rel="stylesheet" href="../estilos/pedimento.css">
     <title>captura de pedimento</title>
 
-    
+
 </head>
 
 
@@ -224,11 +224,10 @@ $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agen
                 </div>
 
                 <div class="form-section">
-                    <h5 class="tex">Bloque 19</h5>
                     <table class="table table-bordered table-hover">
-                        <thead class="table-dark">
+                        <thead>
                             <tr>
-                                <th class="text-center">PATIDAS</th>
+                                <th class="text-center table-dark">PATIDAS</th>
                             </tr>
                         </thead>
 
@@ -237,7 +236,7 @@ $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agen
                 </div>
 
 
-                <?php include_once 'bloque20/partida1.php';
+                <?php include_once 'bloque20/partidaedit.php';
                 ?>
 
                 <div class="form-section">
@@ -340,4 +339,5 @@ $agenteCodigoPostal = isset($_SESSION['agente_codigo_postal']) ? $_SESSION['agen
     ?>
 
 </body>
+
 </html>

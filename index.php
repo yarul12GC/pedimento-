@@ -78,11 +78,11 @@
         document.getElementById('togglePassword').addEventListener('click', function() {
             if (isPasswordVisible) {
                 passwordInput.type = 'password';
-                eyeIcon.src = 'media/ver.png'; // Cambia la ruta de la imagen al ojo oculto
+                eyeIcon.src = 'media/ver.png'; 
                 isPasswordVisible = false;
             } else {
                 passwordInput.type = 'text';
-                eyeIcon.src = 'media/noVer.png'; // Cambia la ruta de la imagen al ojo visible
+                eyeIcon.src = 'media/noVer.png';
                 isPasswordVisible = true;
             }
         });

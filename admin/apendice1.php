@@ -116,7 +116,7 @@ include 'sesion.php';
 
                                 <div class="mb-3">
                                     <label class="control-label mb-3" for="clave">ADUANA </label>
-                                    <input class="form-control" type="text" name="clave" required>
+                                    <input class="form-control" type="text" name="clave">
                                 </div>
 
                             </div>
@@ -124,7 +124,7 @@ include 'sesion.php';
 
                                 <div class="mb-3">
                                     <label class="control-label mb-3" for="clave">SECCION </label>
-                                    <input class="form-control" type="text" name="seccion" required>
+                                    <input class="form-control" type="text" name="seccion" >
                                 </div>
 
                             </div>
@@ -132,7 +132,7 @@ include 'sesion.php';
 
                                 <div class="mb-3">
                                     <label class="control-label mb-3" for="descripcion">CONTENIDO </label>
-                                    <input class="form-control" type="text" name="descripcion" required>
+                                    <input class="form-control" type="text" name="descripcion">
                                 </div>
 
                             </div>
@@ -188,7 +188,7 @@ include 'sesion.php';
 
                                     <div class="mb-3">
                                         <label class="control-label mb-3" for="contenido">CONTENIDO </label>
-                                        <input class="form-control" type="text" name="descripcion" required
+                                        <input class="form-control" type="text" name="descripcion" 
                                             value="<?php echo $row['descripcion']; ?>">
                                     </div>
 

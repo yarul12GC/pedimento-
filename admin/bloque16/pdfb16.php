@@ -50,11 +50,9 @@ if ($resultdembar->num_rows > 0) {
                         <th style="background-color: #6c757d;  width: 30%; color: #ffffff; font-weight: bold;" >NUMERO (GUIA/ORDEN EMBARQUE)/ID:</th>
                         <td style="width: 30%; ">' .  htmlspecialchars($rowemb['numeroembarque']) . '</td>
 
-                        <th style="width: 10%; font-weight: bold;">M</th>
-                        <td style="width: 10%; ">' .  htmlspecialchars($rowemb['nconocimiento']) . '</td>
+                        <td style="width: 20%; ">' .  htmlspecialchars($rowemb['nconocimiento']) . '</td>
 
-                        <th style="width: 10%; font-weight: bold;">H</th>
-                        <td style="width: 10%; ">' .  htmlspecialchars($rowemb['nhouse']) . '</td>
+                        <td style="width: 20%; ">' .  htmlspecialchars($rowemb['nhouse']) . '</td>
 
                     </tr>
     </tbody>

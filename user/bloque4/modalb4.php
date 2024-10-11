@@ -155,9 +155,9 @@
             var valorAduana = valorDolares * tipoCambioMXN;
             var precioPagadoMXN = precioPagado * tipoCambioMXN;
 
-            document.getElementById('valor-dolares').value = valorDolares.toFixed(2);
-            document.getElementById('valor-aduana').value = valorAduana.toFixed(2);
-            document.getElementById('precio-pagado-mxn').value = precioPagadoMXN.toFixed(2);
+            document.getElementById('valor-dolares').value = valorDolares;
+            document.getElementById('valor-aduana').value = valorAduana;
+            document.getElementById('precio-pagado-mxn').value = precioPagadoMXN;
         }
 
         async function submitForm(formId) {
