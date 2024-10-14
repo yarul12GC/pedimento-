@@ -5,6 +5,9 @@ if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 
+// Recibe el nuevo dato de DTA
+$dtaArray = $_POST['dta']; // Asegúrate de que el formulario envíe este dato
+
 $idapendice12Array = $_POST['idapendice12'];
 $tasaArray = $_POST['tasa'];
 $idapendice18Array = $_POST['idapendice18'];
@@ -23,7 +26,8 @@ try {
             tasa = ?, 
             idapendice18 = ?, 
             idapendice13 = ?, 
-            importe = ?
+            importe = ?, 
+            dta = ?  -- Agrega el campo DTA aquí
         WHERE 
             idpedimentoc = ? AND 
             section_id = ? AND 
@@ -43,14 +47,16 @@ try {
         $idpedimentoc = $idpedimentocArray[$i];
         $section_id = $section_idArray[$i];
         $idcontribuciones = $idcontribucionesArray[$i];
+        $dta = $dtaArray[$i]; // Asegúrate de obtener el DTA correspondiente
 
         if (!$stmt->bind_param(
-            'ssssssss',
+            'sssssssss', // Cambia el número de parámetros a 9
             $idapendice12,
             $tasa,
             $idapendice18,
             $idapendice13,
             $importe,
+            $dta, // Agrega el DTA
             $idpedimentoc,
             $section_id,
             $idcontribuciones

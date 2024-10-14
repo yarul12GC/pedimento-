@@ -21,7 +21,7 @@
                                     }
                                     ?>
                                     <label for="CON">CON</label>
-                                    <select class="form-control apendice12-select" name="idapendice12[]">
+                                    <select class="form-control apendice12-select" name="idapendice12[]" onchange="toggleDtaSelect(this)">
                                         <?php while ($apendice12 = $apendice12Result->fetch_assoc()) : ?>
                                             <option value="<?= htmlspecialchars($apendice12['idapendice12']) ?>" data-descripcion12="<?= htmlspecialchars($apendice12['descripcion12']) ?>">
                                                 <?= htmlspecialchars($apendice12['descripcion12']) ?>
@@ -82,6 +82,26 @@
                                 </div>
                             </div>
 
+                            <!-- Campo de selección para DTA (solo si es IVA) -->
+                            <div class="col-md-2 dta-container" style="display: none;">
+                                <div class="form-group">
+                                    <label for="DTA">DTA</label>
+                                    <select class="form-control dta-select" name="dta[]">
+                                        <option value="1">8 al millar para bienes sujetos a impuesto general de importación</option>
+                                        <option value="2">1.76 al millar para bienes de activo fijo en maquiladoras o empresas de programas de exportación</option>
+                                        <option value="3">Cuota fija de 425.44 para la importación temporal de otros bienes para la industria maquiladora y manufacturera</option>
+                                        <option value="4">Cuota fija de 425.44 para mercancías exentas de impuestos al comercio exterior</option>
+                                        <option value="5">Cuota fija de $426.59 para exportaciones </option>
+                                        <option value="6">Cuota fija de $417.19 para operaciones por Estados extranjeros</option>
+                                        <option value="7">Extracción de depósito fiscal</option>
+                                        <option value="71">Tránsito internacional</option>
+                                        <option value="72">Extracción de depósito fiscal</option>
+                                        <option value="73">Rectificación de pedimento</option>
+                                        <option value="8"> 8 al millar sobre el valor del oro </option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <!-- Campo de entrada para importe -->
                             <div class="col-md-2">
                                 <label for="IMPORTE">IMPORTE</label>
@@ -107,16 +127,14 @@
 
 <script>
     function calcularPorcentaje(inputElement) {
-        // Obtener la fila en la que está el input actual
         var row = inputElement.closest('.contribucion-row');
         var valaduusd = parseFloat(row.querySelector('.valaduusd-value').getAttribute('data-valaduusd')) || 0;
         var tasa = parseFloat(row.querySelector('input[name="tasa[]"]').value) || 0;
         var descripcion12 = row.querySelector('.apendice12-select').selectedOptions[0].getAttribute('data-descripcion12');
+        var dtaSelect = row.querySelector('.dta-select');
+        var dtaValue = parseFloat(dtaSelect ? dtaSelect.value : 0) || 0;
 
-        // Obtener todas las filas de contribuciones
         var rows = document.querySelectorAll('.contribucion-row');
-
-        // Buscar si ya existe una contribución con IGI
         var igiValue = 0;
         rows.forEach(function(r) {
             var descripcion = r.querySelector('.apendice12-select').selectedOptions[0].getAttribute('data-descripcion12');
@@ -127,48 +145,73 @@
         });
 
         if (!isNaN(tasa) && !isNaN(valaduusd)) {
-            var dta = valaduusd * 0.008; // Cálculo de DTA
+
+            if (dtaValue === 1) {
+                var dta = valaduusd * 0.008;
+            } else if (dtaValue === 2) {
+                var dta = valaduusd * 0.00176;
+            } else if (dtaValue === 3) {
+                var dta = 425.44;
+            } else if (dtaValue === 4) {
+                var dta = 425.44;
+            } else if (dtaValue === 5) {
+                var dta = 426.59;
+            } else if (dtaValue === 6) {
+                var dta = 417.19;
+            } else if (dtaValue === 7) {
+                var dta = 425.44;
+            } else if (dtaValue === 71) {
+                var dta = 404.01;
+            } else if (dtaValue === 72) {
+                var dta = 425.44;
+            } else if (dtaValue === 73) {
+                var dta = 409.59;
+            } else if (dtaValue === 8) {
+                var dta = Math.min(valaduusd * 0.008, 4508.07);
+            }
+
             var tasav = tasa / 100;
 
-            // Si es IGI, calcular el importe de IGI
             if (descripcion12 === 'IGI') {
                 var igiImporte = valaduusd * tasav;
                 row.querySelector('input[name="importe[]"]').value = igiImporte.toFixed(2);
-                row.querySelector('input[name="importe[]"]').setAttribute('data-igi-added', 'true'); // Marcar que IGI ha sido agregado
-                console.log('IGI calculado:', igiImporte);
-
-                // Si es IVA, verificar que ya exista una contribución IGI previamente declarada
             } else if (descripcion12 === 'IVA') {
-                if (igiValue >= 0) { // Si el IGI ya ha sido calculado
+                if (igiValue >= 0) {
                     var ivaImporte = (valaduusd + igiValue + dta) * tasav;
                     row.querySelector('input[name="importe[]"]').value = ivaImporte.toFixed(2);
-                    console.log('IVA calculado:', ivaImporte);
                 } else {
                     alert('Debe declarar el IGI antes de calcular el IVA.');
-                    row.querySelector('input[name="importe[]"]').value = ''; // Limpiar el campo si no se ha agregado IGI
+                    row.querySelector('input[name="importe[]"]').value = '';
                 }
             }
-
         } else {
-            row.querySelector('input[name="importe[]"]').value = ''; // Limpiar el campo si los valores no son válidos
+            row.querySelector('input[name="importe[]"]').value = '';
         }
     }
 
+    function toggleDtaSelect(selectElement) {
+        var descripcion12 = selectElement.selectedOptions[0].getAttribute('data-descripcion12');
+        var row = selectElement.closest('.contribucion-row');
+        var dtaContainer = row.querySelector('.dta-container');
 
-
+        if (descripcion12 === 'IVA') {
+            dtaContainer.style.display = 'block';
+        } else {
+            dtaContainer.style.display = 'none';
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('add-contribucion-btn-<?php echo $idSeccion; ?>').addEventListener('click', function() {
             var originalRow = document.querySelector('.contribucion-row[data-seccion="<?php echo $idSeccion; ?>"]');
             var clonedRow = originalRow.cloneNode(true);
 
-            // Limpiar los valores de los inputs en la fila clonada
             clonedRow.querySelectorAll('input').forEach(input => {
                 input.value = '';
-                input.setAttribute('data-igi-added', 'false');
             });
 
-            // Añadir la nueva fila al contenedor
+            clonedRow.querySelector('.dta-container').style.display = 'none';
+
             document.getElementById('contribuciones-container-<?php echo $idSeccion; ?>').appendChild(clonedRow);
         });
     });

@@ -11,6 +11,7 @@ $tasa = $_POST['tasa'];
 $idapendice18 = $_POST['idapendice18'];
 $idapendice13 = $_POST['idapendice13'];
 $importe = $_POST['importe'];
+$dta = $_POST['dta']; // Obtener el valor de dta desde el formulario
 
 // Construir la consulta SQL
 $values = [];
@@ -21,12 +22,14 @@ for ($i = 0; $i < count($idapendice12); $i++) {
     $idapendice18Escaped = $conexion->real_escape_string($idapendice18[$i]);
     $idapendice13Escaped = $conexion->real_escape_string($idapendice13[$i]);
     $importeEscaped = $conexion->real_escape_string($importe[$i]);
+    $dtaEscaped = $conexion->real_escape_string($dta[$i]); // Escapar el valor de dta
 
-    $values[] = "($idpedimentoc, '$idapendice12Escaped', $tasaEscaped, '$idapendice18Escaped', '$idapendice13Escaped', '$importeEscaped', '$section_id')";
+    // Incluir el valor de dta en la consulta
+    $values[] = "($idpedimentoc, '$idapendice12Escaped', $tasaEscaped, '$idapendice18Escaped', '$idapendice13Escaped', '$importeEscaped', '$section_id', '$dtaEscaped')";
 }
 
-// Crear la consulta de inserción
-$query = "INSERT INTO contribuciones (idpedimentoc, idapendice12, tasa, idapendice18, idapendice13, importe, section_id) VALUES " . implode(", ", $values);
+// Crear la consulta de inserción incluyendo dta
+$query = "INSERT INTO contribuciones (idpedimentoc, idapendice12, tasa, idapendice18, idapendice13, importe, section_id, dta) VALUES " . implode(", ", $values);
 
 // Ejecutar la consulta
 if ($conexion->query($query) === TRUE) {
